@@ -5,46 +5,32 @@
  */
 package rutaspz.controller;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import rutaspz.util.Utils;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author robri
  */
-public class MapaController extends Controller implements Initializable {
+public class MenuController extends Controller implements Initializable {
 
     @FXML
-    private StackPane root;
-    @FXML
-    private AnchorPane apInterfaz;
-    @FXML
-    private JFXDrawer drawer;
-    @FXML
-    private JFXHamburger hambBtn;
+    private VBox root;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Utils.getInstance().createHamburgerTransition(hambBtn, drawer,"Menu");
+        // TODO
     }    
 
     @Override
     public void initialize() {
     }
-    
-    
-    
     
 }
