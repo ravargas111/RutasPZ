@@ -5,6 +5,7 @@
  */
 package rutaspz.controller;
 
+import com.jfoenix.controls.JFXHamburger;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import rutaspz.util.AppContext;
 
 /**
  * FXML Controller class
@@ -35,13 +37,15 @@ public class ContainerController extends Controller implements Initializable {
     private VBox menuAdmin;
     @FXML
     private VBox menuUsu;
+    @FXML
+    private JFXHamburger hambBtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        AppContext.getInstance().set("hambBtn",hambBtn);
     }    
 
     @FXML
@@ -64,17 +68,6 @@ public class ContainerController extends Controller implements Initializable {
     private void irInfoUsuario(MouseEvent event) {
     }
 
-    @FXML
-    private void irInfoCine(MouseEvent event) {
-    }
-
-    @FXML
-    private void irCartelera(MouseEvent event) {
-    }
-
-    @FXML
-    private void irProximas(MouseEvent event) {
-    }
 
     @Override
     public void initialize() {

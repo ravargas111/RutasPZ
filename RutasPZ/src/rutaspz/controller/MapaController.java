@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import rutaspz.util.AppContext;
 import rutaspz.util.Utils;
 
 /**
@@ -29,15 +30,14 @@ public class MapaController extends Controller implements Initializable {
     private AnchorPane apInterfaz;
     @FXML
     private JFXDrawer drawer;
-    @FXML
-    private JFXHamburger hambBtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Utils.getInstance().createHamburgerTransition(hambBtn, drawer,"Menu");
+        Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");
+        Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);
     }    
 
     @Override

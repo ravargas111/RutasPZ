@@ -9,7 +9,9 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import rutaspz.RutasPZ;
@@ -67,6 +69,19 @@ public class Utils {
         }
         catch (IOException ex) {
             System.out.println("Error cargando el menu\nError:" + ex);
+        }
+    }
+    
+    public void createCloseDrawerEvent(JFXDrawer drawer,Node node){
+        try{
+            node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+                if(drawer.isOpened()){
+                drawer.close();
+            }
+            });
+        }
+        catch(Exception e){
+            System.out.println("error tratando de generar evento cerrado");
         }
     }
 }

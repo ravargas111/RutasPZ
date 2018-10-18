@@ -71,6 +71,10 @@ and open the template in the editor.
     -fx-base-color-but2-hover:transparent;
     -fx-base-color-but-tf-hover:white;
     
+    /*hamburger button*/
+    -fx-base-color-hamb: white;
+    -fx-base-color-hamb-hover:#FF0A0A;
+    
     /*radio button*/
     
     /*text field*/
@@ -550,6 +554,14 @@ and open the template in the editor.
     -fx-background-color:;
     -jfx-selected-color:;
 }*/
+
+.jfx-hamburger {
+	-fx-background-color: transparent;
+}
+
+.jfx-hamburger StackPane {
+	-fx-background-color: -fx-base-color-hamb;
+}
 
 .jfx-check-box{
     -jfx-checked-color:-fx-base-color-checked;
