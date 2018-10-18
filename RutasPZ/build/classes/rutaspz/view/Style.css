@@ -102,7 +102,7 @@ and open the template in the editor.
     -fx-base-color-hyper-tf-focus:#FF0A0A;
     
     /*glyph*/
-    -fx-base-color-glyph:white;
+    -fx-base-color-glyph:black;
     -fx-base-color-glyph-hover:#FF0A0A;
     -fx-base-color-glyph-login: white;
 }
