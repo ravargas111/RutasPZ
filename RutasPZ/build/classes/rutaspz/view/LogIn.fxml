@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="460.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.LogInController">
+   <children>
+      <StackPane fx:id="vbLogIn" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+                  <JFXButton onAction="#irInicioSesion" prefHeight="25.0" prefWidth="174.0" text="Iniciar" />
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="326.0" text="----------- ¿Nueva cuenta? -----------" textFill="#f5eded" />
+                  <JFXButton alignment="CENTER" onAction="#irRegistroCliente" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-button2" text="Ayuda" />
+                  <JFXButton alignment="CENTER" styleClass="jfx-button2" text="Administrador" visible="false" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</StackPane>

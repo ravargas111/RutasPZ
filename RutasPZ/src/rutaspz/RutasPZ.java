@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package rutaspz;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import rutaspz.util.FlowController;
+
+/**
+ *
+ * @author robri
+ */
+public class RutasPZ extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+        FlowController.getInstance().InitializeFlow(primaryStage,null);
+        //primaryStage.getIcons().add(new Image("unaplanilla2/resources/Agregar-48.png"));
+        primaryStage.setTitle("RutasPZ");
+        FlowController.getInstance().goViewInWindow("LogIn");
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+}
