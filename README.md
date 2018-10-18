@@ -1,5 +1,5 @@
 # RutasPZ
-ESPESIFICACION:
+ESPECIFICACIÓN:
 •	Se debe colocar en la pantalla el mapa de Pérez Zeledón.  El grafo está delimitado por lo que se encierra en las líneas rojas, las vías de las líneas rojas también se incluyen en el grafo.
 •	El programa consiste en simular que un pequeño vehículo se desplaza de un punto A a un punto B, la mejor ruta del punto A al B es determinada por un algoritmo y presentar un posible costo del trasporte.
 Para esto se requiere:
