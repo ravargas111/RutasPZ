@@ -10,7 +10,9 @@ import com.jfoenix.controls.JFXHamburger;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseButton;
@@ -40,14 +42,13 @@ public class MapaController extends Controller implements Initializable {
     private Double lFromY;
     private Double lToX;
     private Double lToY;
+    private ArrayList<Double[]> route;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        car=new FontAwesomeIconView(FontAwesomeIcon.CAR);
-        //car.set
-        apInterfaz.getChildren().add(car);
+        initInstances();
         Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");
         Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);
         initMouseEvent();
@@ -55,6 +56,12 @@ public class MapaController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+    }
+    
+    private void initInstances(){
+        route=new ArrayList<>();
+        car=new FontAwesomeIconView(FontAwesomeIcon.CAR);
+        apInterfaz.getChildren().add(car);
     }
     
     private void initMouseEvent(){
@@ -71,6 +78,8 @@ public class MapaController extends Controller implements Initializable {
     private void leftClickEvent(MouseEvent e){
         lFromX= e.getX();
         lFromY= e.getY();
+        car.setX(lFromX);
+        car.setY(lFromY);
     }
     
     private void rigthClickEvent(MouseEvent e){
@@ -82,7 +91,8 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void middleClickEvent(MouseEvent e){
-        Animation.getInstance().desplazar(car,lFromX,lToX,lFromY,lToY);
+        printRoute();
+        followRoute();
     }
     
     private void createLine(AnchorPane parent,Double fromX,Double toX,Double fromY,Double toY){
@@ -92,13 +102,54 @@ public class MapaController extends Controller implements Initializable {
         line.setEndX(toX);
         line.setStartY(fromY);
         line.setEndY(toY);
-        
-        //Animation.getInstance().desplazar(car,lFromX,lToX,lFromY,lToY);
+        insertPointToRoute(toX,toY);
     }
     
     private void pruebaLineas(){
         
     }
     
+    private void insertPointToRoute(Double x,Double y){
+        Double[] point={x,y};
+        this.route.add(point);
+        //System.out.println("(X"+x+",Y:"+y+")");
+    }
     
+    private Double[] getPointFromRoute(Integer i){
+        try{
+           return this.route.get(i);
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("fuera de límite de ruta");
+            return null;
+        }
+    }
+    
+    private void followRoute(){
+        System.out.println("\n********siguiendo*******\n");
+        lFromX=lFromY=null;   
+        route.stream().forEach(e->{
+           if(lFromX==null&&lFromY==null){
+               lFromX=e[0];
+               lFromY=e[1];
+           }
+           else{
+            lToX= e[0];
+            lToY= e[1];
+            Animation.getInstance().desplazar(car, lFromX, lToX, lFromY, lToY);
+            System.out.println("(X"+lFromX+",Y:"+lFromY+")"+"->"+"(X"+lToX+",Y:"+lToY+")");
+            lFromX=new Double(lToX);
+            lFromY=new Double(lToY);
+           }
+        });
+        route.clear();
+        lFromX=lFromY=lToX=lToY=null; 
+    }
+    
+    private void printRoute(){
+        System.out.println("\n\n*********ruta*********");
+        route.stream().forEach(e->{
+            System.out.println("(X"+e[0]+",Y:"+e[1]+")");
+        });
+    }
 }
