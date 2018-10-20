@@ -9,10 +9,10 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.geom.Point2D;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseButton;
@@ -22,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
 import rutaspz.util.Animation;
 import rutaspz.util.AppContext;
+import rutaspz.util.Points2DUtils;
 import rutaspz.util.Utils;
 
 /**
@@ -43,6 +44,7 @@ public class MapaController extends Controller implements Initializable {
     private Double lToX;
     private Double lToY;
     private ArrayList<Double[]> route;
+    private ArrayList<Point2D> pathPoints;
     /**
      * Initializes the controller class.
      */
@@ -62,6 +64,7 @@ public class MapaController extends Controller implements Initializable {
         route=new ArrayList<>();
         car=new FontAwesomeIconView(FontAwesomeIcon.CAR);
         apInterfaz.getChildren().add(car);
+        pathPoints=Points2DUtils.getInstance().getPoints();
     }
     
     private void initMouseEvent(){
@@ -76,17 +79,19 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void leftClickEvent(MouseEvent e){
-        refreshStartPoints(e.getX(),e.getY());
-        car.setX(lFromX);
-        car.setY(lFromY);
+        //refreshStartPoints(e.getX(),e.getY());
+        //car.setX(lFromX);
+        //car.setY(lFromY);
         insertPointToRoute(e.getX(),e.getY());
+        //drawLine(, p2);
     }
     
     private void rigthClickEvent(MouseEvent e){
-        refreshFinishPoints(e.getX(),e.getY());
-        createLine(apInterfaz,lFromX,lToX,lFromY,lToY);
-        refreshStartPoints(e.getX(),e.getY());
-        insertPointToRoute(e.getX(),e.getY());
+        //refreshFinishPoints(e.getX(),e.getY());
+        //createLine(apInterfaz,lFromX,lToX,lFromY,lToY);
+        //refreshStartPoints(e.getX(),e.getY());
+        //insertPointToRoute(e.getX(),e.getY());
+        createRouteLines();
     }
     
     private void refreshStartPoints(Double x,Double y){
@@ -120,6 +125,8 @@ public class MapaController extends Controller implements Initializable {
     private void insertPointToRoute(Double x,Double y){
         Double[] point={x,y};
         this.route.add(point);
+        
+        Points2DUtils.getInstance().insertPoint2D(x, y);
         //System.out.println("(X"+x+",Y:"+y+")");
     }
     
@@ -155,10 +162,35 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void printRoute(){
-        System.out.println("\n\n*********ruta*********");
-        route.stream().forEach(e->{
-            System.out.println("("+e[0].intValue()+","+e[1].intValue()+")");
-        });
+        System.out.println("\n\n*********ruta points*********");
+        Points2DUtils.getInstance().printRoutePoints();
     }
     
+    private void createRouteLines(){
+        System.out.println("\n\n*********creando ruta*********");
+        Integer i=0;
+        for(Point2D p:pathPoints){
+            Point2D n = Points2DUtils.getInstance().getNextPoint(i);
+            Points2DUtils.getInstance().printPoints(p, n);
+            if(n!=null){
+                drawLine(p,n);
+                //Points2DUtils.getInstance().printPoints(p, n);
+            }
+            i++;
+        }
+    }
+    
+    private void drawLine(Point2D p1,Point2D p2){
+        Line line=new Line();
+        apInterfaz.getChildren().add(line);
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+    }
+    
+    
+    /*private Point2D getLastPoint(){
+        return 
+    }*/
 }
