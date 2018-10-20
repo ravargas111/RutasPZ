@@ -39,11 +39,6 @@ public class MapaController extends Controller implements Initializable {
     @FXML
     private JFXDrawer drawer;
     private FontAwesomeIconView car;
-    private Double lFromX;
-    private Double lFromY;
-    private Double lToX;
-    private Double lToY;
-    private ArrayList<Double[]> route;
     private ArrayList<Point2D> pathPoints;
     /**
      * Initializes the controller class.
@@ -61,7 +56,7 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void initInstances(){
-        route=new ArrayList<>();
+        //route=new ArrayList<>();
         car=new FontAwesomeIconView(FontAwesomeIcon.CAR);
         apInterfaz.getChildren().add(car);
         pathPoints=Points2DUtils.getInstance().getPoints();
@@ -94,71 +89,16 @@ public class MapaController extends Controller implements Initializable {
         createRouteLines();
     }
     
-    private void refreshStartPoints(Double x,Double y){
-        lFromX= x;
-        lFromY= y;
-    }
-    
-    private void refreshFinishPoints(Double x,Double y){
-        lToX= x;
-        lToY= y;
-    }
-    
     private void middleClickEvent(MouseEvent e){
         printRoute();
         //followRoute();
         System.out.println("\n\n******Desplazarmiento sec");
-        Animation.getInstance().desplazarSecuencia(car, route);
-    }
-    
-    private void createLine(AnchorPane parent,Double fromX,Double toX,Double fromY,Double toY){
-        Line line=new Line();
-        parent.getChildren().add(line);
-        line.setStartX(fromX);
-        line.setEndX(toX);
-        line.setStartY(fromY);
-        line.setEndY(toY);
-        //Animation.getInstance().desplazar(car, fromX, toX, fromY, toY);
-        //insertPointToRoute(toX,toY);
+        Animation.getInstance().desplazarListaMovs(car, pathPoints);
     }
     
     private void insertPointToRoute(Double x,Double y){
-        Double[] point={x,y};
-        this.route.add(point);
-        
         Points2DUtils.getInstance().insertPoint2D(x, y);
         //System.out.println("(X"+x+",Y:"+y+")");
-    }
-    
-    private Double[] getPointFromRoute(Integer i){
-        try{
-           return this.route.get(i);
-        }
-        catch(IndexOutOfBoundsException e){
-            System.out.println("fuera de límite de ruta");
-            return null;
-        }
-    }
-    
-    private void followRoute(){
-        System.out.println("\n********siguiendo*******\n");
-        lFromX=lFromY=null;   
-        route.stream().forEach(e->{
-           if(lFromX==null&&lFromY==null){
-               lFromX=e[0];
-               lFromY=e[1];
-           }
-           else{
-            lToX= e[0];
-            lToY= e[1];
-            Animation.getInstance().desplazar(car, lFromX, lToX, lFromY, lToY);
-            System.out.println("("+lFromX.intValue()+","+lFromY.intValue()+")"+" -> "+"("+lToX.intValue()+","+lToY.intValue()+")");
-            lFromX=new Double(lToX);
-            lFromY=new Double(lToY);
-           }
-        });
-        route.clear();
-        lFromX=lFromY=lToX=lToY=null; 
     }
     
     private void printRoute(){
@@ -171,10 +111,9 @@ public class MapaController extends Controller implements Initializable {
         Integer i=0;
         for(Point2D p:pathPoints){
             Point2D n = Points2DUtils.getInstance().getNextPoint(i);
-            Points2DUtils.getInstance().printPoints(p, n);
             if(n!=null){
                 drawLine(p,n);
-                //Points2DUtils.getInstance().printPoints(p, n);
+                Points2DUtils.getInstance().printPoints(p, n);
             }
             i++;
         }

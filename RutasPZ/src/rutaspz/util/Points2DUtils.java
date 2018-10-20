@@ -107,7 +107,7 @@ public class Points2DUtils {
             if(p2!=null)
         System.out.print("("+p2.getX()+","+p2.getY()+") --->  ");
         else
-            System.out.print("point 2 nulo");
+            System.out.print("punto 2 nulo");
         }
     }
     
@@ -116,4 +116,14 @@ public class Points2DUtils {
             printPoint(e);
         });
     }
+    
+    public Integer getX(Point2D p){
+        return ((Double)p.getX()).intValue();
+    }
+    
+    public Integer getY(Point2D p){
+        return ((Double)p.getY()).intValue();
+    }
+    
+    
 }

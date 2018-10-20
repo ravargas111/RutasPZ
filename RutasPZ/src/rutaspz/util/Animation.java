@@ -1,6 +1,7 @@
 package rutaspz.util;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import static javafx.animation.Animation.INDEFINITE;
 import javafx.animation.FadeTransition;
@@ -402,6 +403,33 @@ public class Animation {
             //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")"); 
             if(movimientos.size()>1)
             desplazarSecuencia( nodo, movimientos);
+            });  
+        
+        //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
+        desplazamiento.play(); 
+        
+    }
+    
+    public void desplazarListaMovs(Node nodo,ArrayList<Point2D> movimientos){
+        //obtiene vértices
+        FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
+        Point2D n1 = movimientos.get(0);
+        Point2D n2 = movimientos.get(1);
+        //auxNodo.setX(auxNodo.getX()+n1[0]);
+        //auxNodo.setY(auxNodo.getY()+n1[1]);
+        movimientos.remove(0);
+        //crea transición
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
+        desplazamiento.setFromX(n1.getX());
+        desplazamiento.setFromY(n1.getY());
+        desplazamiento.setToX(n2.getX());
+        desplazamiento.setToY(n2.getY());
+        //si queda más de un movimiento lo invoca al finalizar
+        desplazamiento.setOnFinished(e->{
+            System.out.println("("+((FontAwesomeIconView)nodo).getX()+","+((FontAwesomeIconView)nodo).getY()+")");
+            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")"); 
+            if(movimientos.size()>1)
+            desplazarListaMovs( nodo, movimientos);
             });  
         
         //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
