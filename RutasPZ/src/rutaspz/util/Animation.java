@@ -1,6 +1,7 @@
 package rutaspz.util;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.util.ArrayList;
 import static javafx.animation.Animation.INDEFINITE;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -372,6 +373,40 @@ public class Animation {
         desplazamiento.play();
     }
     
+    public void desplazar(Node nodo, Double[] n1 ,Double[] n2){
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
+        desplazamiento.setFromX(n1[0]);
+        desplazamiento.setFromY(n1[1]);
+        desplazamiento.setToX(n2[0]);
+        desplazamiento.setToY(n2[1]);
+        desplazamiento.play();
+    }
     
+    public void desplazarSecuencia(Node nodo,ArrayList<Double[]> movimientos){
+        //obtiene vértices
+        FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
+        Double[] n1 = movimientos.get(0);
+        Double[] n2 = movimientos.get(1);
+        //auxNodo.setX(auxNodo.getX()+n1[0]);
+        //auxNodo.setY(auxNodo.getY()+n1[1]);
+        movimientos.remove(0);
+        //crea transición
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
+        desplazamiento.setFromX(n1[0]);
+        desplazamiento.setFromY(n1[1]);
+        desplazamiento.setToX(n2[0]);
+        desplazamiento.setToY(n2[1]);
+        //si queda más de un movimiento lo invoca al finalizar
+        desplazamiento.setOnFinished(e->{
+            System.out.println("("+((FontAwesomeIconView)nodo).getX()+","+((FontAwesomeIconView)nodo).getY()+")");
+            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")"); 
+            if(movimientos.size()>1)
+            desplazarSecuencia( nodo, movimientos);
+            });  
+        
+        //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
+        desplazamiento.play(); 
+        
+    }
     
 }

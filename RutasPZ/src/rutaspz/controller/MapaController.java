@@ -76,23 +76,34 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void leftClickEvent(MouseEvent e){
-        lFromX= e.getX();
-        lFromY= e.getY();
+        refreshStartPoints(e.getX(),e.getY());
         car.setX(lFromX);
         car.setY(lFromY);
+        insertPointToRoute(e.getX(),e.getY());
     }
     
     private void rigthClickEvent(MouseEvent e){
-        lToX= e.getX();
-        lToY= e.getY();
+        refreshFinishPoints(e.getX(),e.getY());
         createLine(apInterfaz,lFromX,lToX,lFromY,lToY);
-        lFromX= e.getX();
-        lFromY= e.getY();
+        refreshStartPoints(e.getX(),e.getY());
+        insertPointToRoute(e.getX(),e.getY());
+    }
+    
+    private void refreshStartPoints(Double x,Double y){
+        lFromX= x;
+        lFromY= y;
+    }
+    
+    private void refreshFinishPoints(Double x,Double y){
+        lToX= x;
+        lToY= y;
     }
     
     private void middleClickEvent(MouseEvent e){
         printRoute();
-        followRoute();
+        //followRoute();
+        System.out.println("\n\n******Desplazarmiento sec");
+        Animation.getInstance().desplazarSecuencia(car, route);
     }
     
     private void createLine(AnchorPane parent,Double fromX,Double toX,Double fromY,Double toY){
@@ -102,11 +113,8 @@ public class MapaController extends Controller implements Initializable {
         line.setEndX(toX);
         line.setStartY(fromY);
         line.setEndY(toY);
-        insertPointToRoute(toX,toY);
-    }
-    
-    private void pruebaLineas(){
-        
+        //Animation.getInstance().desplazar(car, fromX, toX, fromY, toY);
+        //insertPointToRoute(toX,toY);
     }
     
     private void insertPointToRoute(Double x,Double y){
@@ -137,7 +145,7 @@ public class MapaController extends Controller implements Initializable {
             lToX= e[0];
             lToY= e[1];
             Animation.getInstance().desplazar(car, lFromX, lToX, lFromY, lToY);
-            System.out.println("(X"+lFromX+",Y:"+lFromY+")"+"->"+"(X"+lToX+",Y:"+lToY+")");
+            System.out.println("("+lFromX.intValue()+","+lFromY.intValue()+")"+" -> "+"("+lToX.intValue()+","+lToY.intValue()+")");
             lFromX=new Double(lToX);
             lFromY=new Double(lToY);
            }
@@ -149,7 +157,8 @@ public class MapaController extends Controller implements Initializable {
     private void printRoute(){
         System.out.println("\n\n*********ruta*********");
         route.stream().forEach(e->{
-            System.out.println("(X"+e[0]+",Y:"+e[1]+")");
+            System.out.println("("+e[0].intValue()+","+e[1].intValue()+")");
         });
     }
+    
 }
