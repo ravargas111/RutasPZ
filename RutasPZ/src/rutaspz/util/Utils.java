@@ -8,11 +8,13 @@ package rutaspz.util;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import rutaspz.RutasPZ;
 
@@ -83,5 +85,36 @@ public class Utils {
         catch(Exception e){
             System.out.println("error tratando de generar evento cerrado");
         }
+    }
+    
+    public void createIcon(Pane parent,Double x,Double y,FontAwesomeIcon icon){
+        FontAwesomeIconView i = new FontAwesomeIconView(icon);
+        i.setX(x);
+        i.setY(y);
+        parent.getChildren().add(i);
+    }
+    
+    public FontAwesomeIconView createIcon(Pane parent,FontAwesomeIcon icon){
+        FontAwesomeIconView i = new FontAwesomeIconView(icon);
+        i.setVisible(false);
+        parent.getChildren().add(i);
+        return i;
+    }
+    
+    public void putIcon(FontAwesomeIconView icon,Double x,Double y){
+        icon.setX(x);
+        icon.setY(y);
+        icon.setVisible(true);
+    }
+    
+    public void quitIcon(FontAwesomeIconView icon){
+        icon.setX(0);
+        icon.setY(0);
+        icon.setVisible(false);
+    }
+    
+    public void quitObject(Pane parent,Node node){
+        if(parent.getChildren().contains(node))
+            parent.getChildren().remove(node);
     }
 }

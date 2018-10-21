@@ -39,7 +39,9 @@ public class MapaController extends Controller implements Initializable {
     @FXML
     private JFXDrawer drawer;
     private FontAwesomeIconView car;
+    private FontAwesomeIconView flag;
     private ArrayList<Point2D> pathPoints;
+    private ArrayList<Line> pathLines;
     /**
      * Initializes the controller class.
      */
@@ -57,9 +59,11 @@ public class MapaController extends Controller implements Initializable {
     
     private void initInstances(){
         //route=new ArrayList<>();
-        car=new FontAwesomeIconView(FontAwesomeIcon.CAR);
-        apInterfaz.getChildren().add(car);
-        pathPoints=Points2DUtils.getInstance().getPoints();
+        car = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.CAR);
+        flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
+        pathPoints = Points2DUtils.getInstance().getPoints();
+        pathLines = new ArrayList<>();
+        AppContext.getInstance().set("lines",pathLines);
     }
     
     private void initMouseEvent(){
@@ -77,6 +81,11 @@ public class MapaController extends Controller implements Initializable {
         //refreshStartPoints(e.getX(),e.getY());
         //car.setX(lFromX);
         //car.setY(lFromY);
+        clearLines();
+        pathLines.clear();
+        Utils.getInstance().putIcon(flag, e.getX(), e.getY());
+        Utils.getInstance().quitIcon(car);
+        pathPoints.clear();
         insertPointToRoute(e.getX(),e.getY());
         //drawLine(, p2);
     }
@@ -86,11 +95,14 @@ public class MapaController extends Controller implements Initializable {
         //createLine(apInterfaz,lFromX,lToX,lFromY,lToY);
         //refreshStartPoints(e.getX(),e.getY());
         //insertPointToRoute(e.getX(),e.getY());
+        insertPointToRoute(e.getX(),e.getY());
+        //Utils.getInstance().createIcon(apInterfaz, e.getX(), e.getY(), FontAwesomeIcon.DOT_CIRCLE_ALT);
         createRouteLines();
     }
     
     private void middleClickEvent(MouseEvent e){
         printRoute();
+        Utils.getInstance().putIcon(car, 0.0, 0.0);
         //followRoute();
         System.out.println("\n\n******Desplazarmiento sec");
         Animation.getInstance().desplazarListaMovs(car, pathPoints);
@@ -98,6 +110,7 @@ public class MapaController extends Controller implements Initializable {
     
     private void insertPointToRoute(Double x,Double y){
         Points2DUtils.getInstance().insertPoint2D(x, y);
+        //Utils.getInstance().createIcon(apInterfaz, x, y, FontAwesomeIcon.DOT_CIRCLE_ALT);
         //System.out.println("(X"+x+",Y:"+y+")");
     }
     
@@ -107,7 +120,8 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void createRouteLines(){
-        System.out.println("\n\n*********creando ruta*********");
+        //ArrayList<Line> ruta = new ArrayList<>();
+        //System.out.println("\n\n*********creando ruta*********");
         Integer i=0;
         for(Point2D p:pathPoints){
             Point2D n = Points2DUtils.getInstance().getNextPoint(i);
@@ -126,9 +140,16 @@ public class MapaController extends Controller implements Initializable {
         line.setStartY(p1.getY());
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
+        pathLines.add(line);
     }
     
-    
+    private void clearLines(){
+        if(!pathLines.isEmpty()){
+            pathLines.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }   
+    }
     /*private Point2D getLastPoint(){
         return 
     }*/
