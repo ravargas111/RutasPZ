@@ -152,5 +152,4 @@ public class MapaController extends Controller implements Initializable {
         }   
     }
 
-    
 }

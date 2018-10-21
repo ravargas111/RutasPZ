@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Points2DUtils {
     private static Points2DUtils INSTANCE = null;
     private static ArrayList<Point2D> points=new ArrayList<>();
+    private static ArrayList<Point2D> points2=new ArrayList<>();
     public Points2DUtils() {
     }
     
@@ -191,4 +192,23 @@ public class Points2DUtils {
         return ((double)Math.round(distance * 100d) / 100d);
     }
     
+    public Double getTotalDistance(ArrayList<Point2D> pointsA){
+        Double distance=0.0;
+        for(Point2D p:pointsA){
+            Point2D p2=getNextPoint(p);
+            distance+=getDistance(p, p2);
+        }
+        return ((double)Math.round(distance * 100d) / 100d);
+    }
+    
+    public Integer compareDistace(ArrayList<Point2D> pointsA){
+        try{
+            Double d1 = getTotalDistance();
+            Double d2 = getTotalDistance(pointsA);
+            return d1.compareTo(d2);
+        }
+        catch(NullPointerException e){
+            return null;
+        }
+    }
 }
