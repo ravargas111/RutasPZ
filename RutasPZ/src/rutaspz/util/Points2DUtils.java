@@ -48,15 +48,6 @@ public class Points2DUtils {
         Points2DUtils.points = points;
     }
     
-    public Point2D getNextPoint(Integer i){
-        try{
-        return points.get(i+1);
-        }
-        catch(IndexOutOfBoundsException e){
-            return null;
-        }
-    }
-    
     public Point2D getLastPoint(){
         if(points.size()>0)
         return points.get(points.size()-1);
@@ -72,6 +63,59 @@ public class Points2DUtils {
     public Point2D getPoint(Integer i){
         if(points.size()<i)
         return points.get(i);
+        else return null;
+    }
+    
+    public Integer getPointIndex(Point2D p){
+        if(points.contains(p)){
+            return points.indexOf(p);
+        }
+        else return null;
+    }
+    
+    public Point2D getNextPoint(Integer i){
+        try{
+        return points.get(i+1);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    public Point2D getNextPoint(Point2D p){
+        Integer i=0;
+        if(points.contains(p)){
+            i=points.indexOf(p);
+            try{
+                return points.get(points.indexOf(p)+1);
+            }
+            catch(IndexOutOfBoundsException e){
+                return null;
+            }
+        }
+        else return null;
+    }
+    
+    public Point2D getPreviousPoint(Integer i){
+        try{
+            return points.get(i-1);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    public Point2D getPreviousPoint(Point2D p){
+        Integer i=0;
+        if(points.contains(p)){
+            i=points.indexOf(p);
+            try{
+                return points.get(points.indexOf(p)-1);
+            }
+            catch(IndexOutOfBoundsException e){
+                return null;
+            }
+        }
         else return null;
     }
     
@@ -102,13 +146,15 @@ public class Points2DUtils {
     
     public void printPoints(Point2D p1,Point2D p2){
         if(p1!=null)
-        System.out.println("("+p1.getX()+","+p1.getY()+") --->  ");
-        else{
-            if(p2!=null)
-        System.out.print("("+p2.getX()+","+p2.getY()+") --->  ");
-        else
-            System.out.print("punto 2 nulo");
-        }
+            System.out.print("("+p1.getX()+","+p1.getY()+")");
+        //else{
+        if(p2!=null){
+            System.out.print("--> ("+p2.getX()+","+p2.getY()+")");
+            System.out.print(" ---> Distancia ="+getDistance(p1, p2)+"\n");
+            }
+            else
+                System.out.print("punto 2 nulo");
+        //}
     }
     
     public void printRoutePoints(){
@@ -125,5 +171,8 @@ public class Points2DUtils {
         return ((Double)p.getY()).intValue();
     }
     
-    
+    public Double getDistance(Point2D p1,Point2D p2){
+        Double distance = p1.distance(p2);
+        return ((double)Math.round(distance * 100d) / 100d);
+    }
 }

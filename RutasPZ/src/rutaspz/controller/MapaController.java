@@ -106,6 +106,7 @@ public class MapaController extends Controller implements Initializable {
         //followRoute();
         System.out.println("\n\n******Desplazarmiento sec");
         Animation.getInstance().desplazarListaMovs(car, pathPoints);
+        
     }
     
     private void insertPointToRoute(Double x,Double y){
@@ -124,10 +125,9 @@ public class MapaController extends Controller implements Initializable {
         //System.out.println("\n\n*********creando ruta*********");
         Integer i=0;
         for(Point2D p:pathPoints){
-            Point2D n = Points2DUtils.getInstance().getNextPoint(i);
-            if(n!=null){
-                drawLine(p,n);
-                Points2DUtils.getInstance().printPoints(p, n);
+            Point2D p2 = Points2DUtils.getInstance().getNextPoint(i);
+            if(p2!=null){
+                drawLine(p,p2);
             }
             i++;
         }
@@ -150,7 +150,5 @@ public class MapaController extends Controller implements Initializable {
             });
         }   
     }
-    /*private Point2D getLastPoint(){
-        return 
-    }*/
+
 }
