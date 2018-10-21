@@ -7,6 +7,10 @@ package rutaspz.util;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 
 /**
  *
@@ -16,6 +20,7 @@ public class Points2DUtils {
     private static Points2DUtils INSTANCE = null;
     private static ArrayList<Point2D> points=new ArrayList<>();
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
+    public static enum COLOR {RED,YELLOW,BLUE};
     public Points2DUtils() {
     }
     
@@ -49,11 +54,11 @@ public class Points2DUtils {
         Points2DUtils.points = points;
     }
 
-    public static ArrayList<ArrayList<Point2D>> getPointsArray() {
+    public ArrayList<ArrayList<Point2D>> getPointsArray() {
         return pointsArray;
     }
 
-    public static void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
+    public void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
         Points2DUtils.pointsArray = pointsArray;
     }
     
@@ -241,4 +246,60 @@ public class Points2DUtils {
             setBetterRoute(pA);
         });
     }
+    
+    public void printDistances(){
+        System.out.println("*******Distancias de todas las rutas********");
+        pointsArray.stream().forEach(e->{
+            System.out.println("Distancia: "+getTotalDistance(e));;
+        });
+    }
+    
+    public void addNewRouteToArray(ArrayList<Point2D> pointsA){
+        ArrayList<Point2D> pointsN = new ArrayList<>();
+        pointsN.addAll(pointsA);
+        pointsArray.add(pointsN);
+    }
+    
+    public void drawLine(Pane parent,Point2D p1,Point2D p2){
+        Line line=new Line();
+        parent.getChildren().add(line);
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        //pathLines.add(line);
+        
+    }
+    
+    public void drawLine(Point2D p1,Point2D p2,COLOR c){
+        AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
+        Line line=new Line();
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        parent.getChildren().add(line);
+        switchLineColor(line,c);
+    }
+    
+    private void switchLineColor(Line l,COLOR c){
+        l.setStrokeWidth(7);
+        switch (c) {
+            case YELLOW:
+                //l.setStroke(Paint.valueOf("yelow"));
+                l.getStyleClass().add("line-yellow");
+                break;
+            case RED:
+                //l.setStroke(Paint.valueOf("red"));
+                l.getStyleClass().add("line-red");
+                break;
+            case BLUE:
+                //l.setStroke(Paint.valueOf("blue"));
+                l.getStyleClass().add("line-blue");
+                break;
+            default:
+                break;
+        }
+    }
+    
 }

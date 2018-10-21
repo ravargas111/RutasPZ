@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -411,6 +412,7 @@ public class Animation {
     }
     
     public void desplazarListaMovs(Node nodo,ArrayList<Point2D> movimientos){
+        try{
         //obtiene vértices
         FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Point2D n1 = movimientos.get(0);
@@ -424,17 +426,30 @@ public class Animation {
         desplazamiento.setFromY(n1.getY());
         desplazamiento.setToX(n2.getX());
         desplazamiento.setToY(n2.getY());
+        
         //si queda más de un movimiento lo invoca al finalizar
         desplazamiento.setOnFinished(e->{
-            Points2DUtils.getInstance().printPoints(n1,n2);
-            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")"); 
+            //imprimir info
+            //Points2DUtils.getInstance().printPoints(n1,n2);
+            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");
+            
+            //todo quitar en caso de usarla en otra app
+            Points2DUtils.getInstance().drawLine(n1, n2,Points2DUtils.COLOR.YELLOW);
+            
+            
             if(movimientos.size()>1)
             desplazarListaMovs( nodo, movimientos);
             });  
         
         //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
         desplazamiento.play(); 
-        
+        }
+        catch(NullPointerException e){
+            System.out.println("error trasladando en ruta,puntero nulo");
+        }
+        catch(IndexOutOfBoundsException i){
+            System.out.println("error trasladando ruta,un solo vértice de ruta");
+        }
     }
     
 }

@@ -105,6 +105,10 @@ and open the template in the editor.
     -fx-base-color-glyph:black;
     -fx-base-color-glyph-hover:#FF0A0A;
     -fx-base-color-glyph-login: white;
+    
+    /*line*/
+    -fx-base-color-line: blue;
+    -fx-base-color-line-disable: yellow;
 }
 
 #root{
@@ -655,4 +659,28 @@ and open the template in the editor.
     -glyph-size: 70px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
+}
+
+.line{
+    -fx-border-style: solid;
+    -fx-border-width: 5; 
+    -fx-border: 0; 
+    -fx-border-color: -fx-base-color-line;
+    -fx-stroke-width: 5;
+    -fx-fill: blue;
+    -fx-background-color: white;
+}
+
+.line:disabled{
+    -fx-fill: black;
+}
+
+.line-yellow{
+    -fx-stroke-width: 5;
+    -fx-fill: yellow;
+}
+
+.line-red{
+    -fx-stroke-width: 5;
+    -fx-fill: red;
 }
