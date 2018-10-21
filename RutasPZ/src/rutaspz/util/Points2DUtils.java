@@ -9,6 +9,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 
@@ -271,7 +272,7 @@ public class Points2DUtils {
         
     }
     
-    public void drawLine(Point2D p1,Point2D p2,COLOR c){
+    public Line drawLine(Point2D p1,Point2D p2,COLOR c){
         AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
         Line line=new Line();
         line.setStartX(p1.getX());
@@ -280,22 +281,20 @@ public class Points2DUtils {
         line.setEndY(p2.getY());
         parent.getChildren().add(line);
         switchLineColor(line,c);
+        return line;
     }
     
     private void switchLineColor(Line l,COLOR c){
         l.setStrokeWidth(7);
         switch (c) {
             case YELLOW:
-                //l.setStroke(Paint.valueOf("yelow"));
-                l.getStyleClass().add("line-yellow");
+                l.setStroke(Color.YELLOW);
                 break;
             case RED:
-                //l.setStroke(Paint.valueOf("red"));
-                l.getStyleClass().add("line-red");
+                l.setStroke(Color.RED);
                 break;
             case BLUE:
-                //l.setStroke(Paint.valueOf("blue"));
-                l.getStyleClass().add("line-blue");
+                l.setStroke(Color.BLUE);
                 break;
             default:
                 break;

@@ -14,7 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 /**
@@ -413,6 +413,9 @@ public class Animation {
     
     public void desplazarListaMovs(Node nodo,ArrayList<Point2D> movimientos){
         try{
+        //quitar esto en caso de no ocuparlo
+        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2"); 
+        
         //obtiene vértices
         FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Point2D n1 = movimientos.get(0);
@@ -434,8 +437,7 @@ public class Animation {
             //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");
             
             //todo quitar en caso de usarla en otra app
-            Points2DUtils.getInstance().drawLine(n1, n2,Points2DUtils.COLOR.YELLOW);
-            
+            pathLines.add(Points2DUtils.getInstance().drawLine(n1, n2,Points2DUtils.COLOR.YELLOW));
             
             if(movimientos.size()>1)
             desplazarListaMovs( nodo, movimientos);

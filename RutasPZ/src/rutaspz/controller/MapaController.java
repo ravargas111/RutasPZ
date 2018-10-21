@@ -43,6 +43,7 @@ public class MapaController extends Controller implements Initializable {
     private ArrayList<Point2D> pathPoints;
     private ArrayList<ArrayList<Point2D>> pathPointsArray;
     private ArrayList<Line> pathLines;
+    private ArrayList<Line> pathLines2;
     /**
      * Initializes the controller class.
      */
@@ -66,6 +67,8 @@ public class MapaController extends Controller implements Initializable {
         pathPointsArray = Points2DUtils.getInstance().getPointsArray();
         pathLines = new ArrayList<>();
         AppContext.getInstance().set("lines",pathLines);
+        pathLines2 = new ArrayList<>();
+        AppContext.getInstance().set("lines2",pathLines2);
         AppContext.getInstance().set("parent",apInterfaz);
     }
     
@@ -82,7 +85,7 @@ public class MapaController extends Controller implements Initializable {
     
     private void leftClickEvent(MouseEvent e){
         clearLines();
-        pathLines.clear();
+        clearLines2();
         Utils.getInstance().putIcon(flag, e.getX(), e.getY());
         Utils.getInstance().quitIcon(car);
         pathPoints.clear();
@@ -151,7 +154,16 @@ public class MapaController extends Controller implements Initializable {
             pathLines.stream().forEach(e->{
                 Utils.getInstance().quitObject(apInterfaz, e);
             });
-        }   
+        }
+        pathLines.clear();
     }
-
+    
+    private void clearLines2(){
+        if(!pathLines2.isEmpty()){
+            pathLines2.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }
+        pathLines2.clear();
+    }
 }
