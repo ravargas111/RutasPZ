@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Points2DUtils {
     private static Points2DUtils INSTANCE = null;
     private static ArrayList<Point2D> points=new ArrayList<>();
-    private static ArrayList<Point2D> points2=new ArrayList<>();
+    private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
     public Points2DUtils() {
     }
     
@@ -47,6 +47,14 @@ public class Points2DUtils {
 
     public void setPoints(ArrayList<Point2D> points) {
         Points2DUtils.points = points;
+    }
+
+    public static ArrayList<ArrayList<Point2D>> getPointsArray() {
+        return pointsArray;
+    }
+
+    public static void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
+        Points2DUtils.pointsArray = pointsArray;
     }
     
     public Point2D getLastPoint(){
@@ -210,5 +218,27 @@ public class Points2DUtils {
         catch(NullPointerException e){
             return null;
         }
+    }
+    
+    public void setBetterRoute(ArrayList<Point2D> pointsA){
+        try{
+           Integer i = compareDistace(pointsA);
+           if(i<0){
+               System.out.println("Era menor la segunda ruta....cambiando");
+               points.clear();
+               points.addAll(pointsA);
+           }
+               
+        }
+        catch(NullPointerException e){
+            System.err.println("Algo salió mal al comparar distancias");
+        }
+        
+    }
+    
+    public void setBetterRoute(){
+        pointsArray.stream().forEach(pA->{
+            setBetterRoute(pA);
+        });
     }
 }
