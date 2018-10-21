@@ -97,16 +97,15 @@ public class MapaController extends Controller implements Initializable {
         //insertPointToRoute(e.getX(),e.getY());
         insertPointToRoute(e.getX(),e.getY());
         //Utils.getInstance().createIcon(apInterfaz, e.getX(), e.getY(), FontAwesomeIcon.DOT_CIRCLE_ALT);
-        createRouteLines();
+        //createRouteLines();
     }
     
     private void middleClickEvent(MouseEvent e){
         printRoute();
         Utils.getInstance().putIcon(car, 0.0, 0.0);
-        //followRoute();
-        System.out.println("\n\n******Desplazarmiento sec");
+        createRouteLines();
+        System.out.println("\n\n*********Desplazando*********");
         Animation.getInstance().desplazarListaMovs(car, pathPoints);
-        
     }
     
     private void insertPointToRoute(Double x,Double y){
@@ -116,18 +115,19 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void printRoute(){
-        System.out.println("\n\n*********ruta points*********");
+        System.out.println("\n\n*********Puntos de la ruta*********");
         Points2DUtils.getInstance().printRoutePoints();
     }
     
     private void createRouteLines(){
         //ArrayList<Line> ruta = new ArrayList<>();
-        //System.out.println("\n\n*********creando ruta*********");
+        System.out.println("\n*********Ruta Creada*********");
         Integer i=0;
         for(Point2D p:pathPoints){
             Point2D p2 = Points2DUtils.getInstance().getNextPoint(i);
             if(p2!=null){
                 drawLine(p,p2);
+                Points2DUtils.getInstance().printPoints(p, p2);
             }
             i++;
         }
@@ -141,6 +141,7 @@ public class MapaController extends Controller implements Initializable {
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
         pathLines.add(line);
+        
     }
     
     private void clearLines(){
@@ -151,4 +152,5 @@ public class MapaController extends Controller implements Initializable {
         }   
     }
 
+    
 }

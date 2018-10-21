@@ -161,6 +161,7 @@ public class Points2DUtils {
         points.stream().forEach(e->{
             printPoint(e);
         });
+        System.out.println("****Distancia total****\n"+getTotalDistance());
     }
     
     public Integer getX(Point2D p){
@@ -172,7 +173,22 @@ public class Points2DUtils {
     }
     
     public Double getDistance(Point2D p1,Point2D p2){
+        try{
         Double distance = p1.distance(p2);
         return ((double)Math.round(distance * 100d) / 100d);
+        }
+        catch(NullPointerException e){
+            return 0.0;
+        }
     }
+    
+    public Double getTotalDistance(){
+        Double distance=0.0;
+        for(Point2D p:points){
+            Point2D p2=getNextPoint(p);
+            distance+=getDistance(p, p2);
+        }
+        return ((double)Math.round(distance * 100d) / 100d);
+    }
+    
 }
