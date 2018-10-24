@@ -22,6 +22,7 @@ public class Points2DUtils {
     private static ArrayList<Point2D> points=new ArrayList<>();
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
     private static ArrayList<Vertex> verticesList = new ArrayList<>();
+    private static ArrayList<Vertex> selectedVertices = new ArrayList<>();
     public static enum COLOR {RED,YELLOW,BLUE};
     public Points2DUtils() {
     }
@@ -68,6 +69,14 @@ public class Points2DUtils {
         Points2DUtils.verticesList = verticesList;
     }
 
+    public ArrayList<Vertex> getSelectedVertices() {
+        return selectedVertices;
+    }
+
+    public void setSelectedVertices(ArrayList<Vertex> selectedVertices) {
+        Points2DUtils.selectedVertices = selectedVertices;
+    }
+
     public void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
         Points2DUtils.pointsArray = pointsArray;
     }
@@ -109,6 +118,15 @@ public class Points2DUtils {
     public Vertex getNextVertex(Integer i){
         try{
         return verticesList.get(i+1);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    public Vertex getNextVertexS(Integer i){
+        try{
+        return selectedVertices.get(i+1);
         }
         catch(IndexOutOfBoundsException e){
             return null;
@@ -315,6 +333,7 @@ public class Points2DUtils {
         return line;
     }
     
+    //usada en animation
     public Line drawLine(Vertex p1,Vertex p2,COLOR c){
         AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
         Line line=new Line();
@@ -329,9 +348,22 @@ public class Points2DUtils {
     
     public void createRouteLinesV(){
         Integer i=0;
-        AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
+        //AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         for(Vertex p:verticesList){
             Vertex p2 = Points2DUtils.getInstance().getNextVertex(i);
+            if(p2!=null){
+                drawLine(p,p2,COLOR.BLUE);
+                //Points2DUtils.getInstance().printPoints(p, p2);
+            }
+            i++;
+        }
+    }
+    
+    public void createRouteLinesVSel(){
+        Integer i=0;
+        AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
+        for(Vertex p:selectedVertices){
+            Vertex p2 = Points2DUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
                 drawLine(p,p2,COLOR.BLUE);
                 //Points2DUtils.getInstance().printPoints(p, p2);
@@ -363,8 +395,9 @@ public class Points2DUtils {
         parent.getChildren().add(vertex);
         vertex.getStyleClass().add("circle");
         vertex.setOnMouseClicked(e->{
-            vertex.getIndex();
-            System.out.println("Index: "+vertex.getIndex());
+            //vertex.getIndex();
+            System.out.println("Index:"+vertex.getIndex());
+            
         });
         verticesList.add(vertex);
     }
@@ -389,6 +422,8 @@ public class Points2DUtils {
         v.setOnMouseClicked(e->{
             v.getIndex();
             System.out.println("Index: "+v.getIndex());
+            System.out.println("selected lis size: "+selectedVertices.size());
+            selectedVertices.add(v);
         });
     }
     

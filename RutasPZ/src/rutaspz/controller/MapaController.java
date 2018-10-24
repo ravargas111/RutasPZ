@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +47,8 @@ public class MapaController extends Controller implements Initializable {
     private ArrayList<ArrayList<Point2D>> pathPointsArray;
     private ArrayList<Line> pathLines;
     private ArrayList<Line> pathLines2;
-    private ArrayList<Vertex> vertices;
+    private ArrayList<Vertex> generalVertices;
+    private ArrayList<Vertex> selectedVertices;
     //private ArrayList<Vertex> verticesMap;
     private Integer cont;
     /**
@@ -71,13 +73,15 @@ public class MapaController extends Controller implements Initializable {
         flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
         pathPoints = Points2DUtils.getInstance().getPoints();
         pathPointsArray = Points2DUtils.getInstance().getPointsArray();
-        vertices = Points2DUtils.getInstance().getVerticesList();
+        generalVertices = Points2DUtils.getInstance().getVerticesList();
+        selectedVertices = Points2DUtils.getInstance().getSelectedVertices();
         pathLines = new ArrayList<>();
         AppContext.getInstance().set("lines",pathLines);
         pathLines2 = new ArrayList<>();
         AppContext.getInstance().set("lines2",pathLines2);
         AppContext.getInstance().set("parent",apInterfaz);
         cont=0;
+        selectedVertices.clear();
     }
     
     private void initMouseEvent(){
@@ -89,13 +93,22 @@ public class MapaController extends Controller implements Initializable {
             else if(e.getButton()==MouseButton.MIDDLE)
                 middleClickEvent(e); 
         });
+        this.apInterfaz.addEventHandler(KeyEvent.KEY_TYPED, (e)->{
+            if(e.isControlDown())
+                spaceBarEvent();
+    });
+    }
+    
+    private void spaceBarEvent(){
+        System.out.println("Selected size: "+selectedVertices.size());
     }
     
     private void leftClickEvent(MouseEvent e){
         //System.out.println("X:"+e.getX()+" -- Y:"+e.getY());
-        System.out.println("Vertex("+e.getX()+","+e.getY()+","+cont+")");
-        cont++;
-        Points2DUtils.getInstance().drawVertex(e.getX(), e.getY(), cont);
+        //System.out.println("Vertex("+e.getX()+","+e.getY()+","+cont+")");
+        //cont++;
+        //Points2DUtils.getInstance().drawVertex(e.getX(), e.getY(), cont);
+        
         /*clearLines();
         clearLines2();
         clearVertices();
@@ -124,8 +137,8 @@ public class MapaController extends Controller implements Initializable {
         //createRouteLines();
         //System.out.println("\n\n*********Desplazando*********");
         //Animation.getInstance().desplazarListaMovs(car, pathPoints);
-        Points2DUtils.getInstance().createRouteLinesV();
-        Animation.getInstance().desplazarListaMovsV(car, vertices);
+        Points2DUtils.getInstance().createRouteLinesVSel();
+        Animation.getInstance().desplazarListaMovsV(car, selectedVertices);
     }
     
     private void insertPointToRoute(Double x,Double y){
@@ -185,14 +198,14 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void clearVertices(){
-        vertices.stream().forEach(e->{
+        generalVertices.stream().forEach(e->{
             Utils.getInstance().quitObject(apInterfaz, e);
         });
-        vertices.clear();
+        generalVertices.clear();
     }
     
     public void createBorderVertex(){
-        vertices.addAll(Arrays.asList(
+        generalVertices.addAll(Arrays.asList(
             new Vertex(512.0,6.0,5),
             new Vertex(484.0,31.0,5),
             new Vertex(476.0,57.0,5),
