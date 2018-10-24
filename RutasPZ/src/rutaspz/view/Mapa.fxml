@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDrawer?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1312.0" style="-fx-background-color: white;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.MapaController">
+<StackPane fx:id="root" maxHeight="670.0" maxWidth="1231.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1082.0" style="-fx-background-color: white;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.MapaController">
    <children>
-      <AnchorPane prefHeight="670.0" prefWidth="200.0">
+      <AnchorPane maxWidth="1084.0" prefHeight="670.0" prefWidth="1078.0">
          <children>
-            <ImageView fitHeight="670.0" fitWidth="1312.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fitHeight="670.0" fitWidth="1080.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../resources/images/Mapa.jpg" />
+               </image></ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apInterfaz" prefHeight="670.0" prefWidth="200.0">
+      <AnchorPane fx:id="apInterfaz" maxWidth="1080.0" prefHeight="670.0" prefWidth="1080.0">
          <children>
             <JFXDrawer fx:id="drawer" prefHeight="670.0" prefWidth="100.0" />
          </children>

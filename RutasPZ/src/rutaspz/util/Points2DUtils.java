@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import rutaspz.Vertex;
 
 /**
  *
@@ -21,6 +21,7 @@ public class Points2DUtils {
     private static Points2DUtils INSTANCE = null;
     private static ArrayList<Point2D> points=new ArrayList<>();
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
+    private static ArrayList<Vertex> verticesList = new ArrayList<>();
     public static enum COLOR {RED,YELLOW,BLUE};
     public Points2DUtils() {
     }
@@ -59,6 +60,14 @@ public class Points2DUtils {
         return pointsArray;
     }
 
+    public ArrayList<Vertex> getVerticesList() {
+        return verticesList;
+    }
+
+    public void setVerticesList(ArrayList<Vertex> verticesList) {
+        Points2DUtils.verticesList = verticesList;
+    }
+
     public void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
         Points2DUtils.pointsArray = pointsArray;
     }
@@ -91,6 +100,15 @@ public class Points2DUtils {
     public Point2D getNextPoint(Integer i){
         try{
         return points.get(i+1);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    public Vertex getNextVertex(Integer i){
+        try{
+        return verticesList.get(i+1);
         }
         catch(IndexOutOfBoundsException e){
             return null;
@@ -153,6 +171,10 @@ public class Points2DUtils {
         };
         
         points.add(p);
+    }
+    
+    public void insertVertex(Double x,Double y,Integer index){
+        
     }
     
     public void printPoint(Point2D p){
@@ -268,8 +290,17 @@ public class Points2DUtils {
         line.setStartY(p1.getY());
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
-        //pathLines.add(line);
-        
+        //pathLines.add(line); 
+    }
+    
+    public void drawLine(Pane parent,Vertex p1,Vertex p2){
+        Line line=new Line();
+        parent.getChildren().add(line);
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        //pathLines.add(line); 
     }
     
     public Line drawLine(Point2D p1,Point2D p2,COLOR c){
@@ -282,6 +313,31 @@ public class Points2DUtils {
         parent.getChildren().add(line);
         switchLineColor(line,c);
         return line;
+    }
+    
+    public Line drawLine(Vertex p1,Vertex p2,COLOR c){
+        AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
+        Line line=new Line();
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        parent.getChildren().add(line);
+        switchLineColor(line,c);
+        return line;
+    }
+    
+    public void createRouteLinesV(){
+        Integer i=0;
+        AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
+        for(Vertex p:verticesList){
+            Vertex p2 = Points2DUtils.getInstance().getNextVertex(i);
+            if(p2!=null){
+                drawLine(p,p2,COLOR.BLUE);
+                //Points2DUtils.getInstance().printPoints(p, p2);
+            }
+            i++;
+        }
     }
     
     private void switchLineColor(Line l,COLOR c){
@@ -299,6 +355,63 @@ public class Points2DUtils {
             default:
                 break;
         }
+    }
+    
+    public void drawVertex(Point2D p,Integer index){
+        AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
+        Vertex vertex = new Vertex(index, p.getX(), p.getY());
+        parent.getChildren().add(vertex);
+        vertex.getStyleClass().add("circle");
+        vertex.setOnMouseClicked(e->{
+            vertex.getIndex();
+            System.out.println("Index: "+vertex.getIndex());
+        });
+        verticesList.add(vertex);
+    }
+    
+    public void drawVertex(Double x,Double y,Integer index){
+        AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
+        Vertex vertex = new Vertex(x,y,5);
+        vertex.setIndex(index);
+        parent.getChildren().add(vertex);
+        vertex.getStyleClass().add("circle");
+        vertex.setOnMouseClicked(e->{
+            vertex.getIndex();
+            System.out.println("Index: "+vertex.getIndex());
+        });
+        verticesList.add(vertex);
+    }
+    
+    public void drawVertex(Vertex v){
+        AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
+        parent.getChildren().add(v);
+        v.getStyleClass().add("circle");
+        v.setOnMouseClicked(e->{
+            v.getIndex();
+            System.out.println("Index: "+v.getIndex());
+        });
+    }
+    
+    public void drawVertices(){
+        Integer i=0;
+        for(Point2D p:points){
+           drawVertex(p, i);
+            i++; 
+        } 
+    }
+    
+    public void drawVerticesV(){
+        Integer i=0;
+        for(Vertex p:verticesList){
+           drawVertex(p);
+           p.setIndex(i);
+            i++; 
+        }
+        //System.out.println("Vertices List size:"+verticesList.size());
+    }
+    
+    public void clearVertices(){
+        this.verticesList.clear();
     }
     
 }

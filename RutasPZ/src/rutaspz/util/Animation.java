@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
+import rutaspz.Vertex;
 
 /**
  * El siguiente single tone permite modelar la animaciones de manera
@@ -441,6 +442,50 @@ public class Animation {
             
             if(movimientos.size()>1)
             desplazarListaMovs( nodo, movimientos);
+            });  
+        
+        //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
+        desplazamiento.play(); 
+        }
+        catch(NullPointerException e){
+            System.out.println("error trasladando en ruta,puntero nulo");
+        }
+        catch(IndexOutOfBoundsException i){
+            System.out.println("error trasladando ruta,un solo vértice de ruta");
+        }
+    }
+    
+    public void desplazarListaMovsV(Node nodo,ArrayList<Vertex> movimientos){
+        //System.out.println("Vertices a mover size:"+movimientos.size());
+        try{
+        //quitar esto en caso de no ocuparlo
+        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2"); 
+        
+        //obtiene vértices
+        FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
+        Vertex n1 = movimientos.get(0);
+        Vertex n2 = movimientos.get(1);
+        //auxNodo.setX(auxNodo.getX()+n1[0]);
+        //auxNodo.setY(auxNodo.getY()+n1[1]);
+        movimientos.remove(0);
+        //crea transición
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
+        desplazamiento.setFromX(n1.getX());
+        desplazamiento.setFromY(n1.getY());
+        desplazamiento.setToX(n2.getX());
+        desplazamiento.setToY(n2.getY());
+        
+        //si queda más de un movimiento lo invoca al finalizar
+        desplazamiento.setOnFinished(e->{
+            //imprimir info
+            //Points2DUtils.getInstance().printPoints(n1,n2);
+            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");
+            
+            //todo quitar en caso de usarla en otra app
+            pathLines.add(Points2DUtils.getInstance().drawLine(n1, n2,Points2DUtils.COLOR.YELLOW));
+            
+            if(movimientos.size()>1)
+            desplazarListaMovsV( nodo, movimientos);
             });  
         
         //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
