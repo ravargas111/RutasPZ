@@ -117,6 +117,7 @@ public class MapaController extends Controller implements Initializable {
         pathPointsArray.add(pathPoints);
         insertPointToRoute(e.getX(),e.getY());*/
         //imprimirNuevoVertice(e);
+        
     }
     
     private void rigthClickEvent(MouseEvent e){
