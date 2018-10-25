@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -52,6 +53,8 @@ public class MapaController extends Controller implements Initializable {
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
+    @FXML
+    private Label lblNodo;
     
     /**
      * Initializes the controller class.
@@ -83,6 +86,7 @@ public class MapaController extends Controller implements Initializable {
         pathLines2 = new ArrayList<>();
         AppContext.getInstance().set("lines2",pathLines2);
         AppContext.getInstance().set("parent",apInterfaz);
+        AppContext.getInstance().set("infoNodo",lblNodo);
         cont=0;
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);

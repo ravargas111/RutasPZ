@@ -11,6 +11,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -698,6 +699,7 @@ public class VertexUtils {
      */
     public void drawVertex(Vertex v){
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
+        Label infoNodo = (Label) AppContext.getInstance().get("infoNodo");//todo quitar
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         createPoint2D(v);
@@ -710,6 +712,7 @@ public class VertexUtils {
             if(e.getButton()==MouseButton.PRIMARY){
                 selectedVertex = v;
                 System.out.println("//Adyacencias vértice "+selectedVertex.getIndex());
+                infoNodo.setText(v.getIndex().toString());
             }
             else if(e.getButton()==MouseButton.SECONDARY){
                 System.out.println("putAdyacencia("+selectedVertex.getIndex()+","+v.getIndex()+");");

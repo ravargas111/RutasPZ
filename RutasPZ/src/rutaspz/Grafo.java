@@ -281,11 +281,12 @@ return mat;
         System.out.println("\n\n\n***prueba adyacencias***");
         vertices.stream().forEach(e->{
             Integer i = e.getIndex();
+            System.out.println("");
             System.out.println("adyacencias nodo ("+i+")");
             for (int j = 0; j < nodes; j++) {
                 if(adjacents[i][j]==1){
                    Double w = e.distance(vertices.get(j));
-                   System.out.println("("+i+","+j+")");
+                   System.out.print("("+i+","+j+") -> ");
                    //System.out.println("Peso: "+w);
                    weigths[i][j] = w;
                 }
@@ -296,7 +297,14 @@ return mat;
         //printMatrixW();
     }
     
-    public void initAyacents(){
+    /**
+     * inicializa la matriz de adyacencias
+     */
+    private void initAyacents(){
+        initBorderAdyacents();
+    }
+    
+    private void initBorderAdyacents(){
         //Adyacencias vértice 0
         putAdyacencia(0,1);
         putAdyacencia(0,26);
