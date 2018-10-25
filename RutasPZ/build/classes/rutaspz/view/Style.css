@@ -109,6 +109,10 @@ and open the template in the editor.
     /*line*/
     -fx-base-color-line: blue;
     -fx-base-color-line-disable: yellow;
+    
+    /*circle*/
+     -fx-base-color-circle: black;
+      -fx-base-color-circle-sel: #FF0A0A;
 }
 
 #root{
@@ -686,10 +690,12 @@ and open the template in the editor.
 }
 
 .circle{
-    
+    -fx-fill: -fx-base-color-circle;
+    -fx-opacity: 0.8;
 }
 
 .circle:hover{
+    -fx-fill: -fx-base-color-circle-sel;
     -fx-scale-x: 1.3;
     -fx-scale-y: 1.3;
 }
