@@ -93,12 +93,12 @@ public class Grafo {
         countNodes();
         initMatrix();
         //System.out.println("\nMatriz inicial");
+        //printMatrixA();
+        initAyacents();
+        System.out.println("\nMatriz Inicial");
         printMatrixA();
         
-        System.out.println("\nMatriz Inicial");
-        //printMatrixA();
-        
-        //searchAdyacents();
+        searchAdyacents();
         //printVerticesList();
         
     }
@@ -281,11 +281,12 @@ return mat;
         System.out.println("\n\n\n***prueba adyacencias***");
         vertices.stream().forEach(e->{
             Integer i = e.getIndex();
+            System.out.println("adyacencias nodo ("+i+")");
             for (int j = 0; j < nodes; j++) {
                 if(adjacents[i][j]==1){
                    Double w = e.distance(vertices.get(j));
-                   System.out.println("adyacencia en ("+i+","+j+")");
-                   System.out.println("Peso: "+w);
+                   System.out.println("("+i+","+j+")");
+                   //System.out.println("Peso: "+w);
                    weigths[i][j] = w;
                 }
                     
@@ -293,6 +294,107 @@ return mat;
             //System.out.println("B: "+i);
         });
         //printMatrixW();
+    }
+    
+    public void initAyacents(){
+        //Adyacencias vértice 0
+        putAdyacencia(0,1);
+        putAdyacencia(0,26);
+        //Adyacencias vértice 1
+        putAdyacencia(1,0);
+        putAdyacencia(1,2);
+        //Adyacencias vértice 2
+        putAdyacencia(2,1);
+        putAdyacencia(2,3);
+        putAdyacencia(2,33);
+        //Adyacencias vértice 3
+        putAdyacencia(3,2);
+        putAdyacencia(3,4);
+        putAdyacencia(3,33);
+        //Adyacencias vértice 4
+        putAdyacencia(4,3);
+        putAdyacencia(4,5);
+        putAdyacencia(4,35);
+        //Adyacencias vértice 5
+        putAdyacencia(5,4);
+        putAdyacencia(5,6);
+        //Adyacencias vértice 6
+        putAdyacencia(6,5);
+        putAdyacencia(6,7);
+        //Adyacencias vértice 7
+        putAdyacencia(7,6);
+        putAdyacencia(7,8);
+        putAdyacencia(7,46);
+        //Adyacencias vértice 8
+        putAdyacencia(8,7);
+        putAdyacencia(8,9);
+        putAdyacencia(8,52);
+        //Adyacencias vértice 9
+        putAdyacencia(9,8);
+        putAdyacencia(9,10);
+        putAdyacencia(9,58);
+        //Adyacencias vértice 10
+        putAdyacencia(10,9);
+        putAdyacencia(10,11);
+        putAdyacencia(10,64);
+        //Adyacencias vértice 11
+        putAdyacencia(11,10);
+        putAdyacencia(11,12);
+        putAdyacencia(11,74);
+        //Adyacencias vértice 12
+        putAdyacencia(12,11);
+        putAdyacencia(12,13);
+        //Adyacencias vértice 13
+        putAdyacencia(13,12);
+        putAdyacencia(13,14);
+        putAdyacencia(13,83);
+        //Adyacencias vértice 14
+        putAdyacencia(14,13);
+        putAdyacencia(14,32);
+        putAdyacencia(14,15);
+        //Adyacencias vértice 15
+        putAdyacencia(15,14);
+        putAdyacencia(15,16);
+        putAdyacencia(15,80);
+        //Adyacencias vértice 16
+        putAdyacencia(16,15);
+        putAdyacencia(16,17);
+        //Adyacencias vértice 17
+        putAdyacencia(17,16);
+        putAdyacencia(17,18);
+        putAdyacencia(17,80);
+        //Adyacencias vértice 18
+        putAdyacencia(18,17);
+        putAdyacencia(18,19);
+        //Adyacencias vértice 19
+        putAdyacencia(19,18);
+        putAdyacencia(19,20);
+        putAdyacencia(19,63);
+        //Adyacencias vértice 20
+        putAdyacencia(20,19);
+        putAdyacencia(20,21);
+        //Adyacencias vértice 21
+        putAdyacencia(21,20);
+        putAdyacencia(21,22);
+        putAdyacencia(21,51);
+        //Adyacencias vértice 22
+        putAdyacencia(22,21);
+        putAdyacencia(22,23);
+        //Adyacencias vértice 23
+        putAdyacencia(23,22);
+        putAdyacencia(23,24);
+        putAdyacencia(23,27);
+        //Adyacencias vértice 24
+        putAdyacencia(24,23);
+        putAdyacencia(24,25);
+        //Adyacencias vértice 25
+        putAdyacencia(25,24);
+        putAdyacencia(25,26);
+        putAdyacencia(25,37);
+        //Adyacencias vértice 26
+        putAdyacencia(26,25);
+        putAdyacencia(26,0);
+        putAdyacencia(26,34);
     }
     
 }
