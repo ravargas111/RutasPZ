@@ -301,8 +301,9 @@ return mat;
      * inicializa la matriz de adyacencias
      */
     private void initAyacents(){
-        //initBorderAdyacents();
+        initBorderAdyacents();
         initPricipalStreetAdyacents();
+        initOtherAdyacents();
     }
     
     private void initBorderAdyacents(){
@@ -431,4 +432,30 @@ return mat;
         putAdyacencia(32,14);
     }
     
+    private void initOtherAdyacents(){
+        //Adyacencias vértice 33
+        putAdyacencia(33,2);
+        putAdyacencia(33,3);
+        putAdyacencia(33,34);
+        //Adyacencias vértice 34
+        putAdyacencia(34,33);
+        putAdyacencia(34,35);
+        putAdyacencia(34,26);
+        putAdyacencia(34,36);
+        //Adyacencias vértice 35
+        putAdyacencia(35,4);
+        putAdyacencia(35,34);
+        putAdyacencia(35,39);
+        //Adyacencias vértice 36
+        putAdyacencia(36,34);
+        putAdyacencia(36,37);
+        //Adyacencias vértice 37
+        putAdyacencia(37,36);
+        //putAdyacencia(37,25);no tiene
+        putAdyacencia(37,38);
+        putAdyacencia(37,41);
+        //Adyacencias vértice 38
+        putAdyacencia(38,37);
+        putAdyacencia(38,24);
+    }
 }
