@@ -5,10 +5,16 @@
  */
 package rutaspz.util;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPopup;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import javafx.event.EventType;
+import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import rutaspz.Vertex;
@@ -695,12 +701,38 @@ public class VertexUtils {
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         createPoint2D(v);
-        //Utils.getInstance().createPopUp(v);
+        Utils.getInstance().createPopUp(v);
         v.setOnMouseClicked(e->{
             //printPoint(v);
             //Utils.getInstance().createPopUp(v,parent);
-            selectedVertices.add(v);
+            //todo descomentar la parte de seleccionar vértice
+            //selectedVertices.add(v);
+            if(e.getButton()==MouseButton.PRIMARY){
+                selectedVertex = v;
+                System.out.println("//Adyacencias vértice "+selectedVertex.getIndex());
+            }
+            else if(e.getButton()==MouseButton.SECONDARY){
+                System.out.println("putAdyacencia("+selectedVertex.getIndex()+","+v.getIndex()+");");
+            }
         });
+    }
+    
+    private void createPopUp(Vertex node){
+        JFXPopup popUp = new JFXPopup();
+        VBox vbox = popUpContent(node);
+        node.setOnMouseClicked(e->{
+            //System.out.println("mostrando pop");
+            popUp.show(node, e.getScreenX(), e.getScreenY());
+        });
+        
+        popUp.setPopupContent(vbox);
+    }
+    
+    private VBox popUpContent(Node node){
+        VBox vbox=new VBox();
+        JFXButton b1 = new JFXButton("asdasd");
+        vbox.getChildren().add(b1);
+        return vbox;
     }
     
     public void drawPointsList(){

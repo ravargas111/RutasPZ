@@ -6,6 +6,8 @@
 package rutaspz;
 
 import java.util.ArrayList;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import rutaspz.util.VertexUtils;
 
 /**
@@ -84,6 +86,26 @@ public class Grafo {
         this.empty = empty;
     }
     
+    /**
+     * invoca todas las funciones para cargar los datos del grafo
+     */
+    public void init(){
+        countNodes();
+        initMatrix();
+        //System.out.println("\nMatriz inicial");
+        printMatrixA();
+        
+        System.out.println("\nMatriz Inicial");
+        //printMatrixA();
+        
+        //searchAdyacents();
+        //printVerticesList();
+        
+    }
+    
+    /**
+     * imprime informaación de todos los vértices
+     */
     private void printVerticesList(){
         System.out.println("\n\n****Información Grafo****");
         vertices.stream().forEach(e->{
@@ -92,6 +114,19 @@ public class Grafo {
         System.out.println("\nTotal Nodos: "+nodes);
     }
     
+    /**
+     * cuenta el número de vértices
+     */
+    private void countNodes(){
+        vertices.stream().forEach(e->{
+            nodes++;
+        });
+        System.out.println("Cantidad de nodos "+nodes);
+    }
+    
+    /**
+     * imprime matriz de adyacencia
+     */
     private void printMatrixA(){
         System.out.println("\n\n****Matriz Adyacencia****");
         
@@ -104,6 +139,9 @@ public class Grafo {
         }
     }
     
+    /**
+     * imprime matriz de pesos
+     */
     private void printMatrixW(){
         System.out.println("\n\n****Matriz Pesos****");
         for (int i = 0; i < nodes; i++) {
@@ -115,14 +153,8 @@ public class Grafo {
     }
     
     /**
-     * cuenta el número de nodos
+     * instancia de matrices adyacencia y pesos
      */
-    private void countNodes(){
-        vertices.stream().forEach(e->{
-            nodes++;
-        });
-    }
-    
     private void initMatrix(){
         adjacents = new Integer[nodes][nodes];
         weigths = new Double[nodes][nodes];
@@ -133,26 +165,21 @@ public class Grafo {
                 weigths[i][j]=0.0;
             }
         }
-    }
-    
-    private void loadMatrix(){
-        adjacents = pruebaMatriz();
-    }
-    
-    public void init(){
-        countNodes();
-        initMatrix();
-        System.out.println("\nMatriz inicial");
-        printMatrixA();
         loadMatrix();
-        System.out.println("\nMatriz cargada");
-        printMatrixA();
-        searchAdyacents();
-        //printVerticesList();
-        
     }
     
-    private Integer[][] pruebaMatriz(){
+    /**
+     * carga la matriz inicial
+     */
+    private void loadMatrix(){
+        //adjacents = initialMatrix();
+    }
+    
+    /**
+     * carga los datos de la matriz de adyacencia
+     * @return 
+     */
+    private Integer[][] initialMatrix(){
         Integer [][] mat = {
 {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
@@ -238,12 +265,20 @@ public class Grafo {
 return mat;
     }
     
+    /**
+     * pone como adyacente una posición de la matriz de adyacencia
+     * @param i
+     * @param j 
+     */
     public void putAdyacencia(Integer i,Integer j){
         adjacents[i][j]=1;
     }
     
+    /**
+     * por cada adyacente busca el peso hacia el otro para cargarlos en la matriz de pesos
+     */
     private void searchAdyacents(){
-        System.out.println("\n***prueba adyacencias***");
+        System.out.println("\n\n\n***prueba adyacencias***");
         vertices.stream().forEach(e->{
             Integer i = e.getIndex();
             for (int j = 0; j < nodes; j++) {
@@ -257,7 +292,7 @@ return mat;
             }
             //System.out.println("B: "+i);
         });
-        printMatrixW();
+        //printMatrixW();
     }
     
 }

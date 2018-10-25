@@ -156,7 +156,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(431.0,283.0,4),
             new Vertex(414.0,303.0,4),
             new Vertex(390.0,341.0,4),
-            new Vertex(367.0,374.0,4),
+            new Vertex(367.0,374.0,4),//10
             new Vertex(343.0,406.0,4),
             new Vertex(298.0,466.0,4),
             new Vertex(496.0,607.0,4),
@@ -166,7 +166,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(620.0,585.0,4),
             new Vertex(640.0,530.0,4),
             new Vertex(654.0,481.0,4),
-            new Vertex(668.0,436.0,4),
+            new Vertex(668.0,436.0,4),//20
             new Vertex(680.0,393.0,4),
             new Vertex(684.0,381.0,4),
             new Vertex(635.0,276.0,4),
@@ -177,7 +177,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(625.0,308.0,4),
             new Vertex(611.0,355.0,4),
             new Vertex(598.0,399.0,4),
-            new Vertex(584.0,446.0,4),
+            new Vertex(584.0,446.0,4),//30
             new Vertex(569.0,492.0,4),
             new Vertex(555.0,539.0,4),
             //vértices internos
@@ -188,7 +188,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(564.0,225.0,4),
             new Vertex(603.0,247.0,4),
             new Vertex(504.0,250.0,4),
-            new Vertex(529.0,263.0,4),
+            new Vertex(529.0,263.0,4),//40
             new Vertex(552.0,273.0,4),
             new Vertex(590.0,292.0,4),
             new Vertex(608.0,301.0,4),
@@ -198,7 +198,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(501.0,303.0,4),
             new Vertex(515.0,309.0,4),
             new Vertex(539.0,319.0,4),
-            new Vertex(576.0,337.0,4),
+            new Vertex(576.0,337.0,4),//50
             new Vertex(649.0,376.0,4),
             new Vertex(455.0,324.0,4),
             new Vertex(493.0,343.0,4),
@@ -208,15 +208,17 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(634.0,419.0,4),
             new Vertex(440.0,369.0,4),
             new Vertex(476.0,389.0,4),
-            new Vertex(513.0,408.0,4),
+            new Vertex(513.0,408.0,4),//60
             new Vertex(530.0,415.0,4),
+            new Vertex(542.0,423.0,4),
+            new Vertex(618.0,463.0,4),
             new Vertex(397.0,408.0,4),
             new Vertex(432.0,429.0,4),
             new Vertex(458.0,443.0,4),
             new Vertex(494.0,460.0,4),
             new Vertex(529.0,475.0,4),
             new Vertex(601.0,506.0,4),
-            new Vertex(512.0,491.0,4),
+            new Vertex(512.0,491.0,4),//70
             new Vertex(522.0,496.0,4),
             new Vertex(488.0,500.0,4),
             new Vertex(505.0,507.0,4),
@@ -224,10 +226,12 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(379.0,444.0,4),
             new Vertex(411.0,478.0,4),
             new Vertex(517.0,519.0,4),
+            new Vertex(588.0,549.0,4),
             new Vertex(478.0,529.0,4),
             new Vertex(588.0,568.0,4),
-            new Vertex(355.0,478.0,4),
-            new Vertex(429.0,520.0,4)
+            new Vertex(355.0,478.0,4),//80
+            new Vertex(429.0,520.0,4),
+            new Vertex(504.0,565.0,5)
         ));
         
             System.out.println("Vertices List size:"+generalVertices.size());
@@ -237,8 +241,9 @@ public class MapaController extends Controller implements Initializable {
     
     /*
     private void imprimirNuevoVertice(MouseEvent e){
-        System.out.println("new Vertex("+e.getX()+","+e.getY()+",5),");
+        System.out.println("new Vertex("+e.getX()+","+e.getY()+",4),");
     }
+    
     
     private void insertPointToRoute(Double x,Double y){
         VertexUtils.getInstance().insertPoint2D(x, y);

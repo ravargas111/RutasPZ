@@ -47,6 +47,7 @@ public class ContainerController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppContext.getInstance().set("hambBtn",hambBtn);
+        //Utils.getInstance().createPopUp(hambBtn);
     }    
 
     @FXML
