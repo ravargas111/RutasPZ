@@ -19,10 +19,10 @@ import rutaspz.Vertex;
  */
 public class VertexUtils {
     private static VertexUtils INSTANCE = null;
-    private static ArrayList<Point2D> points=new ArrayList<>();
-    private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
-    private static ArrayList<Vertex> verticesList = new ArrayList<>();
-    private static ArrayList<Vertex> selectedVertices = new ArrayList<>();
+    private static ArrayList<Point2D> points=new ArrayList<>();//no se usan
+    private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();//no se usan
+    private static ArrayList<Vertex> verticesList = new ArrayList<>();//guarda la lista de vértices general
+    private static ArrayList<Vertex> selectedVertices = new ArrayList<>();//guarda la lista de vértices para la ruta creada
     private static ArrayList<Line> routeLines = new ArrayList<>();//guarda las líneas de la ruta principal
     private static ArrayList<Line> followedLines = new ArrayList<>();//guarda las líneas de la ruta seguida
     private static Vertex selectedVertex = new Vertex();
@@ -374,7 +374,7 @@ public class VertexUtils {
      * imprime en consola la información entre dos puntos
      * @param v 
      */
-    public void printVericesInfo(Point2D p1,Point2D p2){
+    public void printPointsInfo(Point2D p1,Point2D p2){
         if(p1!=null)
             System.out.print("("+p1.getX()+","+p1.getY()+")");
         //else{
@@ -385,6 +385,29 @@ public class VertexUtils {
             else
                 System.out.print("punto 2 nulo");
         //}
+    }
+    
+    /**
+     * inprime en la consola información de dos vértices
+     * @param v1
+     * @param v2 
+     */
+    public void printVerticesInfo(Vertex v1,Vertex v2){
+        if(v1!=null)
+            System.out.print("("+v1.getX()+","+v1.getY()+")");
+        //else{
+        if(v2!=null){
+            System.out.print("--> ("+v2.getX()+","+v2.getY()+")");
+            System.out.print(" ---> Distancia ="+getDistance(v1, v2)+"\n");
+            }
+            else
+                System.out.print("Fin de la ruta");
+    }
+    
+    public void printVerticesRoute(){
+        selectedVertices.stream().forEach(e->{
+            printVerticesInfo(e,getNextVertex(e));
+        });
     }
     
     public void printRoutePoints(){
@@ -424,9 +447,9 @@ public class VertexUtils {
      * @param p2
      * @return 
      */
-    public Double getDistance(Vertex p1,Vertex p2){
+    public Double getDistance(Vertex v1,Vertex v2){
         try{
-        Double distance = p1.distance(p2);
+        Double distance = v1.distance(v2);
         return ((double)Math.round(distance * 100d) / 100d);
         }
         catch(NullPointerException e){
@@ -670,7 +693,8 @@ public class VertexUtils {
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
-        Utils.getInstance().createPopUp(v);
+        createPoint2D(v);
+        //Utils.getInstance().createPopUp(v);
         v.setOnMouseClicked(e->{
             //printPoint(v);
             //Utils.getInstance().createPopUp(v,parent);

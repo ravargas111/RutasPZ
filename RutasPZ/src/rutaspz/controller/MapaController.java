@@ -131,6 +131,7 @@ public class MapaController extends Controller implements Initializable {
         car.setVisible(true);
         VertexUtils.getInstance().createRouteLinesVSel();
         Animation.getInstance().desplazarListaMovsV(car, selectedVertices);
+        VertexUtils.getInstance().printVerticesRoute();
     }
     
     private void printRoute(){
