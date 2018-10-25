@@ -134,7 +134,7 @@ public class MapaController extends Controller implements Initializable {
         //Animation.getInstance().desplazarListaMovs(car, pathPoints);
         //Utils.getInstance().putObject(apInterfaz, car);
         car.setVisible(true);
-        VertexUtils.getInstance().createRouteLinesVSel();
+        VertexUtils.getInstance().drawSelectedRoute();
         Animation.getInstance().desplazarListaMovsV(car, selectedVertices);
         VertexUtils.getInstance().printVerticesRoute();
     }
@@ -231,7 +231,7 @@ public class MapaController extends Controller implements Initializable {
         ));
         
             System.out.println("Vertices List size:"+generalVertices.size());
-            VertexUtils.getInstance().drawVerticesV();
+            VertexUtils.getInstance().drawVerticesList();
             
     }
     
@@ -270,7 +270,7 @@ public class MapaController extends Controller implements Initializable {
             }
             i++;
         }
-        VertexUtils.getInstance().drawVertices();
+        VertexUtils.getInstance().drawPointsList();
     }
     
     private void clearLines(){

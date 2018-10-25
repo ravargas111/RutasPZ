@@ -617,7 +617,7 @@ public class VertexUtils {
         return line;
     }
     
-    public void createRouteLinesV(){
+    public void drawRouteList(){
         Integer i=0;
         //AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         for(Vertex p:verticesList){
@@ -630,7 +630,7 @@ public class VertexUtils {
         }
     }
     
-    public void createRouteLinesVSel(){
+    public void drawSelectedRoute(){
         Integer i=0;
         AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         for(Vertex p:selectedVertices){
@@ -703,7 +703,7 @@ public class VertexUtils {
         });
     }
     
-    public void drawVertices(){
+    public void drawPointsList(){
         Integer i=0;
         for(Point2D p:points){
            drawVertex(p, i);
@@ -714,7 +714,7 @@ public class VertexUtils {
     /**
      * dibuja los vértices en el parent a partir de una lista de vértices
      */
-    public void drawVerticesV(){
+    public void drawVerticesList(){
         Integer i=0;
         for(Vertex p:verticesList){
            drawVertex(p);
