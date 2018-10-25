@@ -2,3 +2,4 @@ RutasPZ\RutasPZ\dist\**
 RutasPZ\RutasPZ\build\**
 *.properties
 *.properties
+RutasPZ/build/built-jar.properties
