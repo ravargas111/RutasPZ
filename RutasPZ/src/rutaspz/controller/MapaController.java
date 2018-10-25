@@ -120,7 +120,7 @@ public class MapaController extends Controller implements Initializable {
         pathPoints.clear();
         pathPointsArray.add(pathPoints);
         insertPointToRoute(e.getX(),e.getY());*/
-        //imprimirNuevoVertice(e);
+        imprimirNuevoVertice(e);
         
     }
     
@@ -211,6 +211,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(564.0,381.0,4),
             new Vertex(634.0,419.0,4),
             new Vertex(440.0,369.0,4),
+            //aquí
             new Vertex(476.0,389.0,4),
             new Vertex(513.0,408.0,4),//60
             new Vertex(530.0,415.0,4),
@@ -243,12 +244,11 @@ public class MapaController extends Controller implements Initializable {
             
     }
     
-    /*
     private void imprimirNuevoVertice(MouseEvent e){
         System.out.println("new Vertex("+e.getX()+","+e.getY()+",4),");
     }
     
-    
+    /*
     private void insertPointToRoute(Double x,Double y){
         VertexUtils.getInstance().insertPoint2D(x, y);
         
