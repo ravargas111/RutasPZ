@@ -104,11 +104,6 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void leftClickEvent(MouseEvent e){
-        //System.out.println("X:"+e.getX()+" -- Y:"+e.getY());
-        //System.out.println("Vertex("+e.getX()+","+e.getY()+","+cont+")");
-        //cont++;
-        //Points2DUtils.getInstance().drawVertex(e.getX(), e.getY(), cont);
-        
         /*clearLines();
         clearLines2();
         clearVertices();
@@ -117,16 +112,16 @@ public class MapaController extends Controller implements Initializable {
         pathPoints.clear();
         pathPointsArray.add(pathPoints);
         insertPointToRoute(e.getX(),e.getY());*/
+        //imprimirNuevoVertice(e);
+    }
+    
+    private void imprimirNuevoVertice(MouseEvent e){
+        System.out.println("new Vertex("+e.getX()+","+e.getY()+",5),");
     }
     
     private void rigthClickEvent(MouseEvent e){
-        //refreshFinishPoints(e.getX(),e.getY());
-        //createLine(apInterfaz,lFromX,lToX,lFromY,lToY);
-        //refreshStartPoints(e.getX(),e.getY());
-        //insertPointToRoute(e.getX(),e.getY());
-        insertPointToRoute(e.getX(),e.getY());
-        //Utils.getInstance().createIcon(apInterfaz, e.getX(), e.getY(), FontAwesomeIcon.DOT_CIRCLE_ALT);
-        //createRouteLines();
+        Points2DUtils.getInstance().clearRouteLines();
+        Points2DUtils.getInstance().clearFollowedLines();
     }
     
     private void middleClickEvent(MouseEvent e){
@@ -206,35 +201,93 @@ public class MapaController extends Controller implements Initializable {
     
     public void createBorderVertex(){
         generalVertices.addAll(Arrays.asList(
-            new Vertex(512.0,6.0,5),
-            new Vertex(484.0,31.0,5),
-            new Vertex(476.0,57.0,5),
-            new Vertex(460.0,137.0,5),
-            new Vertex(458.0,166.0,5),
-            new Vertex(457.0,197.0,5),
-            new Vertex(443.0,259.0,5),
-            new Vertex(431.0,283.0,5),
-            new Vertex(414.0,303.0,5),
-            new Vertex(390.0,341.0,5),
-            new Vertex(367.0,374.0,5),
-            new Vertex(343.0,406.0,5),
-            new Vertex(298.0,466.0,5),
-            new Vertex(496.0,607.0,5),
-            new Vertex(531.0,630.0,5),
-            new Vertex(580.0,657.0,5),
-            new Vertex(596.0,659.0,5),
-            new Vertex(620.0,585.0,5),
-            new Vertex(640.0,530.0,5),
-            new Vertex(654.0,481.0,5),
-            new Vertex(668.0,436.0,5),
-            new Vertex(680.0,393.0,5),
-            new Vertex(684.0,381.0,5),
-            new Vertex(635.0,276.0,5),
-            new Vertex(612.0,226.0,5),
-            new Vertex(581.0,164.0,5),
-            new Vertex(566.0,131.0,5)));
+            new Vertex(512.0,6.0,4),
+            new Vertex(484.0,31.0,4),
+            new Vertex(476.0,57.0,4),
+            new Vertex(460.0,137.0,4),
+            new Vertex(458.0,166.0,4),
+            new Vertex(457.0,197.0,4),
+            new Vertex(443.0,259.0,4),
+            new Vertex(431.0,283.0,4),
+            new Vertex(414.0,303.0,4),
+            new Vertex(390.0,341.0,4),
+            new Vertex(367.0,374.0,4),
+            new Vertex(343.0,406.0,4),
+            new Vertex(298.0,466.0,4),
+            new Vertex(496.0,607.0,4),
+            new Vertex(531.0,630.0,4),
+            new Vertex(580.0,657.0,4),
+            new Vertex(596.0,659.0,4),
+            new Vertex(620.0,585.0,4),
+            new Vertex(640.0,530.0,4),
+            new Vertex(654.0,481.0,4),
+            new Vertex(668.0,436.0,4),
+            new Vertex(680.0,393.0,4),
+            new Vertex(684.0,381.0,4),
+            new Vertex(635.0,276.0,4),
+            new Vertex(612.0,226.0,4),
+            new Vertex(581.0,164.0,4),
+            new Vertex(566.0,131.0,4),
+            //calle vertical
+            new Vertex(625.0,308.0,4),
+            new Vertex(611.0,355.0,4),
+            new Vertex(598.0,399.0,4),
+            new Vertex(584.0,446.0,4),
+            new Vertex(569.0,492.0,4),
+            new Vertex(555.0,539.0,4),
+            //vértices internos
+            new Vertex(509.0,117.0,4),
+            new Vertex(526.0,157.0,4),
+            new Vertex(488.0,177.0,4),
+            new Vertex(526.0,207.0,4),
+            new Vertex(564.0,225.0,4),
+            new Vertex(603.0,247.0,4),
+            new Vertex(504.0,250.0,4),
+            new Vertex(529.0,263.0,4),
+            new Vertex(552.0,273.0,4),
+            new Vertex(590.0,292.0,4),
+            new Vertex(608.0,301.0,4),
+            new Vertex(585.0,316.0,4),
+            new Vertex(599.0,321.0,4),
+            new Vertex(466.0,296.0,4),
+            new Vertex(501.0,303.0,4),
+            new Vertex(515.0,309.0,4),
+            new Vertex(539.0,319.0,4),
+            new Vertex(576.0,337.0,4),
+            new Vertex(649.0,376.0,4),
+            new Vertex(455.0,324.0,4),
+            new Vertex(493.0,343.0,4),
+            new Vertex(526.0,362.0,4),
+            new Vertex(543.0,371.0,4),
+            new Vertex(564.0,381.0,4),
+            new Vertex(634.0,419.0,4),
+            new Vertex(440.0,369.0,4),
+            new Vertex(476.0,389.0,4),
+            new Vertex(513.0,408.0,4),
+            new Vertex(530.0,415.0,4),
+            new Vertex(397.0,408.0,4),
+            new Vertex(432.0,429.0,4),
+            new Vertex(458.0,443.0,4),
+            new Vertex(494.0,460.0,4),
+            new Vertex(529.0,475.0,4),
+            new Vertex(601.0,506.0,4),
+            new Vertex(512.0,491.0,4),
+            new Vertex(522.0,496.0,4),
+            new Vertex(488.0,500.0,4),
+            new Vertex(505.0,507.0,4),
+            new Vertex(365.0,427.0,4),
+            new Vertex(379.0,444.0,4),
+            new Vertex(411.0,478.0,4),
+            new Vertex(517.0,519.0,4),
+            new Vertex(478.0,529.0,4),
+            new Vertex(588.0,568.0,4),
+            new Vertex(355.0,478.0,4),
+            new Vertex(429.0,520.0,4)
+        ));
         
+            System.out.println("Vertices List size:"+generalVertices.size());
             Points2DUtils.getInstance().drawVerticesV();
+            
     }
     
 }

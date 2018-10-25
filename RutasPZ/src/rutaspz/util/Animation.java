@@ -482,8 +482,8 @@ public class Animation {
             //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");
             
             //todo quitar en caso de usarla en otra app
-            pathLines.add(Points2DUtils.getInstance().drawLine(n1, n2,Points2DUtils.COLOR.YELLOW));
-            
+            pathLines.add(Points2DUtils.getInstance().drawFollowedLine(n1, n2,Points2DUtils.COLOR.YELLOW));
+            nodo.toFront();
             if(movimientos.size()>1)
             desplazarListaMovsV( nodo, movimientos);
             });  

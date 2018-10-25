@@ -5,8 +5,10 @@
  */
 package rutaspz.util;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -21,6 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import rutaspz.RutasPZ;
 
@@ -123,6 +126,40 @@ public class Utils {
     public void quitObject(Pane parent,Node node){
         if(parent.getChildren().contains(node))
             parent.getChildren().remove(node);
+    }
+    
+    /**
+     * le crea un popUp a un al darle click sobre un nodo 
+     * @param node nodo sobre el cual crear popup
+     * @param content contenido a agregar en el popUp
+     */
+    public void createPopUp(Node node){
+        JFXPopup popUp = new JFXPopup();
+        VBox vbox = popUpContent(node);
+        node.setOnMouseClicked(e->{
+            //System.out.println("mostrando pop");
+            popUp.show(node, e.getScreenX(), e.getScreenY());
+        });
+        
+        popUp.setPopupContent(vbox);
+    }
+    
+    private VBox popUpContent(Node node){
+        VBox vbox=new VBox();
+        JFXButton b1 = new JFXButton("asdasd");
+        vbox.getChildren().add(b1);
+        return vbox;
+    }
+    
+    /**
+     * le crea un popUp a un al mouse event previo 
+     * @param node nodo sobre el cual crear popup
+     * @param content contenido a agregar en el popUp
+     */
+    public void createPopUp(Node node,Node content,MouseEvent e){
+        JFXPopup popUp = new JFXPopup();
+        popUp.show(node,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,e.getX(),e.getY());
+        popUp.setPopupContent((Region) content);
     }
     
     /**

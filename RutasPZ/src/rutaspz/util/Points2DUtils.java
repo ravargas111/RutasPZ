@@ -23,6 +23,8 @@ public class Points2DUtils {
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
     private static ArrayList<Vertex> verticesList = new ArrayList<>();
     private static ArrayList<Vertex> selectedVertices = new ArrayList<>();
+    private static ArrayList<Line> routeLines = new ArrayList<>();//guarda las líneas de la ruta principal
+    private static ArrayList<Line> followedLines = new ArrayList<>();//guarda las líneas de la ruta seguida
     public static enum COLOR {RED,YELLOW,BLUE};
     public Points2DUtils() {
     }
@@ -199,6 +201,11 @@ public class Points2DUtils {
         System.out.println("("+p.getX()+","+p.getY()+")");
     }
     
+    public void printPoint(Vertex v){
+        System.out.println("("+v.getX()+","+v.getY()+")");
+        System.out.println("Index: "+v.getIndex());
+    }
+    
     public void printPoints(Point2D p1,Point2D p2){
         if(p1!=null)
             System.out.print("("+p1.getX()+","+p1.getY()+")");
@@ -308,6 +315,7 @@ public class Points2DUtils {
         line.setStartY(p1.getY());
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
+        routeLines.add(line);
         //pathLines.add(line); 
     }
     
@@ -318,6 +326,7 @@ public class Points2DUtils {
         line.setStartY(p1.getY());
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
+        routeLines.add(line);
         //pathLines.add(line); 
     }
     
@@ -330,11 +339,18 @@ public class Points2DUtils {
         line.setEndY(p2.getY());
         parent.getChildren().add(line);
         switchLineColor(line,c);
+        routeLines.add(line);
         return line;
     }
     
-    //usada en animation
-    public Line drawLine(Vertex p1,Vertex p2,COLOR c){
+    /**
+     * dibuja una línea para la ruta establecida
+     * @param p1 vértice inicio
+     * @param p2 vértice fin
+     * @param c color
+     * @return Línea a añadir
+     */
+    public Line drawLineVSel(Vertex p1,Vertex p2,COLOR c){
         AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
         Line line=new Line();
         line.setStartX(p1.getX());
@@ -342,7 +358,31 @@ public class Points2DUtils {
         line.setEndX(p2.getX());
         line.setEndY(p2.getY());
         parent.getChildren().add(line);
+        line.toBack();
         switchLineColor(line,c);
+        routeLines.add(line);
+        return line;
+    }
+    
+    /**
+     * dibuja una línea para la ruta seguida
+     * @param p1 vértice inicio
+     * @param p2 vértice fin
+     * @param c color
+     * @return Línea a añadir
+     */
+    public Line drawFollowedLine(Vertex p1,Vertex p2,COLOR c){
+        AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
+        Line line=new Line();
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        parent.getChildren().add(line);
+        p1.toFront();
+        p2.toFront();
+        switchLineColor(line,c);
+        followedLines.add(line);
         return line;
     }
     
@@ -352,7 +392,7 @@ public class Points2DUtils {
         for(Vertex p:verticesList){
             Vertex p2 = Points2DUtils.getInstance().getNextVertex(i);
             if(p2!=null){
-                drawLine(p,p2,COLOR.BLUE);
+                drawLineVSel(p,p2,COLOR.BLUE);
                 //Points2DUtils.getInstance().printPoints(p, p2);
             }
             i++;
@@ -365,7 +405,7 @@ public class Points2DUtils {
         for(Vertex p:selectedVertices){
             Vertex p2 = Points2DUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
-                drawLine(p,p2,COLOR.BLUE);
+                drawLineVSel(p,p2,COLOR.BLUE);
                 //Points2DUtils.getInstance().printPoints(p, p2);
             }
             i++;
@@ -419,10 +459,10 @@ public class Points2DUtils {
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
+        Utils.getInstance().createPopUp(v);
         v.setOnMouseClicked(e->{
-            v.getIndex();
-            System.out.println("Index: "+v.getIndex());
-            System.out.println("selected lis size: "+selectedVertices.size());
+            printPoint(v);
+            //Utils.getInstance().createPopUp(v,parent);
             selectedVertices.add(v);
         });
     }
@@ -442,11 +482,36 @@ public class Points2DUtils {
            p.setIndex(i);
             i++; 
         }
-        //System.out.println("Vertices List size:"+verticesList.size());
     }
     
     public void clearVertices(){
         this.verticesList.clear();
     }
     
+    /**
+     * elimina las líneas de la ruta establecida
+     */
+    public void clearRouteLines(){
+        
+        AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
+        if(!routeLines.isEmpty()){
+            routeLines.stream().forEach(e->{
+                Utils.getInstance().quitObject(parent, e);
+            });
+        }
+        routeLines.clear();
+    }
+    
+    /**
+     * elimina las líneas de la ruta seguida por el nodo
+     */
+    public void clearFollowedLines(){
+        AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
+        if(!followedLines.isEmpty()){
+            followedLines.stream().forEach(e->{
+                Utils.getInstance().quitObject(parent, e);
+            });
+        }
+        followedLines.clear();
+    }
 }

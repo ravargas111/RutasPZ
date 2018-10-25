@@ -663,10 +663,10 @@ and open the template in the editor.
 
 .line{
     -fx-border-style: solid;
-    -fx-border-width: 5; 
+    -fx-border-width: 3; 
     -fx-border: 0; 
     -fx-border-color: -fx-base-color-line;
-    -fx-stroke-width: 5;
+    -fx-stroke-width: 3;
     -fx-fill: blue;
     -fx-background-color: white;
 }
