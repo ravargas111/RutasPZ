@@ -95,8 +95,8 @@ public class Grafo {
         //System.out.println("\nMatriz inicial");
         //printMatrixA();
         initAyacents();
-        System.out.println("\nMatriz Inicial");
-        printMatrixA();
+        //System.out.println("\nMatriz Inicial");
+        //printMatrixA();
         
         searchAdyacents();
         //printVerticesList();
@@ -358,7 +358,7 @@ return mat;
         putAdyacencia(13,83);
         //Adyacencias vértice 14
         putAdyacencia(14,13);
-        putAdyacencia(14,32);
+        //putAdyacencia(14,32);
         putAdyacencia(14,15);
         //Adyacencias vértice 15
         putAdyacencia(15,14);
@@ -403,6 +403,10 @@ return mat;
         putAdyacencia(26,25);
         putAdyacencia(26,0);
         putAdyacencia(26,34);
+    }
+    
+    private void initPricipalStreetAdyacents(){
+        
     }
     
 }
