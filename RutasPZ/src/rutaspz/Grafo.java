@@ -507,5 +507,23 @@ return mat;
         //Adyacencias vértice 51
         putAdyacencia(51,28);
         putAdyacencia(51,21);
+        //Adyacencias vértice 52
+        putAdyacencia(52,46);
+        putAdyacencia(52,58);
+        putAdyacencia(52,53);
+        //Adyacencias vértice 53
+        putAdyacencia(53,47);
+        putAdyacencia(53,59);
+        putAdyacencia(53,54);
+        //Adyacencias vértice 54
+        putAdyacencia(54,60);
+        putAdyacencia(54,55);
+        //Adyacencias vértice 55
+        putAdyacencia(55,56);
+        //Adyacencias vértice 56
+        putAdyacencia(56,50);
+        putAdyacencia(56,29);
+        //Adyacencias vértice 57
+        putAdyacencia(57,20);
     }
 }
