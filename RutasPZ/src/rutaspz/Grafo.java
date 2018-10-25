@@ -92,7 +92,7 @@ public class Grafo {
         System.out.println("\nTotal Nodos: "+nodes);
     }
     
-    private void printMatrix(){
+    private void printMatrixA(){
         System.out.println("\n\n****Matriz Adyacencia****");
         
         //System.out.println("Integer [][] mat = {");
@@ -102,14 +102,16 @@ public class Grafo {
                 System.out.print(" "+adjacents[i][j]);
             }
         }
-
-        /*System.out.println("\n\n****Matriz Pesos****");
+    }
+    
+    private void printMatrixW(){
+        System.out.println("\n\n****Matriz Pesos****");
         for (int i = 0; i < nodes; i++) {
             System.out.println("");
             for (int j = 0; j < nodes; j++) {
                 System.out.print(" "+weigths[i][j]);
             }
-        }*/
+        }
     }
     
     /**
@@ -141,10 +143,11 @@ public class Grafo {
         countNodes();
         initMatrix();
         System.out.println("\nMatriz inicial");
-        printMatrix();
+        printMatrixA();
         loadMatrix();
         System.out.println("\nMatriz cargada");
-        printMatrix();
+        printMatrixA();
+        searchAdyacents();
         //printVerticesList();
         
     }
@@ -237,6 +240,24 @@ return mat;
     
     public void putAdyacencia(Integer i,Integer j){
         adjacents[i][j]=1;
+    }
+    
+    private void searchAdyacents(){
+        System.out.println("\n***prueba adyacencias***");
+        vertices.stream().forEach(e->{
+            Integer i = e.getIndex();
+            for (int j = 0; j < nodes; j++) {
+                if(adjacents[i][j]==1){
+                   Double w = e.distance(vertices.get(j));
+                   System.out.println("adyacencia en ("+i+","+j+")");
+                   System.out.println("Peso: "+w);
+                   weigths[i][j] = w;
+                }
+                    
+            }
+            //System.out.println("B: "+i);
+        });
+        printMatrixW();
     }
     
 }
