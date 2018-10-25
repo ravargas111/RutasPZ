@@ -467,12 +467,12 @@ public class Animation {
         ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");
         
         //obtiene vértices
-        FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
+        //FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Vertex n1 = movimientos.get(0);
         Vertex n2 = movimientos.get(1);
         //auxNodo.setX(auxNodo.getX()+n1[0]);
         //auxNodo.setY(auxNodo.getY()+n1[1]);
-        movimientos.remove(0);
+        movimientos.remove(0);//quita el vértice de la lista de movimientos
         //crea transición
         TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
         desplazamiento.setFromX(n1.getX());

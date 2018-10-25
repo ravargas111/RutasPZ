@@ -25,6 +25,9 @@ public class Points2DUtils {
     private static ArrayList<Vertex> selectedVertices = new ArrayList<>();
     private static ArrayList<Line> routeLines = new ArrayList<>();//guarda las líneas de la ruta principal
     private static ArrayList<Line> followedLines = new ArrayList<>();//guarda las líneas de la ruta seguida
+    private static Vertex selectedVertex = new Vertex();
+    private static Vertex startVertex = new Vertex();
+    private static Vertex endVertex = new Vertex();
     public static enum COLOR {RED,YELLOW,BLUE};
     public Points2DUtils() {
     }
@@ -95,15 +98,46 @@ public class Points2DUtils {
         else return null;
     }
     
+    public Vertex getLastVertex(){
+        try{
+           return selectedVertices.get(points.size()-1); 
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    public Vertex getFirstVertex(){
+        try{
+           return selectedVertices.get(0); 
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }  
+    }
+    
     public Point2D getPoint(Integer i){
         if(points.size()<i)
         return points.get(i);
         else return null;
     }
     
+    public Vertex getVertex(Integer i){
+        if(selectedVertices.size()<i)
+        return selectedVertices.get(i);
+        else return null;
+    }
+    
     public Integer getPointIndex(Point2D p){
         if(points.contains(p)){
             return points.indexOf(p);
+        }
+        else return null;
+    }
+    
+    public Integer getVertexIndex(Vertex p){
+        if(selectedVertices.contains(p)){
+            return selectedVertices.indexOf(p);
         }
         else return null;
     }
@@ -135,12 +169,31 @@ public class Points2DUtils {
         }
     }
     
+    /**
+     * obtiene el siguiente punto de la lista de puntos
+     * @param p
+     * @return 
+     */
     public Point2D getNextPoint(Point2D p){
         Integer i=0;
         if(points.contains(p)){
             i=points.indexOf(p);
             try{
                 return points.get(points.indexOf(p)+1);
+            }
+            catch(IndexOutOfBoundsException e){
+                return null;
+            }
+        }
+        else return null;
+    }
+    
+    public Vertex getNextVertex(Vertex p){
+        Integer i=0;
+        if(selectedVertices.contains(p)){
+            i=selectedVertices.indexOf(p);
+            try{
+                return selectedVertices.get(selectedVertices.indexOf(p)+1);
             }
             catch(IndexOutOfBoundsException e){
                 return null;
@@ -172,6 +225,20 @@ public class Points2DUtils {
         else return null;
     }
     
+    public Vertex getPreviousVertex(Vertex p){
+        Integer i=0;
+        if(selectedVertices.contains(p)){
+            i=selectedVertices.indexOf(p);
+            try{
+                return selectedVertices.get(selectedVertices.indexOf(p)-1);
+            }
+            catch(IndexOutOfBoundsException e){
+                return null;
+            }
+        }
+        else return null;
+    }
+    
     public void insertPoint2D(Double x,Double y){
         Point2D p=new Point2D() {
             @Override
@@ -193,6 +260,58 @@ public class Points2DUtils {
         points.add(p);
     }
     
+    /**
+     * crea un punto 2D a partir de coordenadas
+     * @param x
+     * @param y
+     * @return 
+     */
+    public Point2D createPoint2D(Double x,Double y){
+        Point2D p=new Point2D() {
+            @Override
+            public double getX() {
+                return x;
+            }
+
+            @Override
+            public double getY() {
+                return y;
+            }
+
+            @Override
+            public void setLocation(double d, double d1) {
+                //
+            }
+        };
+        
+        return p;
+    }
+    
+    /**
+     * le crea un punto 2D a un vértice
+     * @param v 
+     */
+    public void createPoint2D(Vertex v){
+        Point2D p=new Point2D() {
+            @Override
+            public double getX() {
+                return v.getX();
+            }
+
+            @Override
+            public double getY() {
+                return v.getY();
+            }
+
+            @Override
+            public void setLocation(double d, double d1) {
+                //
+            }
+        };
+        
+        v.setPoint(p);
+    }
+    
     public void insertVertex(Double x,Double y,Integer index){
         
     }
@@ -201,12 +320,37 @@ public class Points2DUtils {
         System.out.println("("+p.getX()+","+p.getY()+")");
     }
     
-    public void printPoint(Vertex v){
+    /**
+     * imprime en consola la información entre dos puntos
+     * @param v 
+     */
+    public void printPoints(Point2D p1,Point2D p2){
+        if(p1!=null)
+            System.out.print("("+p1.getX()+","+p1.getY()+")");
+        //else{
+        if(p2!=null){
+            System.out.print("--> ("+p2.getX()+","+p2.getY()+")");
+            System.out.print(" ---> Distancia ="+getDistance(p1, p2)+"\n");
+            }
+            else
+                System.out.print("punto 2 nulo");
+        //}
+    }
+    
+    /**
+     * imprime en consola la información de un vértice
+     * @param v 
+     */
+    public void printVertexInfo(Vertex v){
         System.out.println("("+v.getX()+","+v.getY()+")");
         System.out.println("Index: "+v.getIndex());
     }
     
-    public void printPoints(Point2D p1,Point2D p2){
+    /**
+     * imprime en consola la información entre dos puntos
+     * @param v 
+     */
+    public void printVericesInfo(Point2D p1,Point2D p2){
         if(p1!=null)
             System.out.print("("+p1.getX()+","+p1.getY()+")");
         //else{
@@ -234,6 +378,12 @@ public class Points2DUtils {
         return ((Double)p.getY()).intValue();
     }
     
+    /**
+     * distancia entre dos puntos
+     * @param p1
+     * @param p2
+     * @return 
+     */
     public Double getDistance(Point2D p1,Point2D p2){
         try{
         Double distance = p1.distance(p2);
@@ -244,10 +394,43 @@ public class Points2DUtils {
         }
     }
     
+    /**
+     * distancia entre dos vértices
+     * @param p1
+     * @param p2
+     * @return 
+     */
+    public Double getDistance(Vertex p1,Vertex p2){
+        try{
+        Double distance = p1.distance(p2);
+        return ((double)Math.round(distance * 100d) / 100d);
+        }
+        catch(NullPointerException e){
+            return 0.0;
+        }
+    }
+    
+    /**
+     * obtiene la distacia total de una ruta de puntos
+     * @return 
+     */
     public Double getTotalDistance(){
         Double distance=0.0;
         for(Point2D p:points){
             Point2D p2=getNextPoint(p);
+            distance+=getDistance(p, p2);
+        }
+        return ((double)Math.round(distance * 100d) / 100d);
+    }
+    
+    /**
+     * obtiene la distacia total de la ruta de vértices seleccionados
+     * @return 
+     */
+    public Double getTotalDistanceV(){
+        Double distance=0.0;
+        for(Vertex p:selectedVertices){
+            Vertex p2=getNextVertex(p);
             distance+=getDistance(p, p2);
         }
         return ((double)Math.round(distance * 100d) / 100d);
@@ -455,13 +638,17 @@ public class Points2DUtils {
         verticesList.add(vertex);
     }
     
+    /**
+     * dibuja un vértice en el parent y añade evento (por el momento añade a vértices seleccionados)
+     * @param v 
+     */
     public void drawVertex(Vertex v){
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         Utils.getInstance().createPopUp(v);
         v.setOnMouseClicked(e->{
-            printPoint(v);
+            //printPoint(v);
             //Utils.getInstance().createPopUp(v,parent);
             selectedVertices.add(v);
         });
@@ -475,6 +662,9 @@ public class Points2DUtils {
         } 
     }
     
+    /**
+     * dibuja los vértices en el parent a partir de una lista de vértices
+     */
     public void drawVerticesV(){
         Integer i=0;
         for(Vertex p:verticesList){
@@ -484,8 +674,11 @@ public class Points2DUtils {
         }
     }
     
+    /**
+     * limpia la lista de vértices
+     */
     public void clearVertices(){
-        this.verticesList.clear();
+        Points2DUtils.verticesList.clear();
     }
     
     /**

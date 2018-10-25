@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import java.awt.geom.Point2D;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,16 +121,16 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void middleClickEvent(MouseEvent e){
-        printRoute();
+        //printRoute();
         //Points2DUtils.getInstance().addNewRouteToArray(pathPoints);
         //Points2DUtils.getInstance().printDistances();
         //createRouteLines();
         //System.out.println("\n\n*********Desplazando*********");
         //Animation.getInstance().desplazarListaMovs(car, pathPoints);
-        Utils.getInstance().putObject(apInterfaz, car);
+        //Utils.getInstance().putObject(apInterfaz, car);
+        car.setVisible(true);
         Points2DUtils.getInstance().createRouteLinesVSel();
         Animation.getInstance().desplazarListaMovsV(car, selectedVertices);
-        //Utils.getInstance().quitObject(apInterfaz, car);
     }
     
     private void printRoute(){

@@ -86,4 +86,19 @@ public class Vertex extends Circle{
         return this.getCenterY();
     }
     
+    /**
+     * obtiene la distancia entre dos vértices
+     * @param v2
+     * @return 
+     */
+    public Double distance(Vertex v2){
+        try{
+        Double distance = point.distance(v2.getPoint());
+        return ((double)Math.round(distance * 100d) / 100d);
+        }
+        catch(NullPointerException e){
+            return 0.0;
+        }
+    }
+    
 }

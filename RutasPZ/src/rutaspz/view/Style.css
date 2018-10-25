@@ -662,7 +662,7 @@ and open the template in the editor.
 }
 
 .line{
-    -fx-border-style: solid;
+    -fx-border-style: dashed;
     -fx-border-width: 3; 
     -fx-border: 0; 
     -fx-border-color: -fx-base-color-line;
