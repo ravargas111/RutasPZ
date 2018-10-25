@@ -111,21 +111,46 @@ public class Utils {
         return i;
     }
     
+    /**
+     * pone un ícono en una posición del parent
+     * @param icon
+     * @param x
+     * @param y 
+     */
     public void putIcon(FontAwesomeIconView icon,Double x,Double y){
         icon.setX(x);
         icon.setY(y);
         icon.setVisible(true);
     }
     
+    /**
+     * quita un ícono de la lista de hijos de un parent
+     * @param icon 
+     */
     public void quitIcon(FontAwesomeIconView icon){
         icon.setX(0);
         icon.setY(0);
         icon.setVisible(false);
     }
     
+    /**
+     * quita un nodo de la lista de hijos de un parent
+     * @param parent
+     * @param node 
+     */
     public void quitObject(Pane parent,Node node){
         if(parent.getChildren().contains(node))
             parent.getChildren().remove(node);
+    }
+    
+    /**
+     * pone un nodo de la lista de hijos de un parent
+     * @param parent
+     * @param node 
+     */
+    public void putObject(Pane parent,Node node){
+        if(!parent.getChildren().contains(node))
+            parent.getChildren().add(node);
     }
     
     /**

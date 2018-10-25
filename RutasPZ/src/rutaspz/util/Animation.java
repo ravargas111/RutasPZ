@@ -455,11 +455,16 @@ public class Animation {
         }
     }
     
+    /**
+     * desplaza un nodo a partir de una lista de vértices (usada por el carro)
+     * @param nodo
+     * @param movimientos 
+     */
     public void desplazarListaMovsV(Node nodo,ArrayList<Vertex> movimientos){
         //System.out.println("Vertices a mover size:"+movimientos.size());
         try{
         //quitar esto en caso de no ocuparlo
-        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2"); 
+        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");
         
         //obtiene vértices
         FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;

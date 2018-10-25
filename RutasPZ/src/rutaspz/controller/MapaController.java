@@ -43,14 +43,15 @@ public class MapaController extends Controller implements Initializable {
     private JFXDrawer drawer;
     private FontAwesomeIconView car;
     private FontAwesomeIconView flag;
-    private ArrayList<Point2D> pathPoints;
-    private ArrayList<ArrayList<Point2D>> pathPointsArray;
-    private ArrayList<Line> pathLines;
-    private ArrayList<Line> pathLines2;
-    private ArrayList<Vertex> generalVertices;
-    private ArrayList<Vertex> selectedVertices;
-    //private ArrayList<Vertex> verticesMap;
+    private ArrayList<Line> pathLines;//líneas de ruta pricipal
+    private ArrayList<Line> pathLines2;//líneas de ruta seguida
+    private ArrayList<Vertex> generalVertices;//todos los vértices
+    private ArrayList<Vertex> selectedVertices;//vértices de ruta
     private Integer cont;
+    //private ArrayList<ArrayList<Point2D>> pathPointsArray;
+    //private ArrayList<Point2D> pathPoints;
+    //private ArrayList<Vertex> verticesMap;
+    
     /**
      * Initializes the controller class.
      */
@@ -69,10 +70,10 @@ public class MapaController extends Controller implements Initializable {
     
     private void initInstances(){
         //route=new ArrayList<>();
+        //pathPoints = Points2DUtils.getInstance().getPoints();
+        //pathPointsArray = Points2DUtils.getInstance().getPointsArray();
         car = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.CAR);
         flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
-        pathPoints = Points2DUtils.getInstance().getPoints();
-        pathPointsArray = Points2DUtils.getInstance().getPointsArray();
         generalVertices = Points2DUtils.getInstance().getVerticesList();
         selectedVertices = Points2DUtils.getInstance().getSelectedVertices();
         pathLines = new ArrayList<>();
@@ -115,10 +116,6 @@ public class MapaController extends Controller implements Initializable {
         //imprimirNuevoVertice(e);
     }
     
-    private void imprimirNuevoVertice(MouseEvent e){
-        System.out.println("new Vertex("+e.getX()+","+e.getY()+",5),");
-    }
-    
     private void rigthClickEvent(MouseEvent e){
         Points2DUtils.getInstance().clearRouteLines();
         Points2DUtils.getInstance().clearFollowedLines();
@@ -128,75 +125,18 @@ public class MapaController extends Controller implements Initializable {
         printRoute();
         //Points2DUtils.getInstance().addNewRouteToArray(pathPoints);
         //Points2DUtils.getInstance().printDistances();
-        Utils.getInstance().putIcon(car, 0.0, 0.0);
         //createRouteLines();
         //System.out.println("\n\n*********Desplazando*********");
         //Animation.getInstance().desplazarListaMovs(car, pathPoints);
+        Utils.getInstance().putObject(apInterfaz, car);
         Points2DUtils.getInstance().createRouteLinesVSel();
         Animation.getInstance().desplazarListaMovsV(car, selectedVertices);
-    }
-    
-    private void insertPointToRoute(Double x,Double y){
-        Points2DUtils.getInstance().insertPoint2D(x, y);
-        
-        //Utils.getInstance().createIcon(apInterfaz, x, y, FontAwesomeIcon.DOT_CIRCLE_ALT);
-        //System.out.println("(X"+x+",Y:"+y+")");
+        //Utils.getInstance().quitObject(apInterfaz, car);
     }
     
     private void printRoute(){
         System.out.println("\n\n*********Puntos de la ruta*********");
         Points2DUtils.getInstance().printRoutePoints();
-    }
-    
-    private void createRouteLines(){
-        //ArrayList<Line> ruta = new ArrayList<>();
-        //System.out.println("\n*********Ruta Creada*********");
-        Integer i=0;
-        for(Point2D p:pathPoints){
-            Point2D p2 = Points2DUtils.getInstance().getNextPoint(i);
-            if(p2!=null){
-                drawLine(p,p2);
-                //Points2DUtils.getInstance().printPoints(p, p2);
-            }
-            i++;
-        }
-        Points2DUtils.getInstance().drawVertices();
-    }
-    
-    private void drawLine(Point2D p1,Point2D p2){
-        Line line=new Line();
-        apInterfaz.getChildren().add(line);
-        line.setStartX(p1.getX());
-        line.setStartY(p1.getY());
-        line.setEndX(p2.getX());
-        line.setEndY(p2.getY());
-        pathLines.add(line);
-        line.getStyleClass().add("line");
-    }
-    
-    private void clearLines(){
-        if(!pathLines.isEmpty()){
-            pathLines.stream().forEach(e->{
-                Utils.getInstance().quitObject(apInterfaz, e);
-            });
-        }
-        pathLines.clear();
-    }
-    
-    private void clearLines2(){
-        if(!pathLines2.isEmpty()){
-            pathLines2.stream().forEach(e->{
-                Utils.getInstance().quitObject(apInterfaz, e);
-            });
-        }
-        pathLines2.clear();
-    }
-    
-    private void clearVertices(){
-        generalVertices.stream().forEach(e->{
-            Utils.getInstance().quitObject(apInterfaz, e);
-        });
-        generalVertices.clear();
     }
     
     public void createBorderVertex(){
@@ -290,4 +230,67 @@ public class MapaController extends Controller implements Initializable {
             
     }
     
+    /*
+    private void imprimirNuevoVertice(MouseEvent e){
+        System.out.println("new Vertex("+e.getX()+","+e.getY()+",5),");
+    }
+    
+    private void insertPointToRoute(Double x,Double y){
+        Points2DUtils.getInstance().insertPoint2D(x, y);
+        
+        //Utils.getInstance().createIcon(apInterfaz, x, y, FontAwesomeIcon.DOT_CIRCLE_ALT);
+        //System.out.println("(X"+x+",Y:"+y+")");
+    }
+    
+    private void drawLine(Point2D p1,Point2D p2){
+        Line line=new Line();
+        apInterfaz.getChildren().add(line);
+        line.setStartX(p1.getX());
+        line.setStartY(p1.getY());
+        line.setEndX(p2.getX());
+        line.setEndY(p2.getY());
+        pathLines.add(line);
+        line.getStyleClass().add("line");
+    }
+    
+    private void createRouteLines(){
+        //ArrayList<Line> ruta = new ArrayList<>();
+        //System.out.println("\n*********Ruta Creada*********");
+        Integer i=0;
+        for(Point2D p:pathPoints){
+            Point2D p2 = Points2DUtils.getInstance().getNextPoint(i);
+            if(p2!=null){
+                drawLine(p,p2);
+                //Points2DUtils.getInstance().printPoints(p, p2);
+            }
+            i++;
+        }
+        Points2DUtils.getInstance().drawVertices();
+    }
+    
+    private void clearLines(){
+        if(!pathLines.isEmpty()){
+            pathLines.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }
+        pathLines.clear();
+    }
+    
+    private void clearLines2(){
+        if(!pathLines2.isEmpty()){
+            pathLines2.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }
+        pathLines2.clear();
+    }
+    
+    private void clearVertices(){
+        generalVertices.stream().forEach(e->{
+            Utils.getInstance().quitObject(apInterfaz, e);
+        });
+        generalVertices.clear();
+    }
+    */
 }
