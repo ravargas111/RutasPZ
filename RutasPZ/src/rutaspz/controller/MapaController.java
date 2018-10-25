@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
+import rutaspz.Grafo;
 import rutaspz.Vertex;
 import rutaspz.util.Animation;
 import rutaspz.util.AppContext;
@@ -47,6 +48,7 @@ public class MapaController extends Controller implements Initializable {
     private ArrayList<Vertex> generalVertices;//todos los vértices
     private ArrayList<Vertex> selectedVertices;//vértices de ruta
     private Integer cont;
+    private Grafo grafo;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
@@ -61,6 +63,7 @@ public class MapaController extends Controller implements Initializable {
         Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);
         initMouseEvent();
         createBorderVertex();
+        grafo.init();
     }    
 
     @Override
@@ -82,6 +85,7 @@ public class MapaController extends Controller implements Initializable {
         AppContext.getInstance().set("parent",apInterfaz);
         cont=0;
         selectedVertices.clear();
+        grafo = new Grafo(generalVertices);
     }
     
     private void initMouseEvent(){

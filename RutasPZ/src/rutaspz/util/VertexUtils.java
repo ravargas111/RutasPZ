@@ -86,27 +86,27 @@ public class VertexUtils {
         VertexUtils.pointsArray = pointsArray;
     }
 
-    public static Vertex getSelectedVertex() {
+    public Vertex getSelectedVertex() {
         return selectedVertex;
     }
 
-    public static void setSelectedVertex(Vertex selectedVertex) {
+    public void setSelectedVertex(Vertex selectedVertex) {
         VertexUtils.selectedVertex = selectedVertex;
     }
 
-    public static Vertex getStartVertex() {
+    public Vertex getStartVertex() {
         return startVertex;
     }
 
-    public static void setStartVertex(Vertex startVertex) {
+    public void setStartVertex(Vertex startVertex) {
         VertexUtils.startVertex = startVertex;
     }
 
-    public static Vertex getEndVertex() {
+    public Vertex getEndVertex() {
         return endVertex;
     }
 
-    public static void setEndVertex(Vertex endVertex) {
+    public void setEndVertex(Vertex endVertex) {
         VertexUtils.endVertex = endVertex;
     }
     
@@ -366,8 +366,9 @@ public class VertexUtils {
      * @param v 
      */
     public void printVertexInfo(Vertex v){
-        System.out.println("("+v.getX()+","+v.getY()+")");
-        System.out.println("Index: "+v.getIndex());
+        System.out.print("\n(index "+v.getIndex()+")");
+        System.out.print(" --> ("+v.getX()+","+v.getY()+")");
+        
     }
     
     /**
@@ -376,7 +377,7 @@ public class VertexUtils {
      */
     public void printPointsInfo(Point2D p1,Point2D p2){
         if(p1!=null)
-            System.out.print("("+p1.getX()+","+p1.getY()+")");
+            System.out.print("\n("+p1.getX()+","+p1.getY()+")");
         //else{
         if(p2!=null){
             System.out.print("--> ("+p2.getX()+","+p2.getY()+")");
@@ -394,7 +395,7 @@ public class VertexUtils {
      */
     public void printVerticesInfo(Vertex v1,Vertex v2){
         if(v1!=null)
-            System.out.print("("+v1.getX()+","+v1.getY()+")");
+            System.out.print("\n("+v1.getX()+","+v1.getY()+")");
         //else{
         if(v2!=null){
             System.out.print("--> ("+v2.getX()+","+v2.getY()+")");
