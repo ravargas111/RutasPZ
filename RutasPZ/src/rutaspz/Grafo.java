@@ -477,5 +477,35 @@ return mat;
         putAdyacencia(43,42);
         putAdyacencia(43,45);
         putAdyacencia(43,27);
+        //Adyacencias vértice 44
+        putAdyacencia(44,42);
+        putAdyacencia(44,45);
+        //Adyacencias vértice 45
+        putAdyacencia(45,44);
+        putAdyacencia(45,43);
+        //Adyacencias vértice 46
+        putAdyacencia(46,7);
+        putAdyacencia(46,52);
+        putAdyacencia(46,47);
+        //Adyacencias vértice 47
+        putAdyacencia(47,46);
+        putAdyacencia(47,48);
+        putAdyacencia(47,39);
+        putAdyacencia(47,53);
+        //Adyacencias vértice 48
+        putAdyacencia(48,47);
+        putAdyacencia(48,40);
+        putAdyacencia(48,49);
+        //Adyacencias vértice 49
+        putAdyacencia(49,48);
+        putAdyacencia(49,50);
+        putAdyacencia(49,54);
+        //Adyacencias vértice 50
+        putAdyacencia(50,44);
+        putAdyacencia(50,49);
+        putAdyacencia(50,28);
+        //Adyacencias vértice 51
+        putAdyacencia(51,28);
+        putAdyacencia(51,21);
     }
 }
