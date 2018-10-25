@@ -17,8 +17,8 @@ import rutaspz.Vertex;
  *
  * @author robri
  */
-public class Points2DUtils {
-    private static Points2DUtils INSTANCE = null;
+public class VertexUtils {
+    private static VertexUtils INSTANCE = null;
     private static ArrayList<Point2D> points=new ArrayList<>();
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();
     private static ArrayList<Vertex> verticesList = new ArrayList<>();
@@ -29,20 +29,20 @@ public class Points2DUtils {
     private static Vertex startVertex = new Vertex();
     private static Vertex endVertex = new Vertex();
     public static enum COLOR {RED,YELLOW,BLUE};
-    public Points2DUtils() {
+    public VertexUtils() {
     }
     
     private static void createInstance() {
         if (INSTANCE == null) {
             synchronized (AppContext.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new Points2DUtils();
+                    INSTANCE = new VertexUtils();
                 }
             }
         }
     }
 
-    public static Points2DUtils getInstance() {
+    public static VertexUtils getInstance() {
         if (INSTANCE == null) {
             createInstance();
         }
@@ -59,7 +59,7 @@ public class Points2DUtils {
     }
 
     public void setPoints(ArrayList<Point2D> points) {
-        Points2DUtils.points = points;
+        VertexUtils.points = points;
     }
 
     public ArrayList<ArrayList<Point2D>> getPointsArray() {
@@ -71,7 +71,7 @@ public class Points2DUtils {
     }
 
     public void setVerticesList(ArrayList<Vertex> verticesList) {
-        Points2DUtils.verticesList = verticesList;
+        VertexUtils.verticesList = verticesList;
     }
 
     public ArrayList<Vertex> getSelectedVertices() {
@@ -79,11 +79,35 @@ public class Points2DUtils {
     }
 
     public void setSelectedVertices(ArrayList<Vertex> selectedVertices) {
-        Points2DUtils.selectedVertices = selectedVertices;
+        VertexUtils.selectedVertices = selectedVertices;
     }
 
     public void setPointsArray(ArrayList<ArrayList<Point2D>> pointsArray) {
-        Points2DUtils.pointsArray = pointsArray;
+        VertexUtils.pointsArray = pointsArray;
+    }
+
+    public static Vertex getSelectedVertex() {
+        return selectedVertex;
+    }
+
+    public static void setSelectedVertex(Vertex selectedVertex) {
+        VertexUtils.selectedVertex = selectedVertex;
+    }
+
+    public static Vertex getStartVertex() {
+        return startVertex;
+    }
+
+    public static void setStartVertex(Vertex startVertex) {
+        VertexUtils.startVertex = startVertex;
+    }
+
+    public static Vertex getEndVertex() {
+        return endVertex;
+    }
+
+    public static void setEndVertex(Vertex endVertex) {
+        VertexUtils.endVertex = endVertex;
     }
     
     public Point2D getLastPoint(){
@@ -573,7 +597,7 @@ public class Points2DUtils {
         Integer i=0;
         //AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         for(Vertex p:verticesList){
-            Vertex p2 = Points2DUtils.getInstance().getNextVertex(i);
+            Vertex p2 = VertexUtils.getInstance().getNextVertex(i);
             if(p2!=null){
                 drawLineVSel(p,p2,COLOR.BLUE);
                 //Points2DUtils.getInstance().printPoints(p, p2);
@@ -586,7 +610,7 @@ public class Points2DUtils {
         Integer i=0;
         AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         for(Vertex p:selectedVertices){
-            Vertex p2 = Points2DUtils.getInstance().getNextVertexS(i);
+            Vertex p2 = VertexUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
                 drawLineVSel(p,p2,COLOR.BLUE);
                 //Points2DUtils.getInstance().printPoints(p, p2);
@@ -678,7 +702,7 @@ public class Points2DUtils {
      * limpia la lista de vértices
      */
     public void clearVertices(){
-        Points2DUtils.verticesList.clear();
+        VertexUtils.verticesList.clear();
     }
     
     /**

@@ -6,7 +6,7 @@
 package rutaspz;
 
 import java.util.ArrayList;
-import rutaspz.util.Points2DUtils;
+import rutaspz.util.VertexUtils;
 
 /**
  *
@@ -24,7 +24,7 @@ public class Grafo {
     public Grafo(Integer nodes) {
         this.nodes = nodes;
         this.adjacents = new Integer[nodes][nodes];
-        this.vertices = Points2DUtils.getInstance().getVerticesList();
+        this.vertices = VertexUtils.getInstance().getVerticesList();
         
         for (int i = 0; i < nodes; i++) {
             //this.vertices.add(new Vertex());
