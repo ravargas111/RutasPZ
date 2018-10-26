@@ -61,12 +61,12 @@ public class MapaController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initInstances();
-        Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");
-        Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);
-        initMouseEvent();
-        createBorderVertex();
-        grafo.init();
+        initInstances();//inicializa todas las instancias
+        Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");//función hamburger btn
+        Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);//menú lateral
+        initMouseEvent();//eventos a darle click sobre el mapa
+        createVertices();//crea los vértices
+        grafo.init();//inicializa la información del grafo
     }    
 
     @Override
@@ -92,6 +92,9 @@ public class MapaController extends Controller implements Initializable {
         grafo = new Grafo(generalVertices);
     }
     
+    /**
+     * selecciona los eventos dependiendo del botón del click
+     */
     private void initMouseEvent(){
         this.apInterfaz.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
             if(e.getButton()==MouseButton.PRIMARY)
@@ -107,10 +110,17 @@ public class MapaController extends Controller implements Initializable {
     });
     }
     
+    /**
+     * acciones barra espaciadora(falta asignar)
+     */
     private void spaceBarEvent(){
         System.out.println("Selected size: "+selectedVertices.size());
     }
     
+    /**
+     * acciones click izquierdo
+     * @param e 
+     */
     private void leftClickEvent(MouseEvent e){
         /*clearLines();
         clearLines2();
@@ -119,16 +129,23 @@ public class MapaController extends Controller implements Initializable {
         Utils.getInstance().quitIcon(car);
         pathPoints.clear();
         pathPointsArray.add(pathPoints);
-        insertPointToRoute(e.getX(),e.getY());*/
+        */
         //imprimirNuevoVertice(e);
-        
     }
     
+    /**
+     * acciones click derecho
+     * @param e 
+     */
     private void rigthClickEvent(MouseEvent e){
         VertexUtils.getInstance().clearRouteLines();
         VertexUtils.getInstance().clearFollowedLines();
     }
     
+    /**
+     * acciones click del centro
+     * @param e 
+     */
     private void middleClickEvent(MouseEvent e){
         //printRoute();
         //Points2DUtils.getInstance().addNewRouteToArray(pathPoints);
@@ -145,10 +162,13 @@ public class MapaController extends Controller implements Initializable {
     
     private void printRoute(){
         System.out.println("\n\n*********Puntos de la ruta*********");
-        VertexUtils.getInstance().printRoutePoints();
+        VertexUtils.getInstance().printVerticesRoute();
     }
     
-    public void createBorderVertex(){
+    /**
+     * añade nuevos vértices (lógicos a la lista de vértices)
+     */
+    public void createVertices(){
         generalVertices.addAll(Arrays.asList(
             new Vertex(512.0,6.0,4),
             new Vertex(484.0,31.0,4),
@@ -239,12 +259,58 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(504.0,565.0,5)
         ));
         
-            System.out.println("Vertices List size:"+generalVertices.size());
-            VertexUtils.getInstance().drawVerticesList();
+            VertexUtils.getInstance().drawVerticesList();//dibuja los vértices en el mapa
             
     }
     
-    private void imprimirNuevoVertice(MouseEvent e){
+    /**
+     * limpia de la pantalla las rutas que estaban 
+     */
+    public void clearPreviousRoute(){
+        clearLines();
+        clearLines2();
+        //clearVertices();
+    }
+    
+    /**
+     * limpia de la pantalla la ruta inicial
+     */
+    private void clearLines(){
+        if(!pathLines.isEmpty()){
+            pathLines.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }
+        pathLines.clear();
+    }
+    
+    /**
+     * limpia de la pantalla la ruta seguida
+     */
+    private void clearLines2(){
+        if(!pathLines2.isEmpty()){
+            pathLines2.stream().forEach(e->{
+                Utils.getInstance().quitObject(apInterfaz, e);
+            });
+        }
+        pathLines2.clear();
+    }
+    
+    /**
+     * limpia de la pantalla los vértices
+     */
+    private void clearVertices(){
+        generalVertices.stream().forEach(e->{
+            Utils.getInstance().quitObject(apInterfaz, e);
+        });
+        generalVertices.clear();
+    }
+    
+    /**
+     * usada para crear funciones que creaban los vértices (cuando estaba creando la matriz)
+     * @param e 
+     */
+    private void printNewVertexFunction(MouseEvent e){
         System.out.println("new Vertex("+e.getX()+","+e.getY()+",4),");
     }
     
@@ -280,31 +346,6 @@ public class MapaController extends Controller implements Initializable {
             i++;
         }
         VertexUtils.getInstance().drawPointsList();
-    }
-    
-    private void clearLines(){
-        if(!pathLines.isEmpty()){
-            pathLines.stream().forEach(e->{
-                Utils.getInstance().quitObject(apInterfaz, e);
-            });
-        }
-        pathLines.clear();
-    }
-    
-    private void clearLines2(){
-        if(!pathLines2.isEmpty()){
-            pathLines2.stream().forEach(e->{
-                Utils.getInstance().quitObject(apInterfaz, e);
-            });
-        }
-        pathLines2.clear();
-    }
-    
-    private void clearVertices(){
-        generalVertices.stream().forEach(e->{
-            Utils.getInstance().quitObject(apInterfaz, e);
-        });
-        generalVertices.clear();
     }
     */
 }

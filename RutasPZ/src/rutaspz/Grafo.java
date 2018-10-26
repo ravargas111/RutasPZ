@@ -642,4 +642,5 @@ return mat;
         System.out.println("\n\nLista de vértices");
         vertices.stream().forEach(v->VertexUtils.getInstance().printVertexInfo(v));
     }
+    
 }
