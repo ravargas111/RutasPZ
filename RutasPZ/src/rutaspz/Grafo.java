@@ -529,6 +529,88 @@ return mat;
         putAdyacencia(58,9);
         putAdyacencia(58,52);
         putAdyacencia(58,59);
+        //Adyacencias vértice 59
+        putAdyacencia(59,58);
+        putAdyacencia(59,66);
+        putAdyacencia(59,60);
+        //Adyacencias vértice 60
+        putAdyacencia(60,59);
+        putAdyacencia(60,53);
+        putAdyacencia(60,61);
+        putAdyacencia(60,67);
+        //Adyacencias vértice 61
+        putAdyacencia(61,60);
+        putAdyacencia(61,62);
+        putAdyacencia(61,68);
+        //Adyacencias vértice 62
+        putAdyacencia(62,61);
+        putAdyacencia(62,55);
+        putAdyacencia(62,63);
+        //Adyacencias vértice 63
+        putAdyacencia(63,62);
+        putAdyacencia(63,30);
+        putAdyacencia(63,69);
+        //Adyacencias vértice 64
+        putAdyacencia(64,19);
+        putAdyacencia(64,57);
+        putAdyacencia(64,30);
+        //Adyacencias vértice 65
+        putAdyacencia(65,10);
+        putAdyacencia(65,76);
+        putAdyacencia(65,66);
+        //Adyacencias vértice 66
+        putAdyacencia(66,65);
+        putAdyacencia(66,59);
+        putAdyacencia(66,77);
+        putAdyacencia(66,67);
+        //Adyacencias vértice 67
+        putAdyacencia(67,66);
+        putAdyacencia(67,68);
+        putAdyacencia(67,60);
+        putAdyacencia(67,83);
+        //Adyacencias vértice 68
+        putAdyacencia(68,67);
+        putAdyacencia(68,61);
+        putAdyacencia(68,73);
+        //Adyacencias vértice 69
+        putAdyacencia(69,63);
+        putAdyacencia(69,72);
+        putAdyacencia(69,31);
+        //Adyacencias vértice 70
+        putAdyacencia(70,64);
+        putAdyacencia(70,31);
+        //Adyacencias vértice 71
+        putAdyacencia(71,72);
+        putAdyacencia(71,74);
+        //Adyacencias vértice 72
+        putAdyacencia(72,71);
+        putAdyacencia(72,69);
+        putAdyacencia(72,78);
+        //Adyacencias vértice 73
+        putAdyacencia(73,74);
+        putAdyacencia(73,68);
+        putAdyacencia(73,80);
+        //Adyacencias vértice 74
+        putAdyacencia(74,71);
+        putAdyacencia(74,73);
+        //Adyacencias vértice 75
+        putAdyacencia(75,11);
+        //Adyacencias vértice 76
+        putAdyacencia(76,65);
+        //Adyacencias vértice 77
+        putAdyacencia(77,66);
+        //Adyacencias vértice 78
+        putAdyacencia(78,72);
+        putAdyacencia(78,84);
+        putAdyacencia(78,32);
+        //Adyacencias vértice 79
+        putAdyacencia(79,70);
+        putAdyacencia(79,32);
+        //Adyacencias vértice 80
+        putAdyacencia(80,73);
+        //Adyacencias vértice 81
+        putAdyacencia(81,79);
+        putAdyacencia(81,17);
         
     }
 }
