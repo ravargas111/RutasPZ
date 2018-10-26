@@ -93,9 +93,10 @@ public class Grafo {
         //System.out.println("\nMatriz inicial");
         //printMatrixA();
         initAyacents();
-        //System.out.println("\nMatriz Inicial");
-        //printMatrixA();
+        System.out.println("\nMatriz Inicial");
+        printMatrixA();
         
+        System.out.println("");
         searchAdyacents();
         //printVerticesList();
         
