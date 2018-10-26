@@ -18,6 +18,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -34,6 +36,8 @@ import rutaspz.RutasPZ;
 public class Utils {
     private static Utils INSTANCE = null;
     private File directory;
+    private static final String localBasePath = "data\\";
+    private static final String localSavedFilesPath = localBasePath + "saved files\\";
     
     public Utils() {
     }
@@ -188,21 +192,22 @@ public class Utils {
     }
     
     /**
-     * abre el directorio y si no existe lo crea
+     * crea o abre un directorio en la computadora del usuario
+     * @param urlDir dirección url del directorio a crear o buscar (separados por "\\")
      */
-    private void openDirectory(){
-        directory = new File(System.getProperty("user.home") + "\\Documents\\CanchasPZ\\Reportes");
+    private void verifyExternalDirectory(String urlDir){
+        directory = new File(System.getProperty("user.home") + urlDir);
             if (!directory.exists()){
                 directory.mkdirs();
             }//crea directorio
     }
     
     /**
-     * averigua si el archivo de la ruta definida ya existía para abrirlo y si no existe,lo crea
+     * averigua si el archivo de la ruta definida + el directorio ya existía para abrirlo y si no existe,lo crea
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    private void openFile(String url) throws FileNotFoundException, IOException{
+    private void loadExternalFile(String url) throws FileNotFoundException, IOException{
         File file = new File(directory+"\\" + url);
         //ver el tipo de file que queremos
         //verifica si ya existía o tiene que crear uno nuevo
@@ -216,7 +221,7 @@ public class Utils {
 		}
     }
     
-    private void saveFile(String url){
+    private void saveExternalFile(String url){
         try{
             //antes crea directorio
             //luego se basa en ese directorio + url para intentar guardar
@@ -233,6 +238,70 @@ public class Utils {
         }
     }
     
+    private static void verifyLocalDirectory(){
+        File directory = new File(localSavedFilesPath);
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
+    }
+    
+    public static boolean existLocalFile(String name){
+        File file = new File(localSavedFilesPath + name);
+        return file.exists();
+    }
+    
+    public static boolean saveLocalFile(Object p){
+        boolean resultado = false;
+        ObjectOutputStream oos = null;
+        try{
+            verifyLocalDirectory();
+            File file = new File(localSavedFilesPath + AppContext.getInstance().get("user"));
+            oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(p);
+            resultado = true;
+            System.out.println("archivo guardado exitosamente");
+            //mostrarMensaje("Guardar partida","Partida guardada exitosamente");
+        }catch(FileNotFoundException ex){
+            resultado = false;
+            System.out.println("Ha ocurrido un error generando archivo, intentalo mas tarde\nError: " + ex);
+        }catch(IOException ex){
+            resultado = false;
+            System.out.println("Ha ocurrido un error archivo, intentalo mas tarde\nError: " + ex);
+        } finally {
+            if(oos != null){
+                try {
+                    oos.close();
+                } catch(IOException ex){
+
+                }
+            }
+        }
+        return resultado;
+    }
+    
+    public static Object loadLocalFile(String name){
+        Object p = null;
+        if(existLocalFile(name)){
+            ObjectInputStream ois = null;
+            try{
+                File file = new File(localSavedFilesPath + name);
+                ois = new ObjectInputStream(new FileInputStream(file));
+                p = ois.readObject();
+            } catch (ClassCastException | IOException | ClassNotFoundException ex) {
+                System.out.println("Ha ocurrido un error cargando el archivo local\nError: " + ex);
+            } finally {
+                if(ois != null){
+                    try {
+                        ois.close();
+                    } catch(IOException ex){
+
+                    }
+                }
+            }
+        }
+        return p;
+    }
+    
     /**
      * hace que windows abra el archivo
      * @param dir 
@@ -246,4 +315,13 @@ public class Utils {
             System.out.println("error ruta");
         }
     }
+    
+    private void saveLocalFile(){
+        
+    }
+    
+    private void openLocalFile(){
+        
+    }
+    
 }
