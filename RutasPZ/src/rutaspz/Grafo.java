@@ -419,15 +419,15 @@ return mat;
         putAdyacencia(29,30);
         //Adyacencias vértice 30
         putAdyacencia(30,31);
-        putAdyacencia(30,62);
-        putAdyacencia(30,63);
+        putAdyacencia(30,63);//antes 62
+        putAdyacencia(30,64);//antes 63
         //Adyacencias vértice 31
-        putAdyacencia(31,68);
-        putAdyacencia(31,69);
         putAdyacencia(31,32);
+        putAdyacencia(31,69);//antes 68
+        putAdyacencia(31,70);//antes 70
         //Adyacencias vértice 32
-        putAdyacencia(32,77);
-        putAdyacencia(32,78);
+        putAdyacencia(32,78);//antes 77
+        putAdyacencia(32,79);//antes 78
         putAdyacencia(32,14);
     }
     
