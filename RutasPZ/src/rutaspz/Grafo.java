@@ -345,18 +345,18 @@ return mat;
         //Adyacencias vértice 10
         putAdyacencia(10,9);
         putAdyacencia(10,11);
-        putAdyacencia(10,64);
+        putAdyacencia(10,65);//antes estaba en 64
         //Adyacencias vértice 11
         putAdyacencia(11,10);
         putAdyacencia(11,12);
-        putAdyacencia(11,74);
+        putAdyacencia(11,75);//antes estaba en 74
         //Adyacencias vértice 12
         putAdyacencia(12,11);
         putAdyacencia(12,13);
         //Adyacencias vértice 13
         putAdyacencia(13,12);
         putAdyacencia(13,14);
-        putAdyacencia(13,83);
+        putAdyacencia(13,84);//antes estaba en 83
         //Adyacencias vértice 14
         putAdyacencia(14,13);
         //putAdyacencia(14,32);
@@ -364,21 +364,21 @@ return mat;
         //Adyacencias vértice 15
         putAdyacencia(15,14);
         putAdyacencia(15,16);
-        putAdyacencia(15,80);
+        putAdyacencia(15,81);//antes estaba en 80
         //Adyacencias vértice 16
         putAdyacencia(16,15);
         putAdyacencia(16,17);
         //Adyacencias vértice 17
         putAdyacencia(17,16);
         putAdyacencia(17,18);
-        putAdyacencia(17,80);
+        putAdyacencia(17,81);//antes estaba en 81
         //Adyacencias vértice 18
         putAdyacencia(18,17);
         putAdyacencia(18,19);
         //Adyacencias vértice 19
         putAdyacencia(19,18);
         putAdyacencia(19,20);
-        putAdyacencia(19,63);
+        putAdyacencia(19,64);//antes estaba en 63
         //Adyacencias vértice 20
         putAdyacencia(20,19);
         putAdyacencia(20,21);
