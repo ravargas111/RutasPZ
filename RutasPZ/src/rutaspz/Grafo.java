@@ -6,8 +6,6 @@
 package rutaspz;
 
 import java.util.ArrayList;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import rutaspz.util.VertexUtils;
 
 /**
@@ -611,6 +609,16 @@ return mat;
         //Adyacencias vértice 81
         putAdyacencia(81,79);
         putAdyacencia(81,17);
-        
+        //Adyacencias vértice 82
+        putAdyacencia(82,83);
+        //Adyacencias vértice 83
+        putAdyacencia(83,67);
+        putAdyacencia(83,82);
+        putAdyacencia(83,84);
+        //Adyacencias vértice 84
+        putAdyacencia(84,83);
+        putAdyacencia(84,78);
+        putAdyacencia(84,13);
     }
+    
 }
