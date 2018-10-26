@@ -17,10 +17,12 @@ public class Vertex extends Circle{
     
     private Integer index;
     private Point2D point;
+    private Integer grade;
     
     public Vertex() {
         super();
         index=0;
+        grade=0;
     }
     
     public Vertex(Integer index) {
@@ -84,6 +86,14 @@ public class Vertex extends Circle{
     
     public Double getY(){
         return this.getCenterY();
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
     
     /**

@@ -90,26 +90,23 @@ public class Grafo {
     public void init(){
         countNodes();
         initMatrix();
-        //System.out.println("\nMatriz inicial");
-        //printMatrixA();
         initAyacents();
-        System.out.println("\nMatriz Inicial");
-        printMatrixA();
-        
-        System.out.println("");
         searchAdyacents();
-        //printVerticesList();
-        
+        printGrafo();
     }
     
     /**
      * imprime informaación de todos los vértices
      */
-    private void printVerticesList(){
+    private void printGrafo(){
         System.out.println("\n\n****Información Grafo****");
-        vertices.stream().forEach(e->{
-            VertexUtils.getInstance().printVertexInfo(e);
-        });
+        System.out.println("");
+        System.out.println("\nMatriz Adyacencia");
+        printMatrixA();
+        System.out.println("");
+        System.out.println("\nMatriz Pesos");
+        printMatrixW();
+        printVertices();
         System.out.println("\nTotal Nodos: "+nodes);
     }
     
@@ -279,21 +276,36 @@ return mat;
     private void searchAdyacents(){
         System.out.println("\n\n\n***prueba adyacencias***");
         vertices.stream().forEach(e->{
-            Integer i = e.getIndex();
+            Integer i = e.getIndex();//a partir del nodo x,revisa todas las columnas
             System.out.println("");
             System.out.println("adyacencias nodo ("+i+")");
+            Integer grade=0;
             for (int j = 0; j < nodes; j++) {
-                if(adjacents[i][j]==1){
+                if(adjacents[i][j]>0){
+                   doubleWay(i,j);
                    Double w = e.distance(vertices.get(j));
                    System.out.print("("+i+","+j+") -> ");
                    //System.out.println("Peso: "+w);
+                   grade+=adjacents[i][j];
                    weigths[i][j] = w;
-                }
-                    
+                }    
             }
+            e.setGrade(grade);
             //System.out.println("B: "+i);
         });
         //printMatrixW();
+    }
+    
+    /**
+     * busca si hay doble vía y pone el grado en 2
+     * @param i
+     * @param j 
+     */
+    private void doubleWay(Integer i,Integer j){
+        if(adjacents[i][j].equals(1)&&adjacents[j][i].equals(0)){
+            adjacents[i][j]=2;
+            adjacents[j][i]=2;
+        }
     }
     
     /**
@@ -626,4 +638,8 @@ return mat;
         //**80 (no hay vía para arriba)
     }
     
+    private void printVertices(){
+        System.out.println("\n\nLista de vértices");
+        vertices.stream().forEach(v->VertexUtils.getInstance().printVertexInfo(v));
+    }
 }

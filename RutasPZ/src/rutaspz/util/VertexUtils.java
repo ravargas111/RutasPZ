@@ -375,7 +375,7 @@ public class VertexUtils {
     public void printVertexInfo(Vertex v){
         System.out.print("\n(index "+v.getIndex()+")");
         System.out.print(" --> ("+v.getX()+","+v.getY()+")");
-        
+        System.out.println("Grado: "+v.getGrade());
     }
     
     /**
