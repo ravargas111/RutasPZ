@@ -512,10 +512,10 @@ return mat;
         putAdyacencia(52,53);
         //Adyacencias vértice 53
         putAdyacencia(53,47);
-        putAdyacencia(53,59);
+        putAdyacencia(53,60);//antes 59
         putAdyacencia(53,54);
         //Adyacencias vértice 54
-        putAdyacencia(54,60);
+        putAdyacencia(54,61);//antes 60
         putAdyacencia(54,55);
         //Adyacencias vértice 55
         putAdyacencia(55,56);
@@ -569,7 +569,7 @@ return mat;
         putAdyacencia(67,83);
         //Adyacencias vértice 68
         putAdyacencia(68,67);
-        putAdyacencia(68,61);
+        //putAdyacencia(68,61);calle una vía
         putAdyacencia(68,73);
         //Adyacencias vértice 69
         putAdyacencia(69,63);
@@ -587,7 +587,7 @@ return mat;
         putAdyacencia(72,78);
         //Adyacencias vértice 73
         putAdyacencia(73,74);
-        putAdyacencia(73,68);
+        //putAdyacencia(73,68);calle una vía
         putAdyacencia(73,80);
         //Adyacencias vértice 74
         putAdyacencia(74,71);
@@ -606,7 +606,7 @@ return mat;
         putAdyacencia(79,70);
         putAdyacencia(79,32);
         //Adyacencias vértice 80
-        putAdyacencia(80,73);
+        //putAdyacencia(80,73);calle una vía
         //Adyacencias vértice 81
         putAdyacencia(81,79);
         putAdyacencia(81,17);
@@ -620,6 +620,10 @@ return mat;
         putAdyacencia(84,83);
         putAdyacencia(84,78);
         putAdyacencia(84,13);
+        
+        //todo preguntar por vértices
+        //75,76,77,82
+        //**80 (no hay vía para arriba)
     }
     
 }
