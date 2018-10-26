@@ -418,9 +418,9 @@ return mat;
         putAdyacencia(29,57);
         putAdyacencia(29,30);
         //Adyacencias vértice 30
+        putAdyacencia(30,31);
         putAdyacencia(30,62);
         putAdyacencia(30,63);
-        putAdyacencia(30,31);
         //Adyacencias vértice 31
         putAdyacencia(31,68);
         putAdyacencia(31,69);
