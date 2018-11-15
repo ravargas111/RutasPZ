@@ -282,12 +282,11 @@ return mat;
             Integer grade=0;
             for (int j = 0; j < nodes; j++) {
                 if(adjacents[i][j]>0){
-                   doubleWay(i,j);
+                   doubleWay(i,j);//selecciona el grado
                    Double w = e.distance(vertices.get(j));
                    System.out.print("("+i+","+j+") -> ");
-                   //System.out.println("Peso: "+w);
                    grade+=adjacents[i][j];
-                   weigths[i][j] = w;
+                   weigths[i][j] = w;//selecciona el peso
                 }    
             }
             e.setGrade(grade);
@@ -643,4 +642,12 @@ return mat;
         vertices.stream().forEach(v->VertexUtils.getInstance().printVertexInfo(v));
     }
     
+    public void printVertexAdyacents(Vertex v){
+        Integer i = v.getIndex();
+        for(int j =0;j<nodes;j++){
+            if(adjacents[i][j]>0){
+                System.out.print("("+j+") -> ");
+            }
+        }
+    }
 }

@@ -67,6 +67,7 @@ public class MapaController extends Controller implements Initializable {
         initMouseEvent();//eventos a darle click sobre el mapa
         createVertices();//crea los vértices
         grafo.init();//inicializa la información del grafo
+        AppContext.getInstance().set("grafo",grafo);
     }    
 
     @Override
@@ -231,7 +232,7 @@ public class MapaController extends Controller implements Initializable {
             new Vertex(564.0,381.0,4),
             new Vertex(634.0,419.0,4),
             new Vertex(440.0,369.0,4),
-            new Vertex(452.0,377.0,4),//último añadido //60
+            new Vertex(452.0,377.0,4),//60
             new Vertex(476.0,389.0,4),
             new Vertex(513.0,408.0,4),
             new Vertex(530.0,415.0,4),
@@ -314,6 +315,7 @@ public class MapaController extends Controller implements Initializable {
         System.out.println("new Vertex("+e.getX()+","+e.getY()+",4),");
     }
     
+    //no usadas pero luego las borro XD
     /*
     private void insertPointToRoute(Double x,Double y){
         VertexUtils.getInstance().insertPoint2D(x, y);

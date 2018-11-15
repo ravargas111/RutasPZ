@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import rutaspz.Grafo;
 import rutaspz.Vertex;
 
 /**
@@ -35,6 +36,7 @@ public class VertexUtils {
     private static Vertex startVertex = new Vertex();
     private static Vertex endVertex = new Vertex();
     public static enum COLOR {RED,YELLOW,BLUE};
+    private static Grafo grafo;
     public VertexUtils() {
     }
     
@@ -693,6 +695,7 @@ public class VertexUtils {
     }
     
     /**
+     * Usada para dibujar vértices en el mapa
      * dibuja un vértice en el parent y añade evento (por el momento añade a vértices seleccionados)
      * @param v 
      */
@@ -710,13 +713,22 @@ public class VertexUtils {
             //selectedVertices.add(v);
             if(e.getButton()==MouseButton.PRIMARY){
                 selectedVertex = v;
-                System.out.println("//Adyacencias vértice "+selectedVertex.getIndex());
-                infoNodo.setText(v.getIndex().toString());
+                System.out.println("\n//Adyacencias vértice "+selectedVertex.getIndex());
+                printAdyacents(v);
+                infoNodo.setText(v.getIndex().toString());//para mostrar cual nodo seleccionó
             }
             else if(e.getButton()==MouseButton.SECONDARY){
                 System.out.println("putAdyacencia("+selectedVertex.getIndex()+","+v.getIndex()+");");
             }
         });
+        v.setOnMouseEntered(e->{
+            infoNodo.setText(v.getIndex().toString());
+        });
+    }
+    
+    private void printAdyacents(Vertex v){
+        grafo = (Grafo) AppContext.getInstance().get("grafo");//quitar (solo para pruebas)
+        grafo.printVertexAdyacents(v);
     }
     
     private void createPopUp(Vertex node){
@@ -749,6 +761,7 @@ public class VertexUtils {
      * dibuja los vértices en el parent a partir de una lista de vértices
      */
     public void drawVerticesList(){
+        grafo = (Grafo) AppContext.getInstance().get("grafo");//quitar (solo para pruebas)
         Integer i=0;
         for(Vertex p:verticesList){
            drawVertex(p);
