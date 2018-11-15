@@ -3,3 +3,8 @@ RutasPZ\RutasPZ\build\**
 *.properties
 *.properties
 RutasPZ/build/built-jar.properties
+/RutasPZ/nbproject/private/
+/RutasPZ/dist/
+/RutasPZ/build/
+RutasPZ/nbproject/private/private.properties
+*.properties
