@@ -490,7 +490,7 @@ public class Animation {
             pathLines.add(VertexUtils.getInstance().drawFollowedLine(n1, n2,VertexUtils.COLOR.YELLOW));
             nodo.toFront();
             if(movimientos.size()>1)
-            desplazarListaMovsV( nodo, movimientos);
+                desplazarListaMovsV( nodo, movimientos);
             });  
         
         //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
