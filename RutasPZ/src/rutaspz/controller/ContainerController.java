@@ -8,9 +8,11 @@ package rutaspz.controller;
 import com.jfoenix.controls.JFXHamburger;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import rutaspz.util.AppContext;
@@ -28,8 +30,19 @@ public class ContainerController extends Controller implements Initializable {
     private VBox menuUsu;
     @FXML
     private JFXHamburger hambBtn;
-    @FXML
     private Label lblNumVert;
+    @FXML
+    private Label lblSel;
+    @FXML
+    private Label lblStart;
+    @FXML
+    private Label lblEnd;
+    @FXML
+    private ToggleGroup vertexRoll;
+    @FXML
+    private ToggleGroup vertexStatus;
+    @FXML
+    private ToggleGroup algorithm;
 
     /**
      * Initializes the controller class.
@@ -37,6 +50,7 @@ public class ContainerController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppContext.getInstance().set("hambBtn",hambBtn);
+        AppContext.getInstance().set("infoNodo",lblSel);
         //Utils.getInstance().createPopUp(hambBtn);
     }    
 
@@ -44,6 +58,10 @@ public class ContainerController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+    }
+
+    @FXML
+    private void move(ActionEvent event) {
     }
     
 }

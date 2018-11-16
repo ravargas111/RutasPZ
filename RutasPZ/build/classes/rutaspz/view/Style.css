@@ -95,7 +95,7 @@ and open the template in the editor.
     -fx-base-color-unchecked:white;
     
     /*separator*/
-    -fx-base-color-sep:#FF0A0A;
+    -fx-base-color-sep:#FFFF8D;
     
     /*hyperlink*/
     -fx-base-color-hyper-tf:white;
@@ -105,14 +105,22 @@ and open the template in the editor.
     -fx-base-color-glyph:white;
     -fx-base-color-glyph-hover:#FF0A0A;
     -fx-base-color-glyph-login: white;
+    -fx-base-color-glyph-menu-lateral-dark: #00616F;
+    -fx-base-color-glyph-menu-lateral: white;
     
     /*line*/
     -fx-base-color-line: blue;
     -fx-base-color-line-disable: yellow;
     
     /*circle*/
-     -fx-base-color-circle: black;
+     -fx-base-color-circle: #00616F;
       -fx-base-color-circle-sel: #FF0A0A;
+      
+    /*otros*/
+    -fx-base-color-cajas-dark: #00616F;
+    -fx-base-color-cajas: #DDF9BB;
+    -fx-base-color-lbl-men-lat-dark:#00616F;
+    -fx-base-color-lbl-men-lat:white;
 }
 
 #root{
@@ -687,6 +695,20 @@ and open the template in the editor.
     -fx-line-spacing: 10;
 }
 
+.glyph-icon-menu-lat-dark{
+    -fx-fill: -fx-base-color-glyph-menu-lateral-dark;
+    -glyph-size: 30px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+}
+
+.glyph-icon-menu-lat{
+    -fx-fill: -fx-base-color-glyph-menu-lateral;
+    -glyph-size: 30px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+}
+
 .line{
     -fx-border-style: dashed;
     -fx-border-width: 3; 
@@ -722,11 +744,30 @@ and open the template in the editor.
     -fx-scale-y: 1.3;
 }
 
-.lbl-menu-vertices{
-    -fx-text-fill: white;
+.lbl-menu-lat{
+    -fx-text-fill: -fx-base-color-lbl-men-lat;
     -fx-font-size:20px; 
     -fx-alignment: center;
     -fx-font-weigth: bold;
+}
+
+.lbl-menu-lat-dark{
+    -fx-text-fill: -fx-base-color-lbl-men-lat-dark;
+    -fx-font-size:15px; 
+    -fx-alignment: center;
+    -fx-font-weigth: bold;
+}
+
+.cajas{
+    -fx-background-color: -fx-base-color-cajas;
+    -fx-alignment: center;
+    -fx-background-radius: 0.8,0.8,0.8,0.8;
+}
+
+.cajas-dark{
+    -fx-background-color: -fx-base-color-cajas-dark;
+    -fx-alignment: center;
+    -fx-background-radius: 10 10 10 10;
 }
 
 

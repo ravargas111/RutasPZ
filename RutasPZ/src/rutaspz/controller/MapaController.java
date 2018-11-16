@@ -90,7 +90,7 @@ public class MapaController extends Controller implements Initializable {
         pathLines2 = new ArrayList<>();
         AppContext.getInstance().set("lines2",pathLines2);
         AppContext.getInstance().set("parent",apInterfaz);
-        AppContext.getInstance().set("infoNodo",lblNodo);
+        
         cont=0;
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);

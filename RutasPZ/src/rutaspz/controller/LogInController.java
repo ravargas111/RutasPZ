@@ -40,9 +40,6 @@ public class LogInController extends Controller implements Initializable {
         FlowController.getInstance().goView("Mapa");
     }
 
-    @FXML
-    private void irRegistroCliente(ActionEvent event) {
-    }
 
 
     @Override
