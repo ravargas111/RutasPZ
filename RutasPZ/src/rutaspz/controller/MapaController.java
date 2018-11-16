@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
+import rutaspz.Floyd;
 import rutaspz.Grafo;
 import rutaspz.Vertex;
 import rutaspz.util.Animation;
@@ -50,6 +51,7 @@ public class MapaController extends Controller implements Initializable {
     private ArrayList<Vertex> selectedVertices;//vértices de ruta
     private Integer cont;
     private Grafo grafo;
+    private Floyd floyd;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
@@ -68,6 +70,7 @@ public class MapaController extends Controller implements Initializable {
         createVertices();//crea los vértices
         grafo.init();//inicializa la información del grafo
         AppContext.getInstance().set("grafo",grafo);
+        initAlgorithms();
     }    
 
     @Override
@@ -91,6 +94,11 @@ public class MapaController extends Controller implements Initializable {
         cont=0;
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);
+    }
+    
+    private void initAlgorithms(){
+        floyd = new Floyd(grafo.getNodes(),grafo.getWeigths().clone());
+        floyd.initInfo();
     }
     
     /**

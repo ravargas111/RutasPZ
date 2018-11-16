@@ -130,7 +130,8 @@ public class Grafo {
         for (int i = 0; i < nodes; i++) {
             System.out.println("");
             for (int j = 0; j < nodes; j++) {
-                System.out.print(" "+adjacents[i][j]);
+                //System.out.print(" "+adjacents[i][j]);
+                System.out.printf("%5d", adjacents[i][j]);
             }
         }
     }
@@ -143,7 +144,8 @@ public class Grafo {
         for (int i = 0; i < nodes; i++) {
             System.out.println("");
             for (int j = 0; j < nodes; j++) {
-                System.out.print(" "+weigths[i][j]);
+                //System.out.print(" "+weigths[i][j]);
+                System.out.printf("%10.2f",weigths[i][j]);
             }
         }
     }

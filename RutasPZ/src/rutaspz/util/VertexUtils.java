@@ -29,9 +29,9 @@ public class VertexUtils {
     private static ArrayList<Point2D> points=new ArrayList<>();//no se usan
     private static ArrayList<ArrayList<Point2D>> pointsArray=new ArrayList<ArrayList<Point2D>>();//no se usan
     private static ArrayList<Vertex> verticesList = new ArrayList<>();//guarda la lista de vértices general
-    private static ArrayList<Vertex> selectedVertices = new ArrayList<>();//guarda la lista de vértices para la ruta creada
-    private static ArrayList<Line> routeLines = new ArrayList<>();//guarda las líneas de la ruta principal
-    private static ArrayList<Line> followedLines = new ArrayList<>();//guarda las líneas de la ruta seguida
+    private static ArrayList<Vertex> selectedVertices = new ArrayList<>();//guarda la lista de vértices para la ruta creada(primer Dijsktra)
+    private static ArrayList<Line> routeLines = new ArrayList<>();//guarda las líneas de la ruta principal(líneas de ruta principal)
+    private static ArrayList<Line> followedLines = new ArrayList<>();//guarda las líneas de la ruta seguida(la qiue se ha seguido)
     private static Vertex selectedVertex = new Vertex();
     private static Vertex startVertex = new Vertex();
     private static Vertex endVertex = new Vertex();
