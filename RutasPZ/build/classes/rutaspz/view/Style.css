@@ -10,13 +10,13 @@ and open the template in the editor.
 *{
     -fx-base-color-root: black;
     -fx-base-color-root2: white;
-    -fx-base-color-lateral:  black;
+    -fx-base-color-lateral:  #EDE5FE;
     
     /*tab pane*/
     -fx-base-color-tp: transparent;
-    -fx-base-color-tp-header: #059CE5;
+    -fx-base-color-tp-header: #00616F;
     -fx-base-color-tp-tab:transparent;
-    -fx-base-color-tp-tab-sel:#28C7DB;
+    -fx-base-color-tp-tab-sel:#00616F;
     -fx-base-color-tp-tab-lbltf:white;
     -fx-base-color-tp-tab-lbltf-sel:white;
     
@@ -102,7 +102,7 @@ and open the template in the editor.
     -fx-base-color-hyper-tf-focus:#FF0A0A;
     
     /*glyph*/
-    -fx-base-color-glyph:black;
+    -fx-base-color-glyph:white;
     -fx-base-color-glyph-hover:#FF0A0A;
     -fx-base-color-glyph-login: white;
     
@@ -138,36 +138,56 @@ and open the template in the editor.
     -fx-background-image : url("../resources/Eliminar-48.png");
 }
 
-.tab-pane
+.jfx-tab-pane
 {
+    -fx-spacing: 30;
     -fx-side: top;
     -fx-background-color: -fx-base-color-tp;
     /*-fx-tab-min-width:90px;*/
 }
 
-.tab-pane .tab-header-area .tab-header-background {
+.jfx-tab-pane .tab-header-area .tab-header-background {
     -fx-side: top;
+    -fx-alignment: center;
     -fx-opacity:1;
     -fx-background-radius: 5%;
     -fx-background-color: -fx-base-color-tp-header;
+    -fx-spacing: 30;
 }
 
-.tab-pane .tab
+.jfx-tab-pane .tab
 {
+    -fx-alignment: center;
     -fx-background-radius: 30 30 30 30;
     -fx-border-radius: 30 30 30 30;
     -fx-background-color: -fx-base-color-tp-tab;
 }
 
-.tab-pane .tab:hover{
+.jfx-tab-pane .tab:hover{
     -fx-translate-y: -3;
 }
 
-.tab-pane .tab:selected
+.jfx-tab-pane .tab:selected
 {
+    -fx-background-radius: 30 , 30, 30 , 30;
     -fx-background-color: -fx-base-color-tp-tab-sel;
     -fx-traslate-x: 1.2;
     -fx-traslate-y: 1.2;
+}
+.jfx-tab-pane:top *.tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+ /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+    -fx-spacing: 30;
+    -fx-alignment: center;
+}
+
+.jfx-tab-pane:left *.tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+ /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+    -fx-spacing: 30;
+    -fx-alignment: center;
 }
 
 .tab .tab-label { 
@@ -175,6 +195,7 @@ and open the template in the editor.
     -fx-text-fill: -fx-base-color-tp-tab-lbltf;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
 .tab:selected .tab-label {
@@ -183,6 +204,7 @@ and open the template in the editor.
     /*-fx-scale-x: 1.2;*/
     /*-fx-scale-y: 1.2;*/
 }
+
 /*todo*/
 /*
 .scroll-pane{
@@ -646,16 +668,16 @@ and open the template in the editor.
 
 .glyph-icon{
     -fx-fill: -fx-base-color-glyph;
-    -glyph-size: 20px;
+    -glyph-size: 25px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
 }
 
-.glyph-icon:hover{
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
-    -fx-fill: -fx-base-color-glyph-hover;
+.glyph-icon-small{
+    -fx-fill: -fx-base-color-glyph;
+    -glyph-size: 25px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
 }
 
 .glyph-icon-login{
@@ -699,3 +721,12 @@ and open the template in the editor.
     -fx-scale-x: 1.3;
     -fx-scale-y: 1.3;
 }
+
+.lbl-menu-vertices{
+    -fx-text-fill: white;
+    -fx-font-size:20px; 
+    -fx-alignment: center;
+    -fx-font-weigth: bold;
+}
+
+

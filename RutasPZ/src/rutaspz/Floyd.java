@@ -34,9 +34,12 @@ public class Floyd {
        //inicializa la matriz de caminos más cortos igual que la de pesos
         for (int i = 0; i < size; i++) 
             for (int j = 0; j < size; j++){
-                if(!weights[i][j].equals(0.0))
-                distances[i][j] = weights[i][j];
-                else distances[i][j] = INF;
+                if(i!=j){
+                    if(!weights[i][j].equals(0.0))
+                    distances[i][j] = weights[i][j];
+                    else distances[i][j] = INF;
+                }
+                else distances[i][j] = 0.0;
             }
     }
     
@@ -71,12 +74,23 @@ public class Floyd {
         System.out.println("");
     }
 
-    private void minRoute(){
-        int i, j, k; 
-        
-        //initInfo();
-        
-        
-        
+    public void shortestPaths(){
+        for (int k = 0; k < size; k++) 
+        { 
+            //selecciona vértice fuente
+            for (int i = 0; i < size; i++) 
+            { 
+                // vértice destino para fuente seleccionada por i
+                for (int j = 0; j < size; j++) 
+                { 
+                    // If vertex k is on the shortest path from 
+                    // i to j, then update the value of dist[i][j] 
+                    if (distances[i][k] + distances[k][j] < distances[i][j]) 
+                        distances[i][j] = distances[i][k] + distances[k][j];
+                        visitedVertex[i][j] = visitedVertex[k][j];//fila con la que se está tratando (revisar si solo poner i)
+                } 
+            } 
+        } 
     }
+
 }
