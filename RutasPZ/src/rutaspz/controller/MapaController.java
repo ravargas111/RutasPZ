@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -32,6 +33,7 @@ import rutaspz.Grafo;
 import rutaspz.Vertex;
 import rutaspz.util.Animation;
 import rutaspz.util.AppContext;
+import rutaspz.util.Mensaje;
 import rutaspz.util.VertexUtils;
 import rutaspz.util.Utils;
 
@@ -153,6 +155,8 @@ public class MapaController extends Controller implements Initializable {
         });
         this.startChanged.addListener((o,f,t)->{
             if(t){
+                if(this.startVertex!=null)
+                    this.startVertex.setId(null);
                 this.startVertex = this.selVertex;
                 this.startVertex.setId("start-vertex");
                 lblStart.setText(startVertex.getIndex().toString());
@@ -160,6 +164,8 @@ public class MapaController extends Controller implements Initializable {
         });
         this.endChanged.addListener((o,f,t)->{
             if(t){
+                if(this.endVertex!=null)
+                    this.endVertex.setId(null);
                 this.endVertex = this.selVertex;
                 this.endVertex.setId("end-vertex");
                 lblEnd.setText(endVertex.getIndex().toString());
@@ -483,17 +489,43 @@ public class MapaController extends Controller implements Initializable {
         VertexUtils.getInstance().drawPointsList();
     }
     */
+    
+    private Boolean isValidMove(){
+        Boolean valid = true;
+        Mensaje msj = new Mensaje();
+       
+        if(this.startVertex==null){
+            valid = false;
+            msj.show(Alert.AlertType.NONE, "Ruta Inválida", "seleccione vértice de salida");
+        }
+        
+        else if(this.endVertex==null){
+            valid = false;
+            msj.show(Alert.AlertType.NONE, "Ruta Inválida", "seleccione vértice de llegada");
+        }
+        
+        else if(this.startVertex.equals(this.endVertex)){
+            valid = false;
+            msj.show(Alert.AlertType.NONE, "Ruta Inválida", "Vértices de salida y llegada deben ser diferentes");
+        }
+        
+        return valid;
+    }
 
     @FXML
     private void move(ActionEvent event) {
         try{
-            if(isDijkstra){
-                selectedVertices.add(startVertex);
-                selectedVertices.add(endVertex);
-                moveCar();
-            }
-            else{
+            if(isValidMove()){
+                if(isDijkstra){//lamar a Dijkstra
+                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    selectedVertices.add(endVertex);
                 
+                }
+                else{//llamar a Floyd
+                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    selectedVertices.add(endVertex);
+                }
+                moveCar();
             }
         }
         catch(NullPointerException e){
