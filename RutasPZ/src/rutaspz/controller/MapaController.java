@@ -60,6 +60,7 @@ public class MapaController extends Controller implements Initializable {
     private SimpleBooleanProperty selectedChanged;
     private SimpleBooleanProperty startChanged;
     private SimpleBooleanProperty endChanged;
+    private Boolean isDijkstra;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
@@ -137,6 +138,7 @@ public class MapaController extends Controller implements Initializable {
         AppContext.getInstance().set("cambio",this.selectedChanged);
         this.startChanged = new SimpleBooleanProperty(false);
         this.endChanged = new SimpleBooleanProperty(false);
+        this.isDijkstra = true;
     }
     
     private void initListeners(){
@@ -425,6 +427,14 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void move(ActionEvent event) {
+        if(isDijkstra){
+            System.out.println("Calcular ruta con Dijstra");
+            System.out.println("Desde: "+startVertex.getIndex().toString());
+            System.out.println("hasta: "+endVertex.getIndex().toString());
+        }
+        else{
+            
+        }
     }
 
     @FXML
@@ -446,13 +456,13 @@ public class MapaController extends Controller implements Initializable {
     private void changeVertexState(ActionEvent event) {
         RadioButton selected = (RadioButton) vertexStatus.getSelectedToggle();
         if (selected==rbStateOpen) {
-            System.out.println("cambio a abierto");
+            //System.out.println("cambio a abierto");
         }
         else if(selected==rbStateSlow){
-            System.out.println("cambio a lento");
+            //System.out.println("cambio a lento");
         }
         else{
-            System.out.println("cambio a cerrado");
+            //System.out.println("cambio a cerrado");
         }
     }
 
@@ -460,10 +470,12 @@ public class MapaController extends Controller implements Initializable {
     private void changeAlgorithm(ActionEvent event) {
         RadioButton selected = (RadioButton) algorithm.getSelectedToggle();
         if (selected==rbDijkstra) {
-            System.out.println("cambio a Dijkstra");
+            this.isDijkstra = true;
+            //System.out.println("cambio a Dijkstra");
         }
         else{
-            System.out.println("cambio a Floyd");
+            this.isDijkstra = false;
+            //System.out.println("cambio a Floyd");
         }
     }
 }
