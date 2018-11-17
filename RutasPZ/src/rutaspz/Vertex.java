@@ -132,5 +132,5 @@ public class Vertex extends Circle{
             return 0.0;
         }
     }
-    
+
 }

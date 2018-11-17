@@ -109,6 +109,7 @@ and open the template in the editor.
     -fx-base-color-glyph-login: #00616F;
     -fx-base-color-glyph-menu-lateral-dark: #00616F;
     -fx-base-color-glyph-menu-lateral: white;
+    -fx-base-color-glyph-car: #00616F;
     
     /*line*/
     -fx-base-color-line: blue;
@@ -705,6 +706,13 @@ and open the template in the editor.
 
 .glyph-icon-menu-lat{
     -fx-fill: -fx-base-color-glyph-menu-lateral;
+    -glyph-size: 30px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+}
+
+.glyph-icon-car{
+    -fx-fill: -fx-base-color-glyph-car;
     -glyph-size: 30px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;

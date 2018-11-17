@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -118,6 +119,7 @@ public class MapaController extends Controller implements Initializable {
         //pathPoints = VertexUtils.getInstance().getPoints();
         //pathPointsArray = VertexUtils.getInstance().getPointsArray();
         car = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.CAR);
+        car.getStyleClass().add("glyph-icon-car");
         flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
         generalVertices = VertexUtils.getInstance().getVerticesList();
         selectedVertices = VertexUtils.getInstance().getSelectedVertices();
@@ -144,14 +146,18 @@ public class MapaController extends Controller implements Initializable {
     private void initListeners(){
         this.selectedChanged.addListener((o,f,t)->{
             if(t){
+                quitOldSelectedInfo();
                 this.selVertex = (Vertex) AppContext.getInstance().get("selVertex");
-                lblSel.setText(selVertex.getIndex().toString());
+                loadNewSelectedInfo();
             }
         });
         this.startChanged.addListener((o,f,t)->{
             if(t){
                 this.startVertex = this.selVertex;
                 lblStart.setText(startVertex.getIndex().toString());
+                this.car.setVisible(true);
+                //this.car.setX(startVertex.getX());
+                //this.car.setY(startVertex.getY());
             }
         });
         this.endChanged.addListener((o,f,t)->{
@@ -160,6 +166,25 @@ public class MapaController extends Controller implements Initializable {
                 lblEnd.setText(endVertex.getIndex().toString());
             }
         });
+    }
+    
+    private void quitOldSelectedInfo(){
+        if(this.selVertex!=null){
+                    
+        }
+    }
+    
+    private void loadNewSelectedInfo(){
+        try{
+            lblSel.setText(selVertex.getIndex().toString());
+            if(selVertex.getState().equals(1)){
+                
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println("vértice seleccionado nulo");
+        }    
+        
     }
     
     private void initAlgorithms(){
@@ -206,6 +231,7 @@ public class MapaController extends Controller implements Initializable {
         pathPointsArray.add(pathPoints);
         */
         //imprimirNuevoVertice(e);
+        //selVertex.addEventFilter(EventType.ROOT, eventFilter);
     }
     
     /**
@@ -389,6 +415,14 @@ public class MapaController extends Controller implements Initializable {
         System.out.println("new Vertex("+e.getX()+","+e.getY()+",4),");
     }
     
+    
+    private void moveCar(){
+        car.setVisible(true);
+        VertexUtils.getInstance().clearRouteLines();//resetea líneas azules
+        VertexUtils.getInstance().clearFollowedLines();//resetea líneas amarillas
+        VertexUtils.getInstance().drawSelectedRoute();//dibuja líneas azules
+        Animation.getInstance().desplazarListaMovsV(car, selectedVertices);//mueve el carrito
+    }
     //no usadas pero luego las borro XD
     /*
     private void insertPointToRoute(Double x,Double y){
@@ -427,13 +461,18 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void move(ActionEvent event) {
-        if(isDijkstra){
-            System.out.println("Calcular ruta con Dijstra");
-            System.out.println("Desde: "+startVertex.getIndex().toString());
-            System.out.println("hasta: "+endVertex.getIndex().toString());
+        try{
+            if(isDijkstra){
+                selectedVertices.add(startVertex);
+                selectedVertices.add(endVertex);
+                moveCar();
+            }
+            else{
+                
+            }
         }
-        else{
-            
+        catch(NullPointerException e){
+            System.out.println("puntero nulo");
         }
     }
 
@@ -456,13 +495,13 @@ public class MapaController extends Controller implements Initializable {
     private void changeVertexState(ActionEvent event) {
         RadioButton selected = (RadioButton) vertexStatus.getSelectedToggle();
         if (selected==rbStateOpen) {
-            //System.out.println("cambio a abierto");
+            this.selVertex.setState(1);
         }
         else if(selected==rbStateSlow){
-            //System.out.println("cambio a lento");
+            this.selVertex.setState(2);
         }
         else{
-            //System.out.println("cambio a cerrado");
+            this.selVertex.setState(3);
         }
     }
 
@@ -471,11 +510,9 @@ public class MapaController extends Controller implements Initializable {
         RadioButton selected = (RadioButton) algorithm.getSelectedToggle();
         if (selected==rbDijkstra) {
             this.isDijkstra = true;
-            //System.out.println("cambio a Dijkstra");
         }
         else{
             this.isDijkstra = false;
-            //System.out.println("cambio a Floyd");
         }
     }
 }

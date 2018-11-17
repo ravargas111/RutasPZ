@@ -696,7 +696,7 @@ public class VertexUtils {
     }
     
     /**
-     * Usada para dibujar vértices en el mapa
+     * Usada para dibujar vértices en el mapa (setear funciones de Vertex)
      * dibuja un vértice en el parent y añade evento (por el momento añade a vértices seleccionados)
      * @param v 
      */
@@ -706,7 +706,7 @@ public class VertexUtils {
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         createPoint2D(v);
-        Utils.getInstance().createPopUp(v);
+        //Utils.getInstance().createPopUp(v);
         v.setOnMouseClicked(e->{
             //printPoint(v);
             //Utils.getInstance().createPopUp(v,parent);
@@ -786,7 +786,6 @@ public class VertexUtils {
      * elimina las líneas de la ruta establecida
      */
     public void clearRouteLines(){
-        
         AnchorPane parent = (AnchorPane) AppContext.getInstance().get("parent");
         if(!routeLines.isEmpty()){
             routeLines.stream().forEach(e->{
@@ -808,4 +807,5 @@ public class VertexUtils {
         }
         followedLines.clear();
     }
+    
 }

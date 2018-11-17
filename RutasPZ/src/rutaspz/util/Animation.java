@@ -474,7 +474,7 @@ public class Animation {
         //auxNodo.setY(auxNodo.getY()+n1[1]);
         movimientos.remove(0);//quita el vértice de la lista de movimientos
         //crea transición
-        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(1000), nodo);
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(5000), nodo);
         desplazamiento.setFromX(n1.getX());
         desplazamiento.setFromY(n1.getY());
         desplazamiento.setToX(n2.getX());
