@@ -576,16 +576,18 @@ public class MapaController extends Controller implements Initializable {
         try{
             if(isValidMove()){
                 if(isDijkstra){//lamar a Dijkstra
-                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
-                    selectedVertices.add(endVertex);
+                    //selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    //selectedVertices.add(endVertex);
                     dijkstra.getShortestWay(startVertex.getIndex(), endVertex.getIndex());
+                    //selected vertices (setea)
+                    //moveCar();
                 }
                 else{//llamar a Floyd
-                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
-                    selectedVertices.add(endVertex);
+                    //selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    //selectedVertices.add(endVertex);
                     floyd.getNodeList(startVertex, endVertex);
                 }
-                //moveCar();
+                
             }
         }
         catch(NullPointerException e){
