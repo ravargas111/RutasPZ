@@ -6,24 +6,25 @@
 package rutaspz.controller;
 
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXRadioButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
 import rutaspz.Floyd;
 import rutaspz.Grafo;
@@ -44,8 +45,6 @@ public class MapaController extends Controller implements Initializable {
     private BorderPane root;
     @FXML
     private AnchorPane apInterfaz;
-    @FXML
-    private JFXDrawer drawer;
     private FontAwesomeIconView car;
     private FontAwesomeIconView flag;
     private ArrayList<Line> pathLines;//líneas de ruta pricipal
@@ -58,6 +57,9 @@ public class MapaController extends Controller implements Initializable {
     private Vertex selVertex;
     private Vertex startVertex;
     private Vertex endVertex;
+    private SimpleBooleanProperty selectedChanged;
+    private SimpleBooleanProperty startChanged;
+    private SimpleBooleanProperty endChanged;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
@@ -75,6 +77,20 @@ public class MapaController extends Controller implements Initializable {
     private Label lblEnd;
     @FXML
     private ToggleGroup algorithm;
+    @FXML
+    private JFXRadioButton rbStart;
+    @FXML
+    private JFXRadioButton rbEnd;
+    @FXML
+    private JFXRadioButton rbStateOpen;
+    @FXML
+    private JFXRadioButton rbStateSlow;
+    @FXML
+    private JFXRadioButton rbStateClosed;
+    @FXML
+    private JFXRadioButton rbDijkstra;
+    @FXML
+    private JFXRadioButton rbFloyd;
     
     /**
      * Initializes the controller class.
@@ -88,6 +104,7 @@ public class MapaController extends Controller implements Initializable {
         createVertices();//crea los vértices
         grafo.init();//inicializa la información del grafo
         AppContext.getInstance().set("grafo",grafo);
+        initListeners();
         initAlgorithms();
     }    
 
@@ -116,6 +133,31 @@ public class MapaController extends Controller implements Initializable {
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);
         AppContext.getInstance().set("infoNodo",lblSel);
+        this.selectedChanged = new SimpleBooleanProperty(false);
+        AppContext.getInstance().set("cambio",this.selectedChanged);
+        this.startChanged = new SimpleBooleanProperty(false);
+        this.endChanged = new SimpleBooleanProperty(false);
+    }
+    
+    private void initListeners(){
+        this.selectedChanged.addListener((o,f,t)->{
+            if(t){
+                this.selVertex = (Vertex) AppContext.getInstance().get("selVertex");
+                lblSel.setText(selVertex.getIndex().toString());
+            }
+        });
+        this.startChanged.addListener((o,f,t)->{
+            if(t){
+                this.startVertex = this.selVertex;
+                lblStart.setText(startVertex.getIndex().toString());
+            }
+        });
+        this.endChanged.addListener((o,f,t)->{
+            if(t){
+                this.endVertex = this.selVertex;
+                lblEnd.setText(endVertex.getIndex().toString());
+            }
+        });
     }
     
     private void initAlgorithms(){
@@ -383,5 +425,45 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void move(ActionEvent event) {
+    }
+
+    @FXML
+    private void changeVertexRoll(ActionEvent event) {
+        RadioButton selected = (RadioButton) vertexRoll.getSelectedToggle();
+        if (selected==rbStart) {
+            System.out.println("cambio de vértice inicial");
+            startChanged.set(true);
+            startChanged.set(false);
+        }
+        else{
+            System.out.println("cambio de vértice final");
+            endChanged.set(true);
+            endChanged.set(false);
+        }
+    }
+
+    @FXML
+    private void changeVertexState(ActionEvent event) {
+        RadioButton selected = (RadioButton) vertexStatus.getSelectedToggle();
+        if (selected==rbStateOpen) {
+            System.out.println("cambio a abierto");
+        }
+        else if(selected==rbStateSlow){
+            System.out.println("cambio a lento");
+        }
+        else{
+            System.out.println("cambio a cerrado");
+        }
+    }
+
+    @FXML
+    private void changeAlgorithm(ActionEvent event) {
+        RadioButton selected = (RadioButton) algorithm.getSelectedToggle();
+        if (selected==rbDijkstra) {
+            System.out.println("cambio a Dijkstra");
+        }
+        else{
+            System.out.println("cambio a Floyd");
+        }
     }
 }

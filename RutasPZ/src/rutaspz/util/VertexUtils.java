@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
@@ -701,7 +702,7 @@ public class VertexUtils {
      */
     public void drawVertex(Vertex v){
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
-        Label infoNodo = (Label) AppContext.getInstance().get("infoNodo");//todo quitar
+        SimpleBooleanProperty cambio = (SimpleBooleanProperty) AppContext.getInstance().get("cambio");//todo quitar
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         createPoint2D(v);
@@ -714,16 +715,19 @@ public class VertexUtils {
             if(e.getButton()==MouseButton.PRIMARY){
                 selectedVertex = v;
                 AppContext.getInstance().set("selVertex",v);
+                cambio.set(true);
+                cambio.set(false);
                 //System.out.println("\n//Adyacencias vértice "+selectedVertex.getIndex());
                 //printAdyacents(v);
-                infoNodo.setText(v.getIndex().toString());//para mostrar cual nodo seleccionó
+                //infoNodo.setText(v.getIndex().toString());//para mostrar cual nodo seleccionó
             }
             else if(e.getButton()==MouseButton.SECONDARY){
                 System.out.println("putAdyacencia("+selectedVertex.getIndex()+","+v.getIndex()+");");
             }
         });
         v.setOnMouseEntered(e->{
-            infoNodo.setText(v.getIndex().toString());
+            //infoNodo.setText(v.getIndex().toString());
+            
         });
     }
     

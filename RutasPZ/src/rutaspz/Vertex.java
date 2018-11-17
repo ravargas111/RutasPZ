@@ -18,32 +18,53 @@ public class Vertex extends Circle{
     private Integer index;
     private Point2D point;
     private Integer grade;
-    Boolean disponible;
+    private Integer state;//1 libre,2 lento,3 cerrado
     
     public Vertex() {
         super();
         index=0;
         grade=0;
+        state=1;
     }
     
     public Vertex(Integer index) {
         super();
         this.index=index;
+        state=1;
     }
     
     public Vertex(Integer index,double centerX, double centerY) {
         super(centerX,centerY,5);
         this.index=index;
+        state=1;
     }
 
     public Vertex(double centerX, double centerY, double radius) {
         super(centerX, centerY, radius);
         index=0;
+        state=1;
     }
 
     public Vertex(double centerX, double centerY, double radius, Paint fill) {
         super(centerX, centerY, radius, fill);
         index=0;
+        state=1;
+    }
+
+    /**
+     * estado de disponibilidad del vértice
+     * @return 1 diponible,2 lento, 3 cerrado
+     */
+    public Integer getState() {
+        return state;
+    }
+
+    /**
+     * estado de disponibilidad del vértice
+     * @param state 1 diponible,2 lento, 3 cerrado
+     */
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Integer getIndex() {
