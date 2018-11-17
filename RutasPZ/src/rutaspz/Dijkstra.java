@@ -62,7 +62,7 @@ public class Dijkstra {
                         previusArr.saltos = 0;
                     }
                     for (int i = 0; i < cantNodos; i++) {
-                        if(weigths[index][i] != null){
+                        if(weigths[index][i] != 0.0){
                             Arrivals newAr = new Arrivals();
                             newAr.prev = index;
                             newAr.peso = previusArr.peso + weigths[index][i];
@@ -87,13 +87,19 @@ public class Dijkstra {
             ArrayList<Integer> way = new ArrayList<>();
             way.add(fin);
             Arrivals next = getMinWeight(caminos[fin]);
-            while(next != null){
-                way.add(next.prev);
+            Boolean bandera = true;
+            while(next != null && bandera){
+                way.add(next.prev);                
+                if(next.prev.equals(ini)) bandera = false;
                 next = getMinWeight(caminos[next.prev]);
             }
             way.sort((n1, n2) -> n1.compareTo(n2));
-            way.stream().forEach(i -> System.out.println("(" + i + ") -> "));
-            return null;
+            ArrayList<Vertex> list = new ArrayList<>();
+            way.stream().forEach(i -> {
+                //llenar la lista de vertex que se retorna
+                System.out.print("(" + i + ") -> ");
+            });
+            return list;
         } else{
             return null;
         }
