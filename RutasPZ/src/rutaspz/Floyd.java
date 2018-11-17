@@ -37,16 +37,25 @@ public class Floyd {
                 if(i!=j){
                     if(!weights[i][j].equals(0.0))
                     distances[i][j] = weights[i][j];
-                    else distances[i][j] = INF;
+                    else{
+                        distances[i][j] = INF;
+                        visitedVertex [i][j]=-10;
+                    }
                 }
                 else distances[i][j] = 0.0;
             }
     }
     
     private void initVisitedVertex(){
-        for (int i = 0; i < size; i++) 
-            for (int j = 0; j < size; j++) 
-                visitedVertex [i][j] = j; 
+        for (int i = 0; i < size; i++){
+           for (int j = 0; j < size; j++){
+                if(distances[i][j].equals(INF))
+                    visitedVertex [i][j]=-1;
+                else visitedVertex [i][j] = i;
+           }       
+        } 
+              
+                 
     }
     
     private void printDistances(){
@@ -74,6 +83,9 @@ public class Floyd {
         System.out.println("");
     }
 
+    /**
+     * crea la matriz con los caminos más cortos entre cada par de vértices y la matriz con los nodos intermediarios
+     */
     public void shortestPaths(){
         for (int k = 0; k < size; k++) 
         { 
@@ -85,12 +97,34 @@ public class Floyd {
                 { 
                     // If vertex k is on the shortest path from 
                     // i to j, then update the value of dist[i][j] 
-                    if (distances[i][k] + distances[k][j] < distances[i][j]) 
+                    if (distances[i][k] + distances[k][j] < distances[i][j]) {
+                        //System.out.println("cambio: ("+k+","+j+")");
                         distances[i][j] = distances[i][k] + distances[k][j];
                         visitedVertex[i][j] = visitedVertex[k][j];//fila con la que se está tratando (revisar si solo poner i)
+                        //visitedVertex[i][j] = k;
+                    }
                 } 
             } 
         } 
+    }
+    
+    public void getNodeList(Vertex start,Vertex end){
+        shortestPaths();
+        printVisitedVertex();
+        Integer origin = start.getIndex();
+        Integer dest = end.getIndex();
+        Integer step=0;
+        Boolean stop=false;
+        step = visitedVertex[origin][dest];
+        
+        System.out.println("Floyd: ("+origin+","+dest+")");
+        System.out.println("primer paso "+step);
+        do{
+            //step = visitedVertex[step][dest];
+            //System.out.println("paso "+step);
+            stop=true;
+        }
+        while(step!=dest&&!stop);
     }
 
 }

@@ -512,27 +512,10 @@ public class MapaController extends Controller implements Initializable {
         return valid;
     }
 
-    @FXML
-    private void move(ActionEvent event) {
-        try{
-            if(isValidMove()){
-                if(isDijkstra){//lamar a Dijkstra
-                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
-                    selectedVertices.add(endVertex);
-                
-                }
-                else{//llamar a Floyd
-                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
-                    selectedVertices.add(endVertex);
-                }
-                moveCar();
-            }
-        }
-        catch(NullPointerException e){
-            System.out.println("puntero nulo");
-        }
-    }
-
+    /**
+     * cambiar función de un vértice (inicial o final)
+     * @param event 
+     */
     @FXML
     private void changeVertexRoll(ActionEvent event) {
         RadioButton selected = (RadioButton) tgVertexRoll.getSelectedToggle();
@@ -548,6 +531,10 @@ public class MapaController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * cambia el estado de un vértice (libre,tráfico lento, cerrado)
+     * @param event 
+     */
     @FXML
     private void changeVertexState(ActionEvent event) {
         RadioButton selected = (RadioButton) tgVertexStatus.getSelectedToggle();
@@ -562,6 +549,10 @@ public class MapaController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * cambia algoritmo a aplicar
+     * @param event 
+     */
     @FXML
     private void changeAlgorithm(ActionEvent event) {
         RadioButton selected = (RadioButton) tgAlgorithm.getSelectedToggle();
@@ -570,6 +561,32 @@ public class MapaController extends Controller implements Initializable {
         }
         else{
             this.isDijkstra = false;
+        }
+    }
+    
+    /**
+     * llamar aquí los algoritmos
+     * @param event 
+     */
+    @FXML
+    private void move(ActionEvent event) {
+        try{
+            if(isValidMove()){
+                if(isDijkstra){//lamar a Dijkstra
+                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    selectedVertices.add(endVertex);
+                
+                }
+                else{//llamar a Floyd
+                    selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
+                    selectedVertices.add(endVertex);
+                    floyd.getNodeList(startVertex, endVertex);
+                }
+                moveCar();
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println("puntero nulo");
         }
     }
 }
