@@ -26,31 +26,18 @@ public class ContainerController extends Controller implements Initializable {
 
     @FXML
     private BorderPane root;
-    @FXML
-    private VBox menuUsu;
-    @FXML
     private JFXHamburger hambBtn;
     private Label lblNumVert;
-    @FXML
     private Label lblSel;
-    @FXML
-    private Label lblStart;
-    @FXML
-    private Label lblEnd;
-    @FXML
-    private ToggleGroup vertexRoll;
-    @FXML
-    private ToggleGroup vertexStatus;
-    @FXML
-    private ToggleGroup algorithm;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AppContext.getInstance().set("hambBtn",hambBtn);
-        AppContext.getInstance().set("infoNodo",lblSel);
+        //AppContext.getInstance().set("hambBtn",hambBtn);
+        //AppContext.getInstance().set("infoNodo",lblSel);
+        //lblSel.textProperty().bind(observable);
         //Utils.getInstance().createPopUp(hambBtn);
     }    
 
@@ -60,8 +47,5 @@ public class ContainerController extends Controller implements Initializable {
     public void initialize() {
     }
 
-    @FXML
-    private void move(ActionEvent event) {
-    }
     
 }

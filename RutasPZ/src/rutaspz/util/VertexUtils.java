@@ -713,8 +713,9 @@ public class VertexUtils {
             //selectedVertices.add(v);
             if(e.getButton()==MouseButton.PRIMARY){
                 selectedVertex = v;
-                System.out.println("\n//Adyacencias vértice "+selectedVertex.getIndex());
-                printAdyacents(v);
+                AppContext.getInstance().set("selVertex",v);
+                //System.out.println("\n//Adyacencias vértice "+selectedVertex.getIndex());
+                //printAdyacents(v);
                 infoNodo.setText(v.getIndex().toString());//para mostrar cual nodo seleccionó
             }
             else if(e.getButton()==MouseButton.SECONDARY){

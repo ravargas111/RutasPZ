@@ -13,13 +13,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
 import rutaspz.Floyd;
@@ -38,7 +41,7 @@ import rutaspz.util.Utils;
 public class MapaController extends Controller implements Initializable {
 
     @FXML
-    private StackPane root;
+    private BorderPane root;
     @FXML
     private AnchorPane apInterfaz;
     @FXML
@@ -52,11 +55,26 @@ public class MapaController extends Controller implements Initializable {
     private Integer cont;
     private Grafo grafo;
     private Floyd floyd;
+    private Vertex selVertex;
+    private Vertex startVertex;
+    private Vertex endVertex;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
     //private ArrayList<Vertex> verticesMap;
     @FXML
     private Label lblNodo;
+    @FXML
+    private Label lblSel;
+    @FXML
+    private ToggleGroup vertexRoll;
+    @FXML
+    private ToggleGroup vertexStatus;
+    @FXML
+    private Label lblStart;
+    @FXML
+    private Label lblEnd;
+    @FXML
+    private ToggleGroup algorithm;
     
     /**
      * Initializes the controller class.
@@ -64,8 +82,8 @@ public class MapaController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initInstances();//inicializa todas las instancias
-        Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");//función hamburger btn
-        Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);//menú lateral
+        //Utils.getInstance().createHamburgerTransition((JFXHamburger) AppContext.getInstance().get("hambBtn"), drawer,"Menu");//función hamburger btn
+        //Utils.getInstance().createCloseDrawerEvent(drawer, apInterfaz);//menú lateral
         initMouseEvent();//eventos a darle click sobre el mapa
         createVertices();//crea los vértices
         grafo.init();//inicializa la información del grafo
@@ -90,10 +108,14 @@ public class MapaController extends Controller implements Initializable {
         pathLines2 = new ArrayList<>();
         AppContext.getInstance().set("lines2",pathLines2);
         AppContext.getInstance().set("parent",apInterfaz);
-        
+        selVertex = new Vertex();
+        AppContext.getInstance().set("selVertex",selVertex);
+        startVertex = new Vertex();
+        endVertex = new Vertex();
         cont=0;
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);
+        AppContext.getInstance().set("infoNodo",lblSel);
     }
     
     private void initAlgorithms(){
@@ -358,4 +380,8 @@ public class MapaController extends Controller implements Initializable {
         VertexUtils.getInstance().drawPointsList();
     }
     */
+
+    @FXML
+    private void move(ActionEvent event) {
+    }
 }

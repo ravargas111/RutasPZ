@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : robri
 */
 *{
-    -fx-base-color-root: black;
+    -fx-base-color-root: #EDE5FE;
     -fx-base-color-root2: white;
     -fx-base-color-lateral:  #EDE5FE;
     
@@ -62,7 +62,7 @@ and open the template in the editor.
     -fx-base-color-tv-header-sep:white;
     
     /*buttons*/
-    -fx-base-color-but:#FF0A0A;
+    -fx-base-color-but:#00616F;
     -fx-base-color-but-border: transparent;
     -fx-base-color-but2:transparent;
     -fx-base-color-but2-border: white;
@@ -76,6 +76,8 @@ and open the template in the editor.
     -fx-base-color-hamb-hover:#FF0A0A;
     
     /*radio button*/
+    -fx-base-color-radio-button-tf:#00616F;
+    -fx-base-color-radio-button-sel:#00616F;
     
     /*text field*/
     -fx-base-color-tf:white;
@@ -95,7 +97,7 @@ and open the template in the editor.
     -fx-base-color-unchecked:white;
     
     /*separator*/
-    -fx-base-color-sep:#FFFF8D;
+    -fx-base-color-sep:#00616F;
     
     /*hyperlink*/
     -fx-base-color-hyper-tf:white;
@@ -104,7 +106,7 @@ and open the template in the editor.
     /*glyph*/
     -fx-base-color-glyph:white;
     -fx-base-color-glyph-hover:#FF0A0A;
-    -fx-base-color-glyph-login: white;
+    -fx-base-color-glyph-login: #00616F;
     -fx-base-color-glyph-menu-lateral-dark: #00616F;
     -fx-base-color-glyph-menu-lateral: white;
     
@@ -585,13 +587,12 @@ and open the template in the editor.
 }
 */
 
-/*todo*/
-/*
+
 .jfx-radio-button{
-    -fx-text-fill: ;
-    -fx-background-color:;
-    -jfx-selected-color:;
-}*/
+    -fx-text-fill: -fx-base-color-radio-button-tf;
+    -fx-background-color: transparent;
+    -jfx-selected-color: -fx-base-color-radio-button-sel;
+}
 
 .jfx-hamburger {
 	-fx-background-color: transparent;

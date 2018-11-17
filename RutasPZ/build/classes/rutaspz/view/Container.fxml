@@ -1,100 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" maxHeight="720.0" maxWidth="1270.0" minHeight="720.0" minWidth="1120.0" prefHeight="720.0" prefWidth="1256.0" style="-fx-background-color: white;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.ContainerController">
    <center>
-      <AnchorPane maxWidth="1150.0" minWidth="1080.0" prefHeight="674.0" prefWidth="1150.0" BorderPane.alignment="CENTER" />
+      <AnchorPane maxWidth="1261.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1261.0" BorderPane.alignment="CENTER" />
    </center>
-   <left>
-      <HBox prefHeight="674.0" prefWidth="164.0" BorderPane.alignment="CENTER">
-         <children>
-            <StackPane maxWidth="1.7976931348623157E308" prefHeight="674.0" prefWidth="177.0" styleClass="menu-lateral">
-               <children>
-                  <VBox fx:id="menuUsu" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="58.0" spacing="70.0" stylesheets="@Style.css" visible="false" StackPane.alignment="TOP_CENTER">
-                     <children>
-                        <JFXHamburger fx:id="hambBtn" alignment="CENTER" prefHeight="28.0" prefWidth="37.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="100.0" />
-                     </opaqueInsets>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <padding>
-                        <Insets top="70.0" />
-                     </padding>
-                  </VBox>
-                  <JFXTabPane>
-                     <tabs>
-                        <Tab>
-                           <content>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="164.0">
-                                 <children>
-                                    <VBox alignment="CENTER" prefHeight="81.0" prefWidth="164.0" styleClass="cajas">
-                                       <children>
-                                          <FontAwesomeIconView stroke="#f0f0f000" styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="58.428571701049805" />
-                                          <Label fx:id="lblSel" alignment="CENTER" prefHeight="39.0" prefWidth="82.0" styleClass="lbl-menu-lat-dark" text="50" />
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="30.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <VBox prefHeight="119.0" prefWidth="83.0" />
-                                 </children>
-                              </VBox>
-                           </content>
-                           <graphic>
-                              <FontAwesomeIconView styleClass="glyph-icon-small" text="" />
-                           </graphic>
-                        </Tab>
-                        <Tab>
-                           <graphic>
-                              <FontAwesomeIconView styleClass="glyph-icon-small" text="" />
-                           </graphic>
-                           <content>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <VBox alignment="CENTER" prefHeight="105.0" prefWidth="164.0">
-                                       <children>
-                                          <HBox alignment="CENTER" prefHeight="69.0" prefWidth="164.0" styleClass="cajas">
-                                             <children>
-                                                <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" />
-                                                <Label fx:id="lblStart" alignment="CENTER" prefHeight="23.0" prefWidth="82.0" styleClass="lbl-menu-lat-dark" text="Label" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="65.0" prefWidth="164.0" styleClass="cajas">
-                                             <children>
-                                                <FontAwesomeIconView size="20" styleClass="glyph-icon-menu-lat-dark" text="" />
-                                                <Label fx:id="lblEnd" alignment="CENTER" prefHeight="23.0" prefWidth="82.0" styleClass="lbl-menu-lat-dark" text="Label" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="5.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <Separator prefWidth="200.0" />
-                                 </children>
-                              </VBox>
-                           </content>
-                        </Tab>
-                     </tabs>
-                  </JFXTabPane>
-               </children>
-            </StackPane>
-         </children>
-      </HBox>
-   </left>
 </BorderPane>
