@@ -70,15 +70,15 @@ public class MapaController extends Controller implements Initializable {
     @FXML
     private Label lblSel;
     @FXML
-    private ToggleGroup vertexRoll;
+    private ToggleGroup tgVertexRoll;
     @FXML
-    private ToggleGroup vertexStatus;
+    private ToggleGroup tgVertexStatus;
+    @FXML
+    private ToggleGroup tgAlgorithm;
     @FXML
     private Label lblStart;
     @FXML
     private Label lblEnd;
-    @FXML
-    private ToggleGroup algorithm;
     @FXML
     private JFXRadioButton rbStart;
     @FXML
@@ -154,32 +154,56 @@ public class MapaController extends Controller implements Initializable {
         this.startChanged.addListener((o,f,t)->{
             if(t){
                 this.startVertex = this.selVertex;
+                this.startVertex.setId("start-vertex");
                 lblStart.setText(startVertex.getIndex().toString());
-                this.car.setVisible(true);
-                //this.car.setX(startVertex.getX());
-                //this.car.setY(startVertex.getY());
             }
         });
         this.endChanged.addListener((o,f,t)->{
             if(t){
                 this.endVertex = this.selVertex;
+                this.endVertex.setId("end-vertex");
                 lblEnd.setText(endVertex.getIndex().toString());
             }
         });
     }
     
     private void quitOldSelectedInfo(){
-        if(this.selVertex!=null){
-                    
+        if(this.selVertex != null&&!this.selVertex.equals(this.startVertex)&&!this.selVertex.equals(this.endVertex)){
+            this.selVertex.setId(null);
         }
     }
     
     private void loadNewSelectedInfo(){
         try{
+            selVertex.setId("selected-vertex");
             lblSel.setText(selVertex.getIndex().toString());
-            if(selVertex.getState().equals(1)){
-                
+            
+            switch(selVertex.getState()){
+                case 1:
+                    tgVertexStatus.selectToggle(rbStateOpen);
+                    break;
+                case 2:
+                    tgVertexStatus.selectToggle(rbStateSlow);
+                    break;
+                case 3:
+                    tgVertexStatus.selectToggle(rbStateClosed);
+                    break;
+                default:
+                    break;
             }
+            
+            tgVertexRoll.selectToggle(null);
+            
+            if(this.startVertex!=null&&this.startVertex.equals(this.selVertex)){
+                this.selVertex.setId("start-vertex");
+                tgVertexRoll.selectToggle(rbStart);
+            }
+               
+            if(this.endVertex!=null&&this.endVertex.equals(this.selVertex)){
+                this.selVertex.setId("end-vertex");
+                tgVertexRoll.selectToggle(rbEnd);
+            }    
+            
         }
         catch(NullPointerException e){
             System.out.println("vértice seleccionado nulo");
@@ -423,6 +447,7 @@ public class MapaController extends Controller implements Initializable {
         VertexUtils.getInstance().drawSelectedRoute();//dibuja líneas azules
         Animation.getInstance().desplazarListaMovsV(car, selectedVertices);//mueve el carrito
     }
+    
     //no usadas pero luego las borro XD
     /*
     private void insertPointToRoute(Double x,Double y){
@@ -478,14 +503,14 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void changeVertexRoll(ActionEvent event) {
-        RadioButton selected = (RadioButton) vertexRoll.getSelectedToggle();
+        RadioButton selected = (RadioButton) tgVertexRoll.getSelectedToggle();
         if (selected==rbStart) {
-            System.out.println("cambio de vértice inicial");
+            //System.out.println("cambio de vértice inicial");
             startChanged.set(true);
             startChanged.set(false);
         }
         else{
-            System.out.println("cambio de vértice final");
+            //System.out.println("cambio de vértice final");
             endChanged.set(true);
             endChanged.set(false);
         }
@@ -493,7 +518,7 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void changeVertexState(ActionEvent event) {
-        RadioButton selected = (RadioButton) vertexStatus.getSelectedToggle();
+        RadioButton selected = (RadioButton) tgVertexStatus.getSelectedToggle();
         if (selected==rbStateOpen) {
             this.selVertex.setState(1);
         }
@@ -507,7 +532,7 @@ public class MapaController extends Controller implements Initializable {
 
     @FXML
     private void changeAlgorithm(ActionEvent event) {
-        RadioButton selected = (RadioButton) algorithm.getSelectedToggle();
+        RadioButton selected = (RadioButton) tgAlgorithm.getSelectedToggle();
         if (selected==rbDijkstra) {
             this.isDijkstra = true;
         }

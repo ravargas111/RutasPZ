@@ -25,9 +25,9 @@ public class Floyd {
     
     public void initInfo(){
         initDistances();
-        printDistances();
+        //printDistances();
         initVisitedVertex();
-        printVisitedVertex();
+        //printVisitedVertex();
     }
     
     private void initDistances(){

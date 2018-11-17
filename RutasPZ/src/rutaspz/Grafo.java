@@ -92,7 +92,7 @@ public class Grafo {
         initMatrix();
         initAyacents();
         searchAdyacents();
-        printGrafo();
+        //printGrafo();
     }
     
     /**
@@ -276,17 +276,17 @@ return mat;
      * por cada adyacente busca el peso hacia el otro para cargarlos en la matriz de pesos
      */
     private void searchAdyacents(){
-        System.out.println("\n\n\n***prueba adyacencias***");
+        //System.out.println("\n\n\n***prueba adyacencias***");
         vertices.stream().forEach(e->{
             Integer i = e.getIndex();//a partir del nodo x,revisa todas las columnas
-            System.out.println("");
-            System.out.println("adyacencias nodo ("+i+")");
+            //System.out.println("");
+            //System.out.println("adyacencias nodo ("+i+")");
             Integer grade=0;
             for (int j = 0; j < nodes; j++) {
                 if(adjacents[i][j]>0){
                    doubleWay(i,j);//selecciona el grado
                    Double w = e.distance(vertices.get(j));
-                   System.out.print("("+i+","+j+") -> ");
+                   //System.out.print("("+i+","+j+") -> ");
                    grade+=adjacents[i][j];
                    weigths[i][j] = w;//selecciona el peso
                 }    
