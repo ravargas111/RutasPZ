@@ -28,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Line;
+import rutaspz.Dijkstra;
 import rutaspz.Floyd;
 import rutaspz.Grafo;
 import rutaspz.Vertex;
@@ -57,6 +58,7 @@ public class MapaController extends Controller implements Initializable {
     private Integer cont;
     private Grafo grafo;
     private Floyd floyd;
+    private Dijkstra dijkstra;
     private Vertex selVertex;
     private Vertex startVertex;
     private Vertex endVertex;
@@ -220,6 +222,7 @@ public class MapaController extends Controller implements Initializable {
     private void initAlgorithms(){
         floyd = new Floyd(grafo.getNodes(),grafo.getWeigths().clone());
         floyd.initInfo();
+        dijkstra = new Dijkstra(grafo.getNodes(),grafo.getAdjacents().clone(),grafo.getWeigths().clone());
     }
     
     /**
@@ -519,7 +522,7 @@ public class MapaController extends Controller implements Initializable {
                 if(isDijkstra){//lamar a Dijkstra
                     selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
                     selectedVertices.add(endVertex);
-                
+
                 }
                 else{//llamar a Floyd
                     selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)
