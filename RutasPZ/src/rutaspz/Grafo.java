@@ -652,4 +652,34 @@ return mat;
             }
         }
     }
+    
+    /**
+     * obtiene una nueva matriz de pesos actualizada con los cambios de estado en los vértices
+     * @return 
+     */
+    public Double[][] updateWeights(){
+        //nueva matriz para siempre tener la original (no sé ni para qué XD pero por aquello)
+        Double[][] weigthsAux = new Double[nodes][nodes];
+        
+        //inicializa nueva matriz
+        for (int i = 0; i < nodes; i++) {
+            for (int j = 0; j < nodes; j++) {
+                weigthsAux[i][j]=0.0;
+            }
+        }
+        
+        //por cada
+        vertices.stream().forEach(e->{
+            Integer i = e.getIndex();//a partir del nodo x,revisa todas las columnas
+            for (int j = 0; j < nodes; j++) {//recorre las columnas de i(índice stream)
+                if(adjacents[i][j]>0){//si tiene adyacente en esa posición i/j
+                    Integer state = vertices.get(j).getState();//obtiene estado del adyacente
+                    Double w = e.distance(vertices.get(j));//calcula la distancia entre el vértice base y el adyacente
+                    w*=state;//producto dependiendo del estado (1=normal,2(Moderado),3(Lento))    
+                    weigths[i][j] = w;//selecciona el peso
+                }    
+            }
+        });
+        return weigthsAux;
+    }
 }

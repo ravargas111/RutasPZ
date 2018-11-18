@@ -27,6 +27,14 @@ public class Floyd {
         this.visitedVertex = new Integer[size][size];
         this.generalVertices = (ArrayList<Vertex>) AppContext.getInstance().get("generalVertices");
     }
+
+    public Double[][] getWeights() {
+        return weights;
+    }
+
+    public void setWeights(Double[][] weights) {
+        this.weights = weights;
+    }
     
     public void initInfo(){
         initDistances();
@@ -125,7 +133,6 @@ public class Floyd {
         Integer startIndex = start.getIndex();
         Integer endIndex = end.getIndex();
         Integer step;
-        System.out.println("Floyd: ("+startIndex+","+endIndex+")");
         
         while (visitedVertex[startIndex][endIndex] != startIndex) {
             step=visitedVertex[startIndex][endIndex];
@@ -135,11 +142,17 @@ public class Floyd {
         list.add(0,start);
         list.add(end);
         
-        System.out.println("Ruta seleccionada: ");
+        //System.out.println("Ruta seleccionada: ");
         for(Vertex v:list){
-            System.out.println(v.getIndex()+"->");
+            //System.out.println(v.getIndex()+"->");
+            
         }
 
     }
 
+    private Double getCost(Vertex start,Vertex end){
+        Double estimatedCost = distances[start.getIndex()][end.getIndex()];
+        System.out.println("Costo estimado (Floyd): "+estimatedCost);
+        return estimatedCost;
+    }
 }

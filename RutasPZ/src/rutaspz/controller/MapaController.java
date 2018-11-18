@@ -536,6 +536,13 @@ public class MapaController extends Controller implements Initializable {
         }
     }
 
+    private void updateWeights(){
+        Double[][] updatedWeigths = grafo.updateWeights();//obtiene matriz de pesos actualizada del grafo
+        floyd.setWeights(updatedWeigths);
+        dijkstra.setWeigths(updatedWeigths);
+        
+    }
+    
     /**
      * cambia el estado de un vértice (libre,tráfico lento, cerrado)
      * @param event 
@@ -544,14 +551,15 @@ public class MapaController extends Controller implements Initializable {
     private void changeVertexState(ActionEvent event) {
         RadioButton selected = (RadioButton) tgVertexStatus.getSelectedToggle();
         if (selected==rbStateOpen) {
-            this.selVertex.setState(1);
+            this.selVertex.setState(1);//tránsito normal
         }
         else if(selected==rbStateSlow){
-            this.selVertex.setState(2);
+            this.selVertex.setState(2);//tránsito moderado
         }
         else{
-            this.selVertex.setState(3);
+            this.selVertex.setState(3);//tránsito lento
         }
+        updateWeights();//actualiza las listas de pesos de los algoritmos con el nuevo cambio en el estado del vértice
     }
 
     /**
@@ -589,7 +597,8 @@ public class MapaController extends Controller implements Initializable {
             }
         }
         catch(NullPointerException e){
-            System.out.println("puntero nulo");
+            System.out.println("vértice inicio o final sin establecerse");
         }
     }
+    
 }

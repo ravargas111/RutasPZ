@@ -18,7 +18,7 @@ public class Vertex extends Circle{
     private Integer index;
     private Point2D point;
     private Integer grade;
-    private Integer state;//1 libre,2 lento,3 cerrado
+    private Integer state;//1 normal,2 moderado,3 lento
     
     public Vertex() {
         super();
