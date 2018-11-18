@@ -9,6 +9,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -465,11 +466,13 @@ public class Animation {
         try{
         //quitar esto en caso de no ocuparlo
         ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");
+        SimpleDoubleProperty pathDistance = (SimpleDoubleProperty) AppContext.getInstance().get("pathDistance");
         
         //obtiene vértices
         //FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Vertex n1 = movimientos.get(0);
         Vertex n2 = movimientos.get(1);
+        Double nextDistance = n1.distance(n2);
         //auxNodo.setX(auxNodo.getX()+n1[0]);
         //auxNodo.setY(auxNodo.getY()+n1[1]);
         movimientos.remove(0);//quita el vértice de la lista de movimientos
@@ -491,6 +494,7 @@ public class Animation {
             nodo.toFront();
             if(movimientos.size()>1)
                 desplazarListaMovsV( nodo, movimientos);
+                pathDistance.set(pathDistance.get()+nextDistance);
             });  
         
         //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        

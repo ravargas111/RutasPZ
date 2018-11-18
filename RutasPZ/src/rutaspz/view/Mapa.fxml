@@ -187,7 +187,7 @@
                                     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="200.0">
                                        <children>
                                           <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" />
-                                          <Label fx:id="lblEstimatedCost" prefHeight="21.0" prefWidth="74.0" styleClass="lbl-menu-lat-dark" text="Tiempo" />
+                                          <Label fx:id="lblEstimatedTime" prefHeight="21.0" prefWidth="74.0" styleClass="lbl-menu-lat-dark" text="Tiempo" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="200.0">
@@ -199,7 +199,7 @@
                                     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="200.0">
                                        <children>
                                           <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" />
-                                          <Label prefHeight="21.0" prefWidth="74.0" styleClass="lbl-menu-lat-dark" text="Costo" />
+                                          <Label fx:id="lblEstimatedCost" prefHeight="21.0" prefWidth="74.0" styleClass="lbl-menu-lat-dark" text="Costo" />
                                        </children>
                                     </HBox>
                                  </children>

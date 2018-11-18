@@ -16,6 +16,7 @@ public class Floyd {
     final static Double INF = 99999.0;
     private Integer size;
     private Double weights[][];
+    private Double[][] originalDistances;
     private Double[][] distances;//contiene las distancias mínimas entre cada parde vértices
     private Integer[][] visitedVertex;//los vértices para acceder a cada par
     private ArrayList<Vertex> generalVertices;
@@ -150,9 +151,9 @@ public class Floyd {
 
     }
 
-    private Double getCost(Vertex start,Vertex end){
+    /*private Double getCost(Vertex start,Vertex end){
         Double estimatedCost = distances[start.getIndex()][end.getIndex()];
         System.out.println("Costo estimado (Floyd): "+estimatedCost);
         return estimatedCost;
-    }
+    }*/
 }

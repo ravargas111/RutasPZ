@@ -5,7 +5,6 @@
  */
 package rutaspz.controller;
 
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXRadioButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -97,6 +96,13 @@ public class MapaController extends Controller implements Initializable {
     private JFXRadioButton rbDijkstra;
     @FXML
     private JFXRadioButton rbFloyd;
+    @FXML
+    private Label lblEstimatedTime;
+    @FXML
+    private Label lblEstimatedDistance;
+    @FXML
+    private Label lblEstimatedCost;
+    private SimpleDoubleProperty pathDistance;
     
     /**
      * Initializes the controller class.
@@ -147,6 +153,8 @@ public class MapaController extends Controller implements Initializable {
         this.startChanged = new SimpleBooleanProperty(false);
         this.endChanged = new SimpleBooleanProperty(false);
         this.isDijkstra = true;
+        this.pathDistance = new SimpleDoubleProperty(0.0);
+        AppContext.getInstance().set("pathDistance",pathDistance);
     }
     
     private void initListeners(){
@@ -174,6 +182,14 @@ public class MapaController extends Controller implements Initializable {
                 this.endVertex.setId("end-vertex");
                 lblEnd.setText(endVertex.getIndex().toString());
             }
+        });
+        
+        this.pathDistance.addListener(d->{
+            Double totalDistance = pathDistance.getValue();
+            if(!totalDistance.equals(0.0)){
+                this.lblEstimatedDistance.setText(totalDistance.toString());
+            }
+            
         });
     }
     
@@ -575,6 +591,10 @@ public class MapaController extends Controller implements Initializable {
         else{
             this.isDijkstra = false;
         }
+    }
+    
+    private void estimatedCost(){
+        
     }
     
     /**
