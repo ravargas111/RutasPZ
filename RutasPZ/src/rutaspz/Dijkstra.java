@@ -41,7 +41,7 @@ public class Dijkstra {
     }
     
     //Methods
-    public ArrayList<Vertex> getShortestWay(Integer ini, Integer fin){
+    public void getShortestPath(Integer ini, Integer fin){
         //shortestWay = 
         Boolean seLlega = false;
         ArrayList<Integer> evaluados = new ArrayList<>();
@@ -103,10 +103,10 @@ public class Dijkstra {
                 list.add(generalVertices.get(i));
                 System.out.print("(" + i + ") -> ");
             });
-            return list;
-        } else{
-            return null;
-        }
+            //return list;
+        } //else{
+            //return null;
+        //}
     }
     
     private Arrivals getMinWeight(Arrivals a){

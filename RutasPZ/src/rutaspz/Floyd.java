@@ -5,6 +5,9 @@
  */
 package rutaspz;
 
+import java.util.ArrayList;
+import rutaspz.util.AppContext;
+
 /**
  *
  * @author robri
@@ -15,12 +18,14 @@ public class Floyd {
     private Double weights[][];
     private Double[][] distances;//contiene las distancias mínimas entre cada parde vértices
     private Integer[][] visitedVertex;//los vértices para acceder a cada par
+    private ArrayList<Vertex> generalVertices;
 
     public Floyd(Integer size, Double[][] weights) {
         this.size = size;
         this.weights = weights;
         this.distances = new Double[size][size];
         this.visitedVertex = new Integer[size][size];
+        this.generalVertices = (ArrayList<Vertex>) AppContext.getInstance().get("generalVertices");
     }
     
     public void initInfo(){
@@ -86,7 +91,7 @@ public class Floyd {
     /**
      * crea la matriz con los caminos más cortos entre cada par de vértices y la matriz con los nodos intermediarios
      */
-    public void shortestPaths(){
+    public void getShortestPath(Vertex start,Vertex end){
         for (int k = 0; k < size; k++) 
         { 
             //selecciona vértice fuente
@@ -100,31 +105,41 @@ public class Floyd {
                     if (distances[i][k] + distances[k][j] < distances[i][j]) {
                         //System.out.println("cambio: ("+k+","+j+")");
                         distances[i][j] = distances[i][k] + distances[k][j];
-                        visitedVertex[i][j] = visitedVertex[k][j];//fila con la que se está tratando (revisar si solo poner i)
-                        //visitedVertex[i][j] = k;
+                        visitedVertex[i][j] = k;
                     }
                 } 
             } 
-        } 
+        }
+        
+        getNodeList(start,end);
     }
     
-    public void getNodeList(Vertex start,Vertex end){
-        shortestPaths();
-        printVisitedVertex();
-        Integer origin = start.getIndex();
-        Integer dest = end.getIndex();
-        Integer step=0;
-        Boolean stop=false;
-        step = visitedVertex[origin][dest];
+    /**
+     * obtiene la secuencia de nodos para llegar de A -> B
+     * @param start vértice inicio
+     * @param end vértice fin
+     */
+    private void getNodeList(Vertex start,Vertex end){
+        ArrayList<Vertex> list = (ArrayList<Vertex>) AppContext.getInstance().get("selectedVertices");
+        list.clear();
+        Integer startIndex = start.getIndex();
+        Integer endIndex = end.getIndex();
+        Integer step;
+        System.out.println("Floyd: ("+startIndex+","+endIndex+")");
         
-        System.out.println("Floyd: ("+origin+","+dest+")");
-        System.out.println("primer paso "+step);
-        do{
-            //step = visitedVertex[step][dest];
-            //System.out.println("paso "+step);
-            stop=true;
+        while (visitedVertex[startIndex][endIndex] != startIndex) {
+            step=visitedVertex[startIndex][endIndex];
+            list.add(0, generalVertices.get(step));
+            endIndex = step;
+    	}
+        list.add(0,start);
+        list.add(end);
+        
+        System.out.println("Ruta seleccionada: ");
+        for(Vertex v:list){
+            System.out.println(v.getIndex()+"->");
         }
-        while(step!=dest&&!stop);
+
     }
 
 }
