@@ -126,7 +126,9 @@ public class MapaController extends Controller implements Initializable {
         car.getStyleClass().add("glyph-icon-car");
         flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
         generalVertices = VertexUtils.getInstance().getVerticesList();
+        AppContext.getInstance().set("generalVertices",generalVertices);
         selectedVertices = VertexUtils.getInstance().getSelectedVertices();
+        AppContext.getInstance().set("selectedVertices",selectedVertices);
         pathLines = new ArrayList<>();
         AppContext.getInstance().set("lines",pathLines);
         pathLines2 = new ArrayList<>();
@@ -580,7 +582,7 @@ public class MapaController extends Controller implements Initializable {
                     //selectedVertices.add(endVertex);
                     dijkstra.getShortestWay(startVertex.getIndex(), endVertex.getIndex());
                     //selected vertices (setea)
-                    //moveCar();
+                    moveCar();
                 }
                 else{//llamar a Floyd
                     //selectedVertices.add(startVertex);//pruebas movimiento carro (quitar)

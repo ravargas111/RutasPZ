@@ -6,6 +6,7 @@
 package rutaspz;
 
 import java.util.ArrayList;
+import rutaspz.util.AppContext;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Dijkstra {
     private Integer[] letras;
     private Integer[][] adjacents;//matriz de adyacencia
     private Double[][] weigths;
-    private ArrayList<Vertex> shortestWay;
+    private ArrayList<Vertex> generalVertices;
 
     //Constructors
     public Dijkstra() {
@@ -36,11 +37,12 @@ public class Dijkstra {
         this.cantNodos = cantNodos;
         this.adjacents = adjacents;
         this.weigths = weigths;
+        this.generalVertices = (ArrayList<Vertex>) AppContext.getInstance().get("generalVertices");
     }
     
     //Methods
     public ArrayList<Vertex> getShortestWay(Integer ini, Integer fin){
-        
+        //shortestWay = 
         Boolean seLlega = false;
         ArrayList<Integer> evaluados = new ArrayList<>();
         
@@ -94,9 +96,11 @@ public class Dijkstra {
                 next = getMinWeight(caminos[next.prev]);
             }
             way.sort((n1, n2) -> n1.compareTo(n2));
-            ArrayList<Vertex> list = new ArrayList<>();
+            ArrayList<Vertex> list = (ArrayList<Vertex>) AppContext.getInstance().get("selectedVertices");
+            list.clear();
             way.stream().forEach(i -> {
                 //llenar la lista de vertex que se retorna
+                list.add(generalVertices.get(i));
                 System.out.print("(" + i + ") -> ");
             });
             return list;
