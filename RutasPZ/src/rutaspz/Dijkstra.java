@@ -6,6 +6,7 @@
 package rutaspz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import rutaspz.util.AppContext;
 
 /**
@@ -47,12 +48,10 @@ public class Dijkstra {
         for (int i = 0; i < cantNodos; i++) {
             evaluados[i] = false;
         }
-        
         Arrivals[] caminos = new Arrivals[cantNodos];
         for (int i = 0; i < cantNodos; i++) {
             caminos[i] = null;
         }
-        
         ArrayList<Integer> porEvaluar = new ArrayList<>();
         porEvaluar.add(ini);
         while(!porEvaluar.isEmpty()){
@@ -98,7 +97,7 @@ public class Dijkstra {
                 if(next.prev.equals(ini)) bandera = false;
                 next = getMinWeight(caminos[next.prev]);
             }
-            way.sort((n1, n2) -> n1.compareTo(n2));
+            Collections.reverse(way);
             ArrayList<Vertex> list = (ArrayList<Vertex>) AppContext.getInstance().get("selectedVertices");
             list.clear();
             way.stream().forEach(i -> {
