@@ -49,12 +49,10 @@ public class MapaController extends Controller implements Initializable {
     @FXML
     private AnchorPane apInterfaz;
     private FontAwesomeIconView car;
-    private FontAwesomeIconView flag;
     private ArrayList<Line> pathLines;//líneas de ruta pricipal
     private ArrayList<Line> pathLines2;//líneas de ruta seguida
     private ArrayList<Vertex> generalVertices;//todos los vértices
     private ArrayList<Vertex> selectedVertices;//vértices de ruta
-    private Integer cont;
     private Grafo grafo;
     private Floyd floyd;
     private Dijkstra dijkstra;
@@ -65,10 +63,9 @@ public class MapaController extends Controller implements Initializable {
     private SimpleBooleanProperty startChanged;
     private SimpleBooleanProperty endChanged;
     private SimpleBooleanProperty isCarMoved;
+    private SimpleDoubleProperty pathDistance;
+    private Double totalTime;
     private Boolean isDijkstra;
-    //private ArrayList<ArrayList<Point2D>> pathPointsArray;
-    //private ArrayList<Point2D> pathPoints;
-    //private ArrayList<Vertex> verticesMap;
     @FXML
     private Label lblNodo;
     @FXML
@@ -103,7 +100,6 @@ public class MapaController extends Controller implements Initializable {
     private Label lblEstimatedDistance;
     @FXML
     private Label lblEstimatedCost;
-    private SimpleDoubleProperty pathDistance;
     
     /**
      * Initializes the controller class.
@@ -126,12 +122,8 @@ public class MapaController extends Controller implements Initializable {
     }
     
     private void initInstances(){
-        //route=new ArrayList<>();
-        //pathPoints = VertexUtils.getInstance().getPoints();
-        //pathPointsArray = VertexUtils.getInstance().getPointsArray();
         car = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.CAR);
         car.getStyleClass().add("glyph-icon-car");
-        flag = Utils.getInstance().createIcon(apInterfaz, FontAwesomeIcon.FLAG_CHECKERED);
         generalVertices = VertexUtils.getInstance().getVerticesList();
         AppContext.getInstance().set("generalVertices",generalVertices);
         selectedVertices = VertexUtils.getInstance().getSelectedVertices();
@@ -145,7 +137,6 @@ public class MapaController extends Controller implements Initializable {
         AppContext.getInstance().set("selVertex",selVertex);
         startVertex = new Vertex();
         endVertex = new Vertex();
-        cont=0;
         selectedVertices.clear();
         grafo = new Grafo(generalVertices);
         AppContext.getInstance().set("infoNodo",lblSel);
@@ -158,6 +149,8 @@ public class MapaController extends Controller implements Initializable {
         AppContext.getInstance().set("pathDistance",pathDistance);
         this.isCarMoved = new SimpleBooleanProperty(false);
         AppContext.getInstance().set("isCarMoved",isCarMoved);
+        this.totalTime = 0.0;
+        AppContext.getInstance().set("totalTime",totalTime);
     }
     
     private void initListeners(){
@@ -189,10 +182,17 @@ public class MapaController extends Controller implements Initializable {
         
         this.pathDistance.addListener(d->{
             Double totalDistance = pathDistance.getValue();
+            totalTime += (Double)AppContext.getInstance().get("newTime");
+            //totalDistance = ((double)Math.round(totalDistance * 100d) / 100d);//redondeo a dos decimales
+            //totalTime = ((double)Math.round(totalTime * 100d) / 100d);
+            round2Decimals(totalDistance);
+            round2Decimals(totalTime);
+            Double totalCost = totalDistance + totalTime;
             if(!totalDistance.equals(0.0)){
-                
+                this.lblEstimatedTime.setText(totalTime.toString());
                 this.lblEstimatedDistance.setText(totalDistance.toString());
-                
+                this.lblEstimatedCost.setText(totalCost.toString());
+                System.out.println("total tima (M)"+totalTime);
             }
             
         });
@@ -208,6 +208,10 @@ public class MapaController extends Controller implements Initializable {
                 
             }
         });
+    }
+    
+    private void round2Decimals(Double number){
+        number = ((double)Math.round(number * 100d) / 100d);
     }
     
     private void quitOldSelectedInfo(){

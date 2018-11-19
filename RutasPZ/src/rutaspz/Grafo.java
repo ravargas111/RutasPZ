@@ -117,7 +117,6 @@ public class Grafo {
         vertices.stream().forEach(e->{
             nodes++;
         });
-        System.out.println("Cantidad de nodos "+nodes);
     }
     
     /**
