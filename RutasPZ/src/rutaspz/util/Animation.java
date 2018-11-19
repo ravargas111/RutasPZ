@@ -466,21 +466,23 @@ public class Animation {
         //System.out.println("Vertices a mover size:"+movimientos.size());
         try{
         //quitar esto en caso de no ocuparlo
-        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");
-        SimpleDoubleProperty pathDistance = (SimpleDoubleProperty) AppContext.getInstance().get("pathDistance");
-        SimpleBooleanProperty isCarMoved = (SimpleBooleanProperty) AppContext.getInstance().get("isCarMoved");
+        ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");//obtiene lalista de líneas amarillas
+        SimpleDoubleProperty pathDistance = (SimpleDoubleProperty) AppContext.getInstance().get("pathDistance");//atributo de distancia recorrida
+        SimpleBooleanProperty isCarMoved = (SimpleBooleanProperty) AppContext.getInstance().get("isCarMoved");//atributo fin de cada moviemiento
         isCarMoved.set(false);
-        Vertex startVertex = (Vertex) AppContext.getInstance().get("startVertex");
         //obtiene vértices
-        //FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Vertex n1 = movimientos.get(0);
         Vertex n2 = movimientos.get(1);
-        Double nextDistance = n1.distance(n2);
-        //auxNodo.setX(auxNodo.getX()+n1[0]);
-        //auxNodo.setY(auxNodo.getY()+n1[1]);
-        movimientos.remove(0);//quita el vértice de la lista de movimientos
+        
+        //obtiene distancia y tiempo
+        Double nextDistance = n1.distance(n2);//asigna distancia de cada salto
+        Double time = nextDistance*50;
+        time*=n2.getState();//dependiendo del estado va a durar más
+        AppContext.getInstance().set("newTime",time);//lo usa el mapa para acumular tiempo
+        
+        movimientos.remove(0);//quita el vértice de la lista de movimientos porque ya lo recorrió
         //crea transición
-        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(5000), nodo);
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(time), nodo);
         desplazamiento.setFromX(n1.getX());
         desplazamiento.setFromY(n1.getY());
         desplazamiento.setToX(n2.getX());
