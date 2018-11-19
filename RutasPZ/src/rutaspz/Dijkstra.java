@@ -44,6 +44,9 @@ public class Dijkstra {
     public void getShortestPath(Integer ini, Integer fin){
         Boolean seLlega = false;
         Boolean[] evaluados = new Boolean[cantNodos];
+        for (int i = 0; i < cantNodos; i++) {
+            evaluados[i] = false;
+        }
         
         Arrivals[] caminos = new Arrivals[cantNodos];
         for (int i = 0; i < cantNodos; i++) {
