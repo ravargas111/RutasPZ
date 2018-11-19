@@ -42,7 +42,6 @@ public class Dijkstra {
     
     //Methods
     public void getShortestPath(Integer ini, Integer fin){
-        //shortestWay = 
         Boolean seLlega = false;
         ArrayList<Integer> evaluados = new ArrayList<>();
         

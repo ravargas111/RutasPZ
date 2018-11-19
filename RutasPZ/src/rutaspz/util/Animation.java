@@ -9,6 +9,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -467,7 +468,9 @@ public class Animation {
         //quitar esto en caso de no ocuparlo
         ArrayList<Line> pathLines = (ArrayList<Line>) AppContext.getInstance().get("lines2");
         SimpleDoubleProperty pathDistance = (SimpleDoubleProperty) AppContext.getInstance().get("pathDistance");
-        
+        SimpleBooleanProperty isCarMoved = (SimpleBooleanProperty) AppContext.getInstance().get("isCarMoved");
+        isCarMoved.set(false);
+        Vertex startVertex = (Vertex) AppContext.getInstance().get("startVertex");
         //obtiene vértices
         //FontAwesomeIconView auxNodo=(FontAwesomeIconView) nodo;
         Vertex n1 = movimientos.get(0);
@@ -485,19 +488,17 @@ public class Animation {
         
         //si queda más de un movimiento lo invoca al finalizar
         desplazamiento.setOnFinished(e->{
-            //imprimir info
-            //Points2DUtils.getInstance().printPoints(n1,n2);
-            //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");
-            
             //todo quitar en caso de usarla en otra app
             pathLines.add(VertexUtils.getInstance().drawFollowedLine(n1, n2,VertexUtils.COLOR.YELLOW));
             nodo.toFront();
-            if(movimientos.size()>1)
+            if(movimientos.size()>1){
+                AppContext.getInstance().set("auxVertex",n2);
+                isCarMoved.set(true);
                 desplazarListaMovsV( nodo, movimientos);
-                pathDistance.set(pathDistance.get()+nextDistance);
+            }
+            pathDistance.set(pathDistance.get()+nextDistance);
             });  
-        
-        //System.out.println("("+n1[0]+","+n1[1]+") "+" ("+n2[0]+","+n2[1]+")");        
+             
         desplazamiento.play(); 
         }
         catch(NullPointerException e){

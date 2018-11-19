@@ -64,6 +64,7 @@ public class MapaController extends Controller implements Initializable {
     private SimpleBooleanProperty selectedChanged;
     private SimpleBooleanProperty startChanged;
     private SimpleBooleanProperty endChanged;
+    private SimpleBooleanProperty isCarMoved;
     private Boolean isDijkstra;
     //private ArrayList<ArrayList<Point2D>> pathPointsArray;
     //private ArrayList<Point2D> pathPoints;
@@ -155,6 +156,8 @@ public class MapaController extends Controller implements Initializable {
         this.isDijkstra = true;
         this.pathDistance = new SimpleDoubleProperty(0.0);
         AppContext.getInstance().set("pathDistance",pathDistance);
+        this.isCarMoved = new SimpleBooleanProperty(false);
+        AppContext.getInstance().set("isCarMoved",isCarMoved);
     }
     
     private void initListeners(){
@@ -187,9 +190,23 @@ public class MapaController extends Controller implements Initializable {
         this.pathDistance.addListener(d->{
             Double totalDistance = pathDistance.getValue();
             if(!totalDistance.equals(0.0)){
+                
                 this.lblEstimatedDistance.setText(totalDistance.toString());
+                
             }
             
+        });
+        
+        this.isCarMoved.addListener((o,f,t)->{
+            if(t){
+                Vertex auxVertex = (Vertex) AppContext.getInstance().get("auxVertex");
+                //System.out.println("Nuevo ini: "+auxVertex.getIndex());
+                if(isDijkstra)
+                    dijkstra.getShortestPath(auxVertex.getIndex(), endVertex.getIndex());
+                else
+                    floyd.getShortestPath(auxVertex, endVertex);
+                
+            }
         });
     }
     
