@@ -43,7 +43,7 @@ public class Dijkstra {
     //Methods
     public void getShortestPath(Integer ini, Integer fin){
         Boolean seLlega = false;
-        ArrayList<Integer> evaluados = new ArrayList<>();
+        Boolean[] evaluados = new Boolean[cantNodos];
         
         Arrivals[] caminos = new Arrivals[cantNodos];
         for (int i = 0; i < cantNodos; i++) {
@@ -55,7 +55,7 @@ public class Dijkstra {
         while(!porEvaluar.isEmpty()){
             Integer index = porEvaluar.get(0);
             if(!index.equals(fin)){
-                if(!evaluados.contains(index)){
+                if(!evaluados[index]){
                     Arrivals previusArr = getMinWeight(caminos[index]);
                     if(previusArr == null){
                         previusArr = new Arrivals();
@@ -74,14 +74,15 @@ public class Dijkstra {
                             } else {
                                 insertarFinal(caminos[i], newAr);
                             }
-                            porEvaluar.add(i);
+                            if(!evaluados[index])
+                                porEvaluar.add(i);
                         }
                     }
                 }
             } else {
                 seLlega = true;
             }
-            evaluados.add(index);
+            evaluados[index] = true;
             porEvaluar.remove(0);
         }
         if(seLlega){
