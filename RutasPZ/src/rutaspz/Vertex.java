@@ -19,7 +19,7 @@ public class Vertex extends Circle{
     private Point2D point;
     private Integer grade;
     private Integer state;//1 normal,2 moderado,3 lento
-    private Boolean open;
+    private Boolean open;//habilitado
     
     public Vertex() {
         super();
