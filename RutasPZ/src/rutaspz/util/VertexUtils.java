@@ -639,6 +639,9 @@ public class VertexUtils {
         }
     }
     
+    /**
+     * dibuja la ruta principal
+     */
     public void drawSelectedRoute(){
         Integer i=0;
         AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
@@ -646,6 +649,9 @@ public class VertexUtils {
             Vertex p2 = VertexUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
                 drawLineVSel(p,p2,COLOR.BLUE);
+                Double distance = p.distance(p2);
+                Double time = distance*50;
+                time /= 300;
                 //Points2DUtils.getInstance().printPoints(p, p2);
             }
             i++;

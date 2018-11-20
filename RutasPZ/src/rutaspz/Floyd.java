@@ -147,7 +147,7 @@ public class Floyd {
         
         //System.out.println("Ruta seleccionada: ");
         for(Vertex v:list){
-            //System.out.println(v.getIndex()+"->");
+            //System.out.println(v.getIndex()+"->"); //aquí la lista tiene todos los nodos de la ruta inicial
             
         }
 

@@ -189,12 +189,13 @@ public class MapaController extends Controller implements Initializable {
             //totalTime = ((double)Math.round(totalTime * 100d) / 100d);
             round2Decimals(totalDistance);
             round2Decimals(totalTime);
-            Double totalCost = totalDistance + totalTime;
-            
+            double valor = totalDistance + totalTime; 
+
+            Double totalCost = Double.valueOf(String.format("%.2f", valor));
             if(!totalDistance.equals(0.0)){
                 //this.lblEstimatedTime.setText(totalTime.toString());//setea tiemppo total (MARIO)
                 timeFormat(totalTime);//función para separar y mostrar (MARIO)
-                this.lblEstimatedDistance.setText(totalDistance.toString());
+                this.lblEstimatedDistance.setText(String.format("%.2f", totalDistance)+ " Mts");
                 this.lblEstimatedCost.setText(totalCost.toString());
                 System.out.println("total tima (M)"+totalTime);
             }
@@ -217,13 +218,12 @@ public class MapaController extends Controller implements Initializable {
     private void timeFormat(Double time){
         if(time>60){
             time/=60;
-            Integer iPart = time.intValue();
-            Double fPart = time - iPart;
-            this.lblEstimatedTime.setText(iPart+ ":" );
-            this.lblEstimatedCost.setText(lblEstimatedCost.getText()+fPart);
+            Double iPart = time;
+
+            this.lblEstimatedTime.setText(String.format("%.2f", iPart)+ "Min ");
         }
         else{
-            this.lblEstimatedTime.setText(time.toString()+ ": 00" );
+            this.lblEstimatedTime.setText(time.intValue()+ " Seg" );
         }
     }
     
