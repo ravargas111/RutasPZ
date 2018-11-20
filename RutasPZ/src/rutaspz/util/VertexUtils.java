@@ -645,6 +645,8 @@ public class VertexUtils {
     public void drawSelectedRoute(){
         Integer i=0;
         AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
+        Double initialWT = 0.0;
+        Double initTT = 0.0;
         for(Vertex p:selectedVertices){
             Vertex p2 = VertexUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
@@ -656,6 +658,8 @@ public class VertexUtils {
             }
             i++;
         }
+        AppContext.getInstance().set("initTT",initTT);
+        AppContext.getInstance().set("initialWT",initialWT);
     }
     
     private void switchLineColor(Line l,COLOR c){
