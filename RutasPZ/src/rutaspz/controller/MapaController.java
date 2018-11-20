@@ -102,6 +102,12 @@ public class MapaController extends Controller implements Initializable {
     private Label lblEstimatedCost;
     @FXML
     private JFXRadioButton rbClosed;
+    @FXML
+    private Label lblInitialTime;
+    @FXML
+    private Label lblInitialDistance;
+    @FXML
+    private Label lblInitialCost;
     
     /**
      * Initializes the controller class.
