@@ -23,6 +23,7 @@ public class Vertex extends Circle{
     private Boolean selected;
     private Boolean startVertex;
     private Boolean endVertex;
+    private Vertex accidentenVertex;
     private Integer state;//1 normal,2 moderado,3 lento
     private Boolean open;//habilitado
     
@@ -51,6 +52,15 @@ public class Vertex extends Circle{
         startVertex = false;
         selected = false;
     }
+
+    public Vertex getAccidentenVertex() {
+        return accidentenVertex;
+    }
+
+    public void setAccidentenVertex(Vertex accidentenVertex) {
+        this.accidentenVertex = accidentenVertex;
+    }
+    
     
     public Vertex(Integer index,double centerX, double centerY) {
         super(centerX,centerY,5);

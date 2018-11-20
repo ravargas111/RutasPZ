@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import static javafx.scene.control.Alert.AlertType.INFORMATION;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -26,6 +27,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import rutaspz.Accident;
@@ -119,6 +121,8 @@ public class MapaController extends Controller implements Initializable {
     private VBox vbLateral;
     @FXML
     private VBox vbRoll;
+    @FXML
+    private StackPane spLateralIzq;
     
     /**
      * Initializes the controller class.
@@ -244,12 +248,15 @@ public class MapaController extends Controller implements Initializable {
         
         this.searching.addListener((o,f,t)->{
             if(!t){
+                spLateralIzq.setDisable(false); 
                 blockVertices(false);
                 this.accident2 = this.selVertex;
                 this.accident1.setId("accident-vertex");
                 this.accident1.setAccident(true);
                 this.accident2.setId("accident-vertex");
                 this.accident2.setAccident(true);
+                this.accident1.setAccidentenVertex(this.accident2);
+                this.accident2.setAccidentenVertex(this.accident1);
                 grafo.pushAccident(accident1, accident2);
                 updateWeights();
             }
@@ -319,7 +326,19 @@ public class MapaController extends Controller implements Initializable {
             if(this.endVertex!=null&&this.endVertex.equals(this.selVertex)){
                 this.selVertex.setId("end-vertex");
                 tgVertexRoll.selectToggle(rbEnd);
-            }    
+            } 
+            if(this.selVertex.getAccident()){
+                rbAccident.setSelected(true);
+            }
+            else{
+                rbAccident.setSelected(false);
+            }
+            if(this.selVertex.getOpen()){
+                rbClosed.setSelected(false);
+            } else{
+                rbClosed.setSelected(true);
+            }
+            
             
         }
         catch(NullPointerException e){
@@ -771,12 +790,31 @@ public class MapaController extends Controller implements Initializable {
     
     @FXML
     private void putAccident(ActionEvent event) {
+        if(this.rbAccident.isSelected()){
+        spLateralIzq.setDisable(true);
         this.accident1 = this.selVertex;
         this.searching.setValue(true);
-        this.selVertex.setId("accident-vertex");
+        this.selVertex.setId("selected-vertex");
         blockVertices(true);
         ArrayList<Vertex> list = grafo.vertexAdjacents(selVertex);
         unlockAdyacents(list);
+        Mensaje msj = new Mensaje();
+        msj.show(INFORMATION, "CREAR ACCIDENTE", "Seleccione hacia que ruta se produce el accidente");
+        }
+        else{
+          grafo.popAccident(selVertex, selVertex.getAccidentenVertex());
+          selVertex.getAccidentenVertex().setAccidentenVertex(null);
+         spLateralIzq.setDisable(false);  
+          this.searching.setValue(false);
+          selVertex.getAccidentenVertex().setId(null);
+          selVertex.getAccidentenVertex().setAccident(false);
+          this.selVertex.setId(null);
+          this.selVertex.setAccident(false);
+          selVertex.getAccidentenVertex().setAccidentenVertex(null);
+          selVertex.setAccidentenVertex(null);
+          blockVertices(false); 
+          grafo.updateWeights();
+        }
     }
 
     @FXML

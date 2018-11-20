@@ -37,7 +37,7 @@
       </StackPane>
    </center>
    <left>
-      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="spLateralIzq" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <JFXTabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <tabs>
