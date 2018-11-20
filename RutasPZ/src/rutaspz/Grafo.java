@@ -18,11 +18,13 @@ public class Grafo {
     private Integer nodes;//cantidad de nodos
     private ArrayList<Vertex> vertices;//lista de vértices con información respectiva
     private Boolean empty;//si el grafo está vacío
+    private ArrayList<Accident> accidents;
 
     public Grafo() {
         this.nodes=0;
         this.vertices=new ArrayList<>();
         this.empty=true;
+        this.accidents = new ArrayList<>();
     }
     
     public Grafo(Integer nodes) {
@@ -30,7 +32,7 @@ public class Grafo {
         this.nodes = nodes;
         this.adjacents = new Integer[nodes][nodes];
         this.vertices = VertexUtils.getInstance().getVerticesList();
-        
+        this.accidents = new ArrayList<>();
         for (int i = 0; i < nodes; i++) {
             //this.vertices.add(new Vertex());
             for (int j = 0; j < nodes; j++) {
@@ -42,6 +44,7 @@ public class Grafo {
     public Grafo(ArrayList<Vertex> vertices) {
         this();
         this.vertices = vertices;
+        this.accidents = new ArrayList<>();
     }
 
     public Integer[][] getAdjacents() {
@@ -589,6 +592,9 @@ public class Grafo {
                 }    
             }
         });
+        
+        refreshAccidents();
+        
         return weigthsAux;
     }
     
@@ -605,4 +611,32 @@ public class Grafo {
         }
         return list;
     }
+    
+    public void pushAccident(Vertex v1,Vertex v2){
+        if(!accidents.stream().anyMatch(a->a.getV1().equals(v1)&&a.getV2().equals(v2))){
+            System.out.println("nuevo accidente: ("+v1.getIndex()+","+v2.getIndex()+")");
+            Accident accident = new Accident(v1,v2);
+            accidents.add(accident);
+        }
+    }
+    
+    public void popAccident(Vertex v1,Vertex v2){
+           Accident delAccident = accidents.stream().filter(a->a.getV1().equals(v1)&&a.getV2().equals(v2)).findAny().orElse(null);
+           if(delAccident!=null){
+               System.out.println("accidente removido");
+                accidents.remove(delAccident);
+           }    
+    }
+    
+    private void refreshAccidents(){
+        System.out.println("refrescando "+accidents.size()+" accidentes");
+        accidents.stream().forEach(a->{
+            Integer i = a.getV1().getIndex();
+            Integer j = a.getV2().getIndex();
+            System.out.println("Viejo valor: ("+i+","+j+") "+weigths[i][j]);
+            weigths[i][j] = 0.0;
+            System.out.println("Nuevo valor: ("+i+","+j+") "+weigths[i][j]+"\n");
+        });
+    }
+    
 }

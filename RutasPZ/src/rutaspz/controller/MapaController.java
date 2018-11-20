@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Line;
+import rutaspz.Accident;
 import rutaspz.Dijkstra;
 import rutaspz.Floyd;
 import rutaspz.Grafo;
@@ -241,7 +242,11 @@ public class MapaController extends Controller implements Initializable {
                 blockVertices(false);
                 this.accident2 = this.selVertex;
                 this.accident1.setId("accident-vertex");
+                this.accident1.setAccident(true);
                 this.accident2.setId("accident-vertex");
+                this.accident2.setAccident(true);
+                grafo.pushAccident(accident1, accident2);
+                grafo.updateWeights();
             }
         });
     }

@@ -19,6 +19,7 @@ public class Vertex extends Circle{
     private Point2D point;
     private Integer grade;
     private Boolean option;
+    private Boolean accident;
     private Integer state;//1 normal,2 moderado,3 lento
     private Boolean open;//habilitado
     
@@ -30,6 +31,7 @@ public class Vertex extends Circle{
         state=1;
         open=true;
         option=false;
+        accident = false;
     }
     
     public Vertex(Integer index) {
@@ -38,6 +40,7 @@ public class Vertex extends Circle{
         state=1;
         open=true;
         option=false;
+        accident = false;
     }
     
     public Vertex(Integer index,double centerX, double centerY) {
@@ -45,6 +48,7 @@ public class Vertex extends Circle{
         this.index=index;
         state=1;
         open=true;
+        accident = false;
     }
 
     public Vertex(double centerX, double centerY, double radius) {
@@ -53,6 +57,7 @@ public class Vertex extends Circle{
         state=1;
         open=true;
         option=false;
+        accident = false;
     }
 
     public Vertex(double centerX, double centerY, double radius, Paint fill) {
@@ -61,6 +66,7 @@ public class Vertex extends Circle{
         state=1;
         open=true;
         option=false;
+        accident = false;
     }
 
     /**
@@ -144,6 +150,14 @@ public class Vertex extends Circle{
 
     public void setOpen(Boolean open) {
         this.open = open;
+    }
+
+    public Boolean getAccident() {
+        return accident;
+    }
+
+    public void setAccident(Boolean accident) {
+        this.accident = accident;
     }
     
     
