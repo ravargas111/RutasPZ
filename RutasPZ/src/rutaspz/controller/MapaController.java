@@ -28,7 +28,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import rutaspz.Accident;
 import rutaspz.Dijkstra;
 import rutaspz.Floyd;
 import rutaspz.Grafo;
@@ -694,6 +693,7 @@ public class MapaController extends Controller implements Initializable {
      */
     @FXML
     private void move(ActionEvent event) {
+        updateWeights();
         totalTime = 0.0;
         pathDistance.set(0.0);
         AppContext.getInstance().set("newTime",0);
