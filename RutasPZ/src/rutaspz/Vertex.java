@@ -20,6 +20,9 @@ public class Vertex extends Circle{
     private Integer grade;
     private Boolean option;
     private Boolean accident;
+    private Boolean selected;
+    private Boolean startVertex;
+    private Boolean endVertex;
     private Integer state;//1 normal,2 moderado,3 lento
     private Boolean open;//habilitado
     
@@ -32,6 +35,9 @@ public class Vertex extends Circle{
         open=true;
         option=false;
         accident = false;
+        endVertex = false;
+        startVertex = false;
+        selected = false;
     }
     
     public Vertex(Integer index) {
@@ -41,6 +47,9 @@ public class Vertex extends Circle{
         open=true;
         option=false;
         accident = false;
+        endVertex = false;
+        startVertex = false;
+        selected = false;
     }
     
     public Vertex(Integer index,double centerX, double centerY) {
@@ -49,6 +58,9 @@ public class Vertex extends Circle{
         state=1;
         open=true;
         accident = false;
+        endVertex = false;
+        startVertex = false;
+        selected = false;
     }
 
     public Vertex(double centerX, double centerY, double radius) {
@@ -58,6 +70,9 @@ public class Vertex extends Circle{
         open=true;
         option=false;
         accident = false;
+        endVertex = false;
+        startVertex = false;
+        selected = false;
     }
 
     public Vertex(double centerX, double centerY, double radius, Paint fill) {
@@ -67,6 +82,9 @@ public class Vertex extends Circle{
         open=true;
         option=false;
         accident = false;
+        endVertex = false;
+        startVertex = false;
+        selected = false;
     }
 
     /**

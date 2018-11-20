@@ -246,7 +246,7 @@ public class MapaController extends Controller implements Initializable {
                 this.accident2.setId("accident-vertex");
                 this.accident2.setAccident(true);
                 grafo.pushAccident(accident1, accident2);
-                grafo.updateWeights();
+                updateWeights();
             }
         });
     }
@@ -642,6 +642,7 @@ public class MapaController extends Controller implements Initializable {
         Double[][] updatedWeigths = grafo.updateWeights();//obtiene matriz de pesos actualizada del grafo
         floyd.setWeights(updatedWeigths);
         dijkstra.setWeigths(updatedWeigths);
+        refreshStyles();
     }
     
     /**
@@ -734,11 +735,31 @@ public class MapaController extends Controller implements Initializable {
             });
         }
     }
-    //falta validación de start y end
+    
+    private void refreshStyles(){
+        this.generalVertices.stream().forEach(v->{
+            v.setId(null);
+            if(v.equals(startVertex))
+                v.setId("start-vertex");
+            else if(v.equals(endVertex))
+                v.setId("end-vertex");
+            else if(v.equals(selVertex))
+                v.setId("selected-vertex");
+            else{
+                if(!v.getOpen())
+                    v.setId("closed-vertex");
+                else if(v.getAccident())
+                    v.setId("accident-vertex");
+                else if(v.getOption())
+                    v.setId("option-vertex");
+            }
+        });
+    }
     
     private void unlockAdyacents(ArrayList<Vertex> list){
         list.forEach(e->{
             e.setDisable(false);
+            e.setOption(true);
             e.setId("option-vertex");
         });
     }
@@ -751,6 +772,11 @@ public class MapaController extends Controller implements Initializable {
         blockVertices(true);
         ArrayList<Vertex> list = grafo.vertexAdjacents(selVertex);
         unlockAdyacents(list);
+    }
+
+    @FXML
+    private void refreshClick(MouseEvent event) {
+        refreshStyles();
     }
     
 }
