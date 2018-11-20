@@ -591,4 +591,18 @@ public class Grafo {
         });
         return weigthsAux;
     }
+    
+    public ArrayList<Vertex> vertexAdjacents(Vertex vertex){
+        ArrayList<Vertex> list = new ArrayList<>();
+        System.out.println("Buscando adyacentes: ");
+        Integer i = vertex.getIndex();
+        for(int j =0; j<nodes;j++ ){
+            if(adjacents[i][j]>0&&vertices.get(j).getOpen()){
+                list.add(vertices.get(j));
+                vertices.get(j).setOption(true);
+                //System.out.println(vertices.get(j).getIndex().toString());
+            }
+        }
+        return list;
+    }
 }

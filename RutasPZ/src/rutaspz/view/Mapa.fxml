@@ -131,6 +131,12 @@
                                           <JFXRadioButton fx:id="rbClosed" onAction="#closeVertex" prefHeight="17.0" prefWidth="57.0" text="Cerrado" />
                                        </children>
                                     </HBox>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="cajas">
+                                       <children>
+                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="21.571428298950195" />
+                                          <JFXRadioButton fx:id="rbAccident" onAction="#putAccident" prefHeight="17.0" prefWidth="57.0" text="Accidente" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>

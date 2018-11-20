@@ -18,8 +18,10 @@ public class Vertex extends Circle{
     private Integer index;
     private Point2D point;
     private Integer grade;
+    private Boolean option;
     private Integer state;//1 normal,2 moderado,3 lento
     private Boolean open;//habilitado
+    
     
     public Vertex() {
         super();
@@ -27,6 +29,7 @@ public class Vertex extends Circle{
         grade=0;
         state=1;
         open=true;
+        option=false;
     }
     
     public Vertex(Integer index) {
@@ -34,6 +37,7 @@ public class Vertex extends Circle{
         this.index=index;
         state=1;
         open=true;
+        option=false;
     }
     
     public Vertex(Integer index,double centerX, double centerY) {
@@ -48,6 +52,7 @@ public class Vertex extends Circle{
         index=0;
         state=1;
         open=true;
+        option=false;
     }
 
     public Vertex(double centerX, double centerY, double radius, Paint fill) {
@@ -55,6 +60,7 @@ public class Vertex extends Circle{
         index=0;
         state=1;
         open=true;
+        option=false;
     }
 
     /**
@@ -79,6 +85,14 @@ public class Vertex extends Circle{
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public Boolean getOption() {
+        return option;
+    }
+
+    public void setOption(Boolean option) {
+        this.option = option;
     }
     
     public void point2D(){

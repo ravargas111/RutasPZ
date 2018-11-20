@@ -59,11 +59,14 @@ public class MapaController extends Controller implements Initializable {
     private Vertex selVertex;
     private Vertex startVertex;
     private Vertex endVertex;
+    private Vertex accident1;
+    private Vertex accident2;
     private SimpleBooleanProperty selectedChanged;
     private SimpleBooleanProperty startChanged;
     private SimpleBooleanProperty endChanged;
     private SimpleBooleanProperty isCarMoved;
     private SimpleDoubleProperty pathDistance;
+    private SimpleBooleanProperty searching;
     private Double totalTime;
     private Boolean isDijkstra;
     @FXML
@@ -108,6 +111,8 @@ public class MapaController extends Controller implements Initializable {
     private Label lblInitialDistance;
     @FXML
     private Label lblInitialCost;
+    @FXML
+    private JFXRadioButton rbAccident;
     
     /**
      * Initializes the controller class.
@@ -159,6 +164,10 @@ public class MapaController extends Controller implements Initializable {
         AppContext.getInstance().set("isCarMoved",isCarMoved);
         this.totalTime = 0.0;
         AppContext.getInstance().set("totalTime",totalTime);
+        this.searching = new SimpleBooleanProperty(false);
+        AppContext.getInstance().set("searching",searching);
+        this.accident1 = new Vertex();
+        this.accident2 = new Vertex();
     }
     
     private void initListeners(){
@@ -224,6 +233,15 @@ public class MapaController extends Controller implements Initializable {
                 else
                     floyd.getShortestPath(auxVertex, endVertex);
                 
+            }
+        });
+        
+        this.searching.addListener((o,f,t)->{
+            if(!t){
+                blockVertices(false);
+                this.accident2 = this.selVertex;
+                this.accident1.setId("accident-vertex");
+                this.accident2.setId("accident-vertex");
             }
         });
     }
@@ -595,7 +613,7 @@ public class MapaController extends Controller implements Initializable {
         
         return valid;
     }
-
+    
     /**
      * cambiar función de un vértice (inicial o final)
      * @param event 
@@ -693,6 +711,41 @@ public class MapaController extends Controller implements Initializable {
             this.selVertex.setId("closed-vertex");
         else this.selVertex.setId(null);
         updateWeights();
+    }
+
+    private void blockVertices(Boolean block){
+        if(block){
+          this.generalVertices.stream().forEach(e->{
+                e.setDisable(true);  
+            });  
+        }
+        else{
+            this.generalVertices.stream().forEach(e->{
+                e.setDisable(false);
+                if(e.getOption()){
+                   e.setId(null);
+                   e.setOption(false);
+                }   
+            });
+        }
+    }
+    //falta validación de start y end
+    
+    private void unlockAdyacents(ArrayList<Vertex> list){
+        list.forEach(e->{
+            e.setDisable(false);
+            e.setId("option-vertex");
+        });
+    }
+    
+    @FXML
+    private void putAccident(ActionEvent event) {
+        this.accident1 = this.selVertex;
+        this.searching.setValue(true);
+        this.selVertex.setId("accident-vertex");
+        blockVertices(true);
+        ArrayList<Vertex> list = grafo.vertexAdjacents(selVertex);
+        unlockAdyacents(list);
     }
     
 }

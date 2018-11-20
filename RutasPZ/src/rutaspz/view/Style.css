@@ -124,9 +124,10 @@ and open the template in the editor.
       -fx-base-color-circle-sel: #FF0A0A;
       -fx-base-color-circle-start:#80C826;
       -fx-base-color-circle-end:#059CE5;
-      -fx-base-color-circle-sel:#202020;
+      -fx-base-color-circle-sel:purple;
       -fx-base-color-circle-closed:#FF0A0A;
       -fx-base-color-circle-accident:#FABB17;
+      -fx-base-color-circle-option:pink;
       
     /*otros*/
     -fx-base-color-cajas-dark: #00616F;
@@ -779,6 +780,10 @@ and open the template in the editor.
 
 #accident-vertex{
     -fx-fill: -fx-base-color-circle-accident;
+}
+
+#option-vertex{
+    -fx-fill: -fx-base-color-circle-option;
 }
 
 .lbl-menu-lat{

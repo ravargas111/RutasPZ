@@ -722,6 +722,7 @@ public class VertexUtils {
     public void drawVertex(Vertex v){
         AnchorPane parent =(AnchorPane) AppContext.getInstance().get("parent");
         SimpleBooleanProperty cambio = (SimpleBooleanProperty) AppContext.getInstance().get("cambio");//todo quitar
+        SimpleBooleanProperty searching = (SimpleBooleanProperty) AppContext.getInstance().get("searching");//todo quitar
         parent.getChildren().add(v);
         v.getStyleClass().add("circle");
         createPoint2D(v);
@@ -736,6 +737,8 @@ public class VertexUtils {
                 AppContext.getInstance().set("selVertex",v);
                 cambio.set(true);
                 cambio.set(false);
+                if(searching.getValue())
+                    searching.set(false);//si estaba buscando deja de buscar
                 //System.out.println("\n//Adyacencias vértice "+selectedVertex.getIndex());
                 //printAdyacents(v);
                 //infoNodo.setText(v.getIndex().toString());//para mostrar cual nodo seleccionó
