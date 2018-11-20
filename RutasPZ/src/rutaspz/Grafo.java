@@ -581,7 +581,7 @@ public class Grafo {
         vertices.stream().forEach(e->{
             Integer i = e.getIndex();//a partir del nodo x,revisa todas las columnas
             for (int j = 0; j < nodes; j++) {//recorre las columnas de i(índice stream)
-                if(adjacents[i][j]>0){//si tiene adyacente en esa posición i/j
+                if(adjacents[i][j]>0&&vertices.get(j).getOpen()){//si tiene adyacente en esa posición i/j y está abierto
                     Integer state = vertices.get(j).getState();//obtiene estado del adyacente
                     Double w = e.distance(vertices.get(j));//calcula la distancia entre el vértice base y el adyacente
                     w*=state;//producto dependiendo del estado (1=normal,2(Moderado),3(Lento))    

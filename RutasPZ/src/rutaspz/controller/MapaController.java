@@ -100,6 +100,8 @@ public class MapaController extends Controller implements Initializable {
     private Label lblEstimatedDistance;
     @FXML
     private Label lblEstimatedCost;
+    @FXML
+    private JFXRadioButton rbClosed;
     
     /**
      * Initializes the controller class.
@@ -654,6 +656,15 @@ public class MapaController extends Controller implements Initializable {
         catch(NullPointerException e){
             System.out.println("vértice inicio o final sin establecerse");
         }
+    }
+
+    @FXML
+    private void closeVertex(ActionEvent event) {
+        this.selVertex.setOpen(!selVertex.getOpen());
+        if(!selVertex.getOpen())
+            this.selVertex.setId("closed-vertex");
+        else this.selVertex.setId(null);
+        updateWeights();
     }
     
 }

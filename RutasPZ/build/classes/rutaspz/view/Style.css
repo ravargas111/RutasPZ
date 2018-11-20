@@ -114,16 +114,19 @@ and open the template in the editor.
     -fx-base-color-glyph-end:#FF0A0A;
     -fx-base-color-glyph-selected:#202020;
     
+    
     /*line*/
     -fx-base-color-line: blue;
     -fx-base-color-line-disable: yellow;
     
     /*circle*/
-     -fx-base-color-circle: #00616F;
+     -fx-base-color-circle: #202020;
       -fx-base-color-circle-sel: #FF0A0A;
-      -fx-base-color-circle-start:#059CE5;
-      -fx-base-color-circle-end:#FF0A0A;
+      -fx-base-color-circle-start:#80C826;
+      -fx-base-color-circle-end:#059CE5;
       -fx-base-color-circle-sel:#202020;
+      -fx-base-color-circle-closed:#FF0A0A;
+      -fx-base-color-circle-accident:#FABB17;
       
     /*otros*/
     -fx-base-color-cajas-dark: #00616F;
@@ -768,6 +771,14 @@ and open the template in the editor.
 
 #selected-vertex{
     -fx-fill: -fx-base-color-circle-sel;
+}
+
+#closed-vertex{
+    -fx-fill: -fx-base-color-circle-closed;
+}
+
+#accident-vertex{
+    -fx-fill: -fx-base-color-circle-accident;
 }
 
 .lbl-menu-lat{

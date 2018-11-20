@@ -19,36 +19,42 @@ public class Vertex extends Circle{
     private Point2D point;
     private Integer grade;
     private Integer state;//1 normal,2 moderado,3 lento
+    private Boolean open;
     
     public Vertex() {
         super();
         index=0;
         grade=0;
         state=1;
+        open=true;
     }
     
     public Vertex(Integer index) {
         super();
         this.index=index;
         state=1;
+        open=true;
     }
     
     public Vertex(Integer index,double centerX, double centerY) {
         super(centerX,centerY,5);
         this.index=index;
         state=1;
+        open=true;
     }
 
     public Vertex(double centerX, double centerY, double radius) {
         super(centerX, centerY, radius);
         index=0;
         state=1;
+        open=true;
     }
 
     public Vertex(double centerX, double centerY, double radius, Paint fill) {
         super(centerX, centerY, radius, fill);
         index=0;
         state=1;
+        open=true;
     }
 
     /**
@@ -117,6 +123,16 @@ public class Vertex extends Circle{
     public void setGrade(Integer grade) {
         this.grade = grade;
     }
+
+    public Boolean getOpen() {
+        return open;
+    }
+
+    public void setOpen(Boolean open) {
+        this.open = open;
+    }
+    
+    
     
     /**
      * obtiene la distancia entre dos vértices
