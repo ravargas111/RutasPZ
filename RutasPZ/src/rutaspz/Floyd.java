@@ -34,6 +34,7 @@ public class Floyd {
     }
 
     public void setWeights(Double[][] weights) {
+        System.out.println("Floyd");
         this.weights = weights;
     }
     
