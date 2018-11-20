@@ -43,7 +43,7 @@
                <tabs>
                   <Tab>
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="164.0">
+                        <VBox fx:id="vbLateral" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="164.0">
                            <children>
                               <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="135.0" prefWidth="164.0" styleClass="cajas">
                                  <children>
@@ -60,7 +60,7 @@
                                  </VBox.margin>
                               </VBox>
                               <Separator prefWidth="200.0" />
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="119.0" prefWidth="83.0" styleClass="cajas">
+                              <VBox fx:id="vbRoll" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="119.0" prefWidth="83.0" styleClass="cajas">
                                  <children>
                                     <Label prefHeight="21.0" prefWidth="165.0" styleClass="lbl-menu-lat-dark" text="Rol" />
                                     <HBox prefHeight="60.0" prefWidth="164.0" spacing="5.0" styleClass="cajas">

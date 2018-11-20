@@ -26,6 +26,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import rutaspz.Accident;
 import rutaspz.Dijkstra;
@@ -114,6 +115,10 @@ public class MapaController extends Controller implements Initializable {
     private Label lblInitialCost;
     @FXML
     private JFXRadioButton rbAccident;
+    @FXML
+    private VBox vbLateral;
+    @FXML
+    private VBox vbRoll;
     
     /**
      * Initializes the controller class.
