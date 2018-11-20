@@ -478,11 +478,14 @@ public class Animation {
         Double nextDistance = n1.distance(n2);//asigna distancia de cada salto
         Double time = nextDistance*50;
         time*=n2.getState();//dependiendo del estado va a durar más
-        AppContext.getInstance().set("newTime",time);//lo usa el mapa para acumular tiempo
+        
         
         movimientos.remove(0);//quita el vértice de la lista de movimientos porque ya lo recorrió
         //crea transición
         TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(time), nodo);
+        time/=300;//tiempo que se va setear en el label (MARIO)
+        Integer newTime =time.intValue();//convierte (MARIO)
+        AppContext.getInstance().set("newTime",newTime);//lo usa el mapa para acumular tiempo (MARIO)
         desplazamiento.setFromX(n1.getX());
         desplazamiento.setFromY(n1.getY());
         desplazamiento.setToX(n2.getX());

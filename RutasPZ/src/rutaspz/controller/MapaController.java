@@ -182,14 +182,16 @@ public class MapaController extends Controller implements Initializable {
         
         this.pathDistance.addListener(d->{
             Double totalDistance = pathDistance.getValue();
-            totalTime += (Double)AppContext.getInstance().get("newTime");
+            totalTime += (Integer)AppContext.getInstance().get("newTime");//aquí lo obtiene (MARIO)
             //totalDistance = ((double)Math.round(totalDistance * 100d) / 100d);//redondeo a dos decimales
             //totalTime = ((double)Math.round(totalTime * 100d) / 100d);
             round2Decimals(totalDistance);
             round2Decimals(totalTime);
             Double totalCost = totalDistance + totalTime;
+            
             if(!totalDistance.equals(0.0)){
-                this.lblEstimatedTime.setText(totalTime.toString());
+                //this.lblEstimatedTime.setText(totalTime.toString());//setea tiemppo total (MARIO)
+                timeFormat(totalTime);//función para separar y mostrar (MARIO)
                 this.lblEstimatedDistance.setText(totalDistance.toString());
                 this.lblEstimatedCost.setText(totalCost.toString());
                 System.out.println("total tima (M)"+totalTime);
@@ -208,6 +210,19 @@ public class MapaController extends Controller implements Initializable {
                 
             }
         });
+    }
+    
+    private void timeFormat(Double time){
+        if(time>60){
+            time/=60;
+            Integer iPart = time.intValue();
+            Double fPart = time - iPart;
+            this.lblEstimatedTime.setText(iPart+ ":" );
+            this.lblEstimatedCost.setText(lblEstimatedCost.getText()+fPart);
+        }
+        else{
+            this.lblEstimatedTime.setText(time.toString()+ ": 00" );
+        }
     }
     
     private void round2Decimals(Double number){
@@ -577,7 +592,6 @@ public class MapaController extends Controller implements Initializable {
         Double[][] updatedWeigths = grafo.updateWeights();//obtiene matriz de pesos actualizada del grafo
         floyd.setWeights(updatedWeigths);
         dijkstra.setWeigths(updatedWeigths);
-        
     }
     
     /**
