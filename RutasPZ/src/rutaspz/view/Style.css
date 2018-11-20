@@ -127,7 +127,7 @@ and open the template in the editor.
       -fx-base-color-circle-sel:purple;
       -fx-base-color-circle-closed:#FF0A0A;
       -fx-base-color-circle-accident:#FABB17;
-      -fx-base-color-circle-option:pink;
+      -fx-base-color-circle-option:#FABB17;
       
     /*otros*/
     -fx-base-color-cajas-dark: #00616F;
@@ -764,14 +764,20 @@ and open the template in the editor.
 
 #start-vertex{
     -fx-fill: -fx-base-color-circle-start;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
 }
 
 #end-vertex{
     -fx-fill: -fx-base-color-circle-end;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
 }
 
 #selected-vertex{
     -fx-fill: -fx-base-color-circle-sel;
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
 }
 
 #closed-vertex{

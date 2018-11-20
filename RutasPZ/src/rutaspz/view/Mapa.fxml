@@ -100,7 +100,7 @@
                                     </HBox>
                                     <HBox prefHeight="59.0" prefWidth="164.0" spacing="5.0" styleClass="cajas">
                                        <children>
-                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="41.0" />
+                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="21.0" />
                                           <JFXRadioButton fx:id="rbStateSlow" onAction="#changeVertexState" prefHeight="17.0" prefWidth="56.0" text="Moderado" toggleGroup="$tgVertexStatus" />
                                        </children>
                                     </HBox>
@@ -119,7 +119,7 @@
                                  </VBox.margin>
                               </VBox>
                               <Separator prefWidth="200.0" />
-                              <VBox prefHeight="70.0" prefWidth="200.0" styleClass="cajas">
+                              <VBox prefHeight="106.0" prefWidth="200.0" styleClass="cajas">
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
