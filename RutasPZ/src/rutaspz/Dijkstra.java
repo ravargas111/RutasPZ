@@ -177,7 +177,6 @@ public class Dijkstra {
     }
 
     public void setWeigths(Double[][] weigths) {
-        System.out.println("Dijkstra");
         this.weigths = weigths;
     }
     

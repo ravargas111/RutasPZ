@@ -102,6 +102,7 @@ public class Floyd {
      * crea la matriz con los caminos más cortos entre cada par de vértices y la matriz con los nodos intermediarios
      */
     public void getShortestPath(Vertex start,Vertex end){
+        initDistances();
         for (int k = 0; k < size; k++) 
         { 
             //selecciona vértice fuente

@@ -575,7 +575,6 @@ public class MapaController extends Controller implements Initializable {
 
     private void updateWeights(){
         Double[][] updatedWeigths = grafo.updateWeights();//obtiene matriz de pesos actualizada del grafo
-        System.out.println("se actualizaron los pesos");
         floyd.setWeights(updatedWeigths);
         dijkstra.setWeigths(updatedWeigths);
         
