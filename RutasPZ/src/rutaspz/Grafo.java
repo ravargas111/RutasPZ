@@ -593,20 +593,18 @@ public class Grafo {
             }
         });
         
-        refreshAccidents();
+        refreshAccidents(weigthsAux);
         
         return weigthsAux;
     }
     
     public ArrayList<Vertex> vertexAdjacents(Vertex vertex){
         ArrayList<Vertex> list = new ArrayList<>();
-        System.out.println("Buscando adyacentes: ");
         Integer i = vertex.getIndex();
         for(int j =0; j<nodes;j++ ){
             if(adjacents[i][j]>0&&vertices.get(j).getOpen()){
                 list.add(vertices.get(j));
                 vertices.get(j).setOption(true);
-                //System.out.println(vertices.get(j).getIndex().toString());
             }
         }
         return list;
@@ -614,7 +612,6 @@ public class Grafo {
     
     public void pushAccident(Vertex v1,Vertex v2){
         if(!accidents.stream().anyMatch(a->a.getV1().equals(v1)&&a.getV2().equals(v2))){
-            System.out.println("nuevo accidente: ("+v1.getIndex()+","+v2.getIndex()+")");
             Accident accident = new Accident(v1,v2);
             accidents.add(accident);
         }
@@ -628,14 +625,13 @@ public class Grafo {
            }    
     }
     
-    private void refreshAccidents(){
-        System.out.println("refrescando "+accidents.size()+" accidentes");
+    private void refreshAccidents(Double[][] matrix){
         accidents.stream().forEach(a->{
             Integer i = a.getV1().getIndex();
             Integer j = a.getV2().getIndex();
-            System.out.println("Viejo valor: ("+i+","+j+") "+weigths[i][j]);
-            weigths[i][j] = 0.0;
-            System.out.println("Nuevo valor: ("+i+","+j+") "+weigths[i][j]+"\n");
+            System.out.println("Viejo valor: ("+i+","+j+") "+matrix[i][j]);
+            matrix[i][j] = 0.0;
+            System.out.println("Nuevo valor: ("+i+","+j+") "+matrix[i][j]+"\n");
         });
     }
     
