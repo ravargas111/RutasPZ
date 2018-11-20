@@ -482,7 +482,7 @@ public class Animation {
         
         movimientos.remove(0);//quita el vértice de la lista de movimientos porque ya lo recorrió
         //crea transición
-        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(time), nodo);
+        TranslateTransition desplazamiento = new TranslateTransition(Duration.millis(time), nodo); //(antes de esto no variar el tiempo porque se usa en la animación)
         time/=300;//tiempo que se va setear en el label (MARIO)
         Integer newTime =time.intValue();//convierte (MARIO)
         AppContext.getInstance().set("newTime",newTime);//lo usa el mapa para acumular tiempo (MARIO)
