@@ -776,6 +776,8 @@ and open the template in the editor.
 
 #selected-vertex{
     -fx-fill: -fx-base-color-circle-sel;
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
 }
 
 #closed-vertex{
