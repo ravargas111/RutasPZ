@@ -647,17 +647,26 @@ public class VertexUtils {
         AnchorPane parent= (AnchorPane) AppContext.getInstance().get("parent");
         Double initialWT = 0.0;
         Double initTT = 0.0;
+        
         for(Vertex p:selectedVertices){
             Vertex p2 = VertexUtils.getInstance().getNextVertexS(i);
             if(p2!=null){
                 drawLineVSel(p,p2,COLOR.BLUE);
                 Double distance = p.distance(p2);
+                initialWT+= distance;             
                 Double time = distance*50;
+                distance *= p2.getState();
                 time /= 300;
+                Integer timeIni = time.intValue();
+                initTT += timeIni;
+                
                 //Points2DUtils.getInstance().printPoints(p, p2);
             }
             i++;
         }
+        
+        Double initCost = initTT + initialWT;
+        AppContext.getInstance().set("initCost",initCost);
         AppContext.getInstance().set("initTT",initTT);
         AppContext.getInstance().set("initialWT",initialWT);
     }

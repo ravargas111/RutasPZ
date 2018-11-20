@@ -496,12 +496,16 @@ public class Animation {
             //todo quitar en caso de usarla en otra app
             pathLines.add(VertexUtils.getInstance().drawFollowedLine(n1, n2,VertexUtils.COLOR.YELLOW));
             nodo.toFront();
-            if(movimientos.size()>1){
+            pathDistance.set(pathDistance.get()+nextDistance);
+            if(movimientos.size()>1){      
+                System.out.println("Entro");
                 AppContext.getInstance().set("auxVertex",n2);
                 isCarMoved.set(true);
                 desplazarListaMovsV( nodo, movimientos);
             }
-            pathDistance.set(pathDistance.get()+nextDistance);
+            else{
+               AppContext.getInstance().set("newTime",0);
+            }
             });  
              
         desplazamiento.play(); 

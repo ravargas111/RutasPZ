@@ -189,6 +189,13 @@ public class MapaController extends Controller implements Initializable {
         });
         
         this.pathDistance.addListener(d->{
+            Double initTT = (Double) AppContext.getInstance().get("initTT");
+            round2Decimals(totalTime);
+            timeFormatInit(initTT);
+            Double initialWT = (Double) AppContext.getInstance().get("initialWT");
+            this.lblInitialDistance.setText(String.format("%.2f", initialWT)+ " Mts");
+            Double initCost = (Double) AppContext.getInstance().get("initCost");
+            this.lblInitialCost.setText(String.format("%.2f", initCost));
             Double totalDistance = pathDistance.getValue();
             totalTime += (Integer)AppContext.getInstance().get("newTime");//aquí lo obtiene (MARIO)
             //totalDistance = ((double)Math.round(totalDistance * 100d) / 100d);//redondeo a dos decimales
@@ -230,6 +237,18 @@ public class MapaController extends Controller implements Initializable {
         }
         else{
             this.lblEstimatedTime.setText(time.intValue()+ " Seg" );
+        }
+    }
+    
+     private void timeFormatInit(Double time){
+        if(time>60){
+            time/=60;
+            Double iPart = time;
+
+            this.lblInitialTime.setText(String.format("%.2f", iPart)+ "Min ");
+        }
+        else{
+            this.lblInitialTime.setText(time.intValue()+ " Seg" );
         }
     }
     
@@ -646,6 +665,9 @@ public class MapaController extends Controller implements Initializable {
      */
     @FXML
     private void move(ActionEvent event) {
+        totalTime = 0.0;
+        pathDistance.set(0.0);
+        AppContext.getInstance().set("newTime",0);
         try{
             if(isValidMove()){
                 if(isDijkstra){//lamar a Dijkstra

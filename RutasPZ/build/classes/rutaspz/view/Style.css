@@ -708,14 +708,14 @@ and open the template in the editor.
 
 .glyph-icon-menu-lat-dark{
     -fx-fill: -fx-base-color-glyph-menu-lateral-dark;
-    -glyph-size: 30px;
+    -glyph-size: 25px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
 }
 
 .glyph-icon-menu-lat{
     -fx-fill: -fx-base-color-glyph-menu-lateral;
-    -glyph-size: 30px;
+    -glyph-size: 25px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
 }
@@ -783,14 +783,14 @@ and open the template in the editor.
 
 .lbl-menu-lat{
     -fx-text-fill: -fx-base-color-lbl-men-lat;
-    -fx-font-size:20px; 
+    -fx-font-size:10px; 
     -fx-alignment: center;
     -fx-font-weigth: bold;
 }
 
 .lbl-menu-lat-dark{
     -fx-text-fill: -fx-base-color-lbl-men-lat-dark;
-    -fx-font-size:15px; 
+    -fx-font-size:10px; 
     -fx-alignment: center;
     -fx-font-weigth: bold;
 }
