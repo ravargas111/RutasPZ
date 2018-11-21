@@ -116,8 +116,8 @@ and open the template in the editor.
     
     
     /*line*/
-    -fx-base-color-line: blue;
-    -fx-base-color-line-disable: yellow;
+    -fx-base-color-line: #059CE5;
+    -fx-base-color-line-disable: #80C826;
     
     /*circle*/
      -fx-base-color-circle: #202020;
@@ -728,28 +728,27 @@ and open the template in the editor.
     -fx-line-spacing: 10;
 }
 
-.line{
-    -fx-border-style: dashed;
-    -fx-border-width: 3; 
-    -fx-border: 0; 
-    -fx-border-color: -fx-base-color-line;
-    -fx-stroke-width: 3;
-    -fx-fill: blue;
-    -fx-background-color: white;
+.line{    
+    -fx-stroke-width: 6;
+    -fx-stroke-dash-array: 2 15 15 2;
+    -fx-stroke: #00616F;
+    -fx-opacity: 0.8;
 }
 
 .line:disabled{
-    -fx-fill: black;
+    -fx-fill: #00616F;
 }
 
 .line-yellow{
-    -fx-stroke-width: 5;
-    -fx-fill: yellow;
+    -fx-stroke-width: 6;
+    -fx-stroke-dash-array: 2 15 15 2;
+    -fx-stroke: #80C826;
+    -fx-opacity: 0.8;
 }
 
 .line-red{
     -fx-stroke-width: 5;
-    -fx-fill: red;
+    -fx-fill: #80C826;
 }
 
 .circle{

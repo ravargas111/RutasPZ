@@ -675,13 +675,15 @@ public class VertexUtils {
         l.setStrokeWidth(7);
         switch (c) {
             case YELLOW:
-                l.setStroke(Color.YELLOW);
+                //l.setStroke(Color.YELLOW);
+                l.getStyleClass().add("line-yellow");
                 break;
             case RED:
                 l.setStroke(Color.RED);
                 break;
             case BLUE:
-                l.setStroke(Color.BLUE);
+                //l.setStroke(Color.BLUE);
+                l.getStyleClass().add("line");
                 break;
             default:
                 break;
