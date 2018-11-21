@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : robri
 */
 *{
-    -fx-base-color-root: #EDE5FE;
+    -fx-base-color-root: #FAF7EE;
     -fx-base-color-root2: white;
     -fx-base-color-lateral:  #EDE5FE;
     
@@ -131,7 +131,7 @@ and open the template in the editor.
       
     /*otros*/
     -fx-base-color-cajas-dark: #00616F;
-    -fx-base-color-cajas: #DDF9BB;
+    -fx-base-color-cajas: #E7E9DE;
     -fx-base-color-lbl-men-lat-dark:#00616F;
     -fx-base-color-lbl-men-lat:white;
 }

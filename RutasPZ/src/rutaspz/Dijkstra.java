@@ -103,7 +103,6 @@ public class Dijkstra {
             way.stream().forEach(i -> {
                 //llenar la lista de vertex que se retorna
                 list.add(generalVertices.get(i));
-                System.out.print("(" + i + ") -> ");
             });
             //return list;
         } //else{

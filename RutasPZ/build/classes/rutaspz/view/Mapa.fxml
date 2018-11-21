@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1277.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.MapaController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1277.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rutaspz.controller.MapaController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +37,7 @@
       </StackPane>
    </center>
    <left>
-      <StackPane fx:id="spLateralIzq" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="spLateralIzq" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="704.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <JFXTabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <tabs>
@@ -133,7 +133,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="cajas">
                                        <children>
-                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="21.571428298950195" />
+                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="21.571428298950195" />
                                           <JFXRadioButton fx:id="rbAccident" onAction="#putAccident" prefHeight="17.0" prefWidth="57.0" text="Accidente" />
                                        </children>
                                     </HBox>
@@ -179,7 +179,7 @@
                                     <Label prefHeight="25.0" prefWidth="163.0" styleClass="lbl-menu-lat-dark" text="Algoritmo" />
                                     <HBox prefHeight="35.0" prefWidth="200.0" spacing="5.0" styleClass="cajas">
                                        <children>
-                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="44.85714340209961" />
+                                          <FontAwesomeIconView styleClass="glyph-icon-menu-lat-dark" text="" wrappingWidth="44.85714340209961" />
                                           <JFXRadioButton fx:id="rbDijkstra" onAction="#changeAlgorithm" selected="true" text="Dijkstra">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="tgAlgorithm" />
@@ -198,7 +198,7 @@
                                     </HBox>
                                  </children>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets top="5.0" />
                                  </VBox.margin>
                               </VBox>
                               <Separator prefWidth="200.0" />
@@ -224,11 +224,14 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                               </VBox>
                               <Separator prefWidth="200.0" />
                               <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="134.0" prefWidth="200.0" styleClass="cajas">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets top="5.0" />
                                  </VBox.margin>
                                  <children>
                                     <Label styleClass="lbl-menu-lat-dark" text="Acumulado" />
@@ -258,7 +261,7 @@
                                     <FontAwesomeIconView text="" />
                                  </graphic>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXButton>
                            </children>
